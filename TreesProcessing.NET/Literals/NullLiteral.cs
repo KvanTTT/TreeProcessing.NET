@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.NullLiteral)]
+    [Serializable]
     [ProtoContract]
     public class NullLiteral : Terminal
     {

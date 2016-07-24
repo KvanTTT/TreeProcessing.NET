@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 using ProtoBuf;
+using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.BinaryOperatorExpression)]
-    [XmlType]
+    [Serializable]
     [ProtoContract]
     public class BinaryOperatorExpression : Expression
     {

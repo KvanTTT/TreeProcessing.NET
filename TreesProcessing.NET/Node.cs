@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.Node)]
+    [Serializable]
     [ProtoContract]
     public abstract class Node : IComparable, IComparable<Node>, IEquatable<Node>
     {

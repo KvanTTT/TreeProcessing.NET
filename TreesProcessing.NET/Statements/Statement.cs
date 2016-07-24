@@ -1,9 +1,11 @@
 ﻿using ProtoBuf;
+using System;
 using System.Xml.Serialization;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.Statement)]
+    [Serializable]
     [ProtoContract]
     [ProtoInclude(50, typeof(BlockStatement))]
     [ProtoInclude(51, typeof(ExpressionStatement))]

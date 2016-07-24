@@ -1,9 +1,11 @@
 ﻿using ProtoBuf;
+using System;
 using System.Xml.Serialization;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.Expression)]
+    [Serializable]
     [ProtoContract]
     [ProtoInclude(10, typeof(BinaryOperatorExpression))]
     [ProtoInclude(11, typeof(InvocationExpression))]

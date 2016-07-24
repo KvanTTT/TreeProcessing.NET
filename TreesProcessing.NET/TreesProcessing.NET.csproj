@@ -79,6 +79,9 @@
       <HintPath>..\packages\protobuf-net.2.1.0\lib\netstandard1.5\protobuf-net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Shim">
+      <HintPath>..\packages\shim.2.0.1\lib\portable-net45+netcore45+wpa81\Shim.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

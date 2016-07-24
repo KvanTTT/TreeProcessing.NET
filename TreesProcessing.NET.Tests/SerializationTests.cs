@@ -14,6 +14,29 @@ namespace TreesProcessing.NET.Tests
     public class SerializationTests
     {
         [Test]
+        public void Binary_Serialization()
+        {
+            Statement tree = SampleTree.Init();
+
+            Statement actualTree;
+            using (var memoryStream = new System.IO.MemoryStream())
+            {
+                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                binaryFormatter.Serialize(memoryStream, tree);
+
+                memoryStream.Position = 0;
+                var chars = new byte[memoryStream.Length];
+                memoryStream.Read(chars, 0, (int)memoryStream.Length);
+                var str = Encoding.Default.GetString(chars);
+
+                memoryStream.Position = 0;
+                actualTree = (Statement)binaryFormatter.Deserialize(memoryStream);
+            }
+
+            Assert.AreEqual(0, tree.CompareTo(actualTree));
+        }
+
+        [Test]
         public void Xml_Serialization()
         {
             Statement tree = SampleTree.Init();
@@ -23,8 +46,8 @@ namespace TreesProcessing.NET.Tests
             using (var memoryStream = new System.IO.MemoryStream())
             {
                 serializer.Serialize(memoryStream, tree);
-                memoryStream.Position = 0;
 
+                memoryStream.Position = 0;
                 var chars = new byte[memoryStream.Length];
                 memoryStream.Read(chars, 0, (int)memoryStream.Length);
                 var str = Encoding.Default.GetString(chars);

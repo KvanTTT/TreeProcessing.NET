@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.MemberReferenceExpression)]
+    [Serializable]
     [ProtoContract]
     public class MemberReferenceExpression : Expression
     {

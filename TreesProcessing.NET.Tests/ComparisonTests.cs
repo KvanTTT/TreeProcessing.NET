@@ -1,9 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Linq;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TreesProcessing.NET.Tests
 {
@@ -42,7 +39,7 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(1, tree1.Compare((Node)treeWithChangedInt));
 
             dynamic treeWithChangedListCount = visitor.Visit(tree2);
-            treeWithChangedListCount.Statements = new Statement[] { treeWithChangedListCount.Statements[0] };
+            treeWithChangedListCount.Statements = new List<Statement> { treeWithChangedListCount.Statements[0] };
 
             Assert.AreEqual(2, tree1.CompareTo(treeWithChangedListCount));
             Assert.AreEqual(2, tree1.Compare((Node)treeWithChangedListCount));

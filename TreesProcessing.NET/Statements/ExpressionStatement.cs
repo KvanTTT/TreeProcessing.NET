@@ -1,9 +1,11 @@
 ﻿using ProtoBuf;
+using System;
 using System.Collections.Generic;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.ExpressionStatement)]
+    [Serializable]
     [ProtoContract]
     public class ExpressionStatement : Statement
     {

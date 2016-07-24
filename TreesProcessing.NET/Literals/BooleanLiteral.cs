@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.BooleanLiteral)]
+    [Serializable]
     [ProtoContract]
     public class BooleanLiteral : Terminal
     {
