@@ -1,0 +1,89 @@
+﻿using Newtonsoft.Json;
+using ProtoBuf;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+
+namespace TreesProcessing.NET
+{
+    [NodeAttr(NodeType.BinaryOperatorExpression)]
+    [XmlType]
+    [ProtoContract]
+    public class BinaryOperatorExpression : Expression
+    {
+        public override NodeType NodeType => NodeType.BinaryOperatorExpression;
+
+        public Expression Left { get; set; }
+
+        [JsonIgnore]
+        [ProtoMember(1, Name = nameof(Left))]
+        public Node LeftSerializable { get { return Left; } set { Left = (Expression)value; } }
+
+        [ProtoMember(2)]
+        public string Operator { get; set; }
+        
+        public Expression Right { get; set; }
+
+        [JsonIgnore]
+        [ProtoMember(3, Name = nameof(Right))]
+        public Node RightSerializable { get { return Right; } set { Right = (Expression)value; } }
+
+        public BinaryOperatorExpression(Expression left, string op, Expression right)
+        {
+            Left = left;
+            Operator = op;
+            Right = right;
+        }
+
+        public BinaryOperatorExpression()
+        {
+        }
+
+        public override int CompareTo(Node other)
+        {
+            int result = base.CompareTo(other);
+            if (result != 0)
+            {
+                return result;
+            }
+
+            BinaryOperatorExpression expr = (BinaryOperatorExpression)other;
+            result = Left.CompareTo(expr.Left);
+            if (result != 0)
+            {
+                return result;
+            }
+
+            result = Operator.CompareTo(expr.Operator);
+            if (result != 0)
+            {
+                return result;
+            }
+
+            result = Right.CompareTo(expr.Right);
+            if (result != 0)
+            {
+                return result;
+            }
+
+            return 0;
+        }
+
+        public override IEnumerable<Node> Descendants
+        {
+            get
+            {
+                var result = new List<Node>();
+                result.Add(Left);
+                result.AddRange(Left.Descendants);
+                result.Add(Right);
+                result.AddRange(Right.Descendants);
+                return result;
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"{Left} {Operator} {Right}";
+        }
+    }
+}
