@@ -1,19 +1,19 @@
 ﻿using ProtoBuf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.Statement)]
     [ProtoContract]
-    /*[ProtoInclude(50, typeof(BlockStatement))]
+    [ProtoInclude(50, typeof(BlockStatement))]
     [ProtoInclude(51, typeof(ExpressionStatement))]
     [ProtoInclude(52, typeof(ForStatement))]
     [ProtoInclude(53, typeof(IfElseStatement))]
-    [ProtoInclude(54, typeof(NullLiteral))]*/
+
+    [XmlInclude(typeof(BlockStatement))]
+    [XmlInclude(typeof(ExpressionStatement))]
+    [XmlInclude(typeof(ForStatement))]
+    [XmlInclude(typeof(IfElseStatement))]
     public abstract class Statement : Node
     {
         public override NodeType NodeType => NodeType.Statement;

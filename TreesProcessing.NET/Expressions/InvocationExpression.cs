@@ -1,7 +1,5 @@
-﻿using Newtonsoft.Json;
-using ProtoBuf;
+﻿using ProtoBuf;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace TreesProcessing.NET
 {
@@ -11,27 +9,13 @@ namespace TreesProcessing.NET
     {
         public override NodeType NodeType => NodeType.InvocationExpression;
 
+        [ProtoMember(1)]
         public Expression Target { get; set; }
 
-        [JsonIgnore]
-        [ProtoMember(1, Name = nameof(Target))]
-        public Node TargetSerializable
-        {
-            get { return Target; }
-            set { Target = (Expression)value; }
-        }
+        [ProtoMember(2)]
+        public List<Expression> Args { get; set; }
 
-        public IList<Expression> Args { get; set; }
-
-        [JsonIgnore]
-        [ProtoMember(2, Name = nameof(Args), OverwriteList = true)]
-        public IList<Node> ArgsSerializable
-        {
-            get { return Args.Select(s => (Node)s).ToList(); }
-            set { Args = value.Select(s => (Expression)s).ToList(); }
-        }
-
-        public InvocationExpression(Expression target, IList<Expression> args)
+        public InvocationExpression(Expression target, List<Expression> args)
         {
             Target = target;
             Args = args;

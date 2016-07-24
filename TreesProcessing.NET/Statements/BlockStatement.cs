@@ -1,10 +1,5 @@
-﻿using Newtonsoft.Json;
-using ProtoBuf;
-using System;
+﻿using ProtoBuf;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TreesProcessing.NET
 {
@@ -14,17 +9,10 @@ namespace TreesProcessing.NET
     {
         public override NodeType NodeType => NodeType.BlockStatement;
 
-        public IList<Statement> Statements { get; set; }
+        [ProtoMember(1)]
+        public List<Statement> Statements { get; set; }
 
-        [JsonIgnore]
-        [ProtoMember(1, Name = nameof(Statements), OverwriteList = true)]
-        public IList<Node> StatementsSerializable
-        {
-            get { return Statements.Select(s => (Node)s).ToList(); }
-            set { Statements = value.Select(s => (Statement)s).ToList(); }
-        }
-
-        public BlockStatement(IList<Statement> statements)
+        public BlockStatement(List<Statement> statements)
         {
             Statements = statements;
         }

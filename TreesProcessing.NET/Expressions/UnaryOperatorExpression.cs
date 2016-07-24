@@ -1,10 +1,5 @@
-﻿using Newtonsoft.Json;
-using ProtoBuf;
-using System;
+﻿using ProtoBuf;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TreesProcessing.NET
 {
@@ -16,12 +11,9 @@ namespace TreesProcessing.NET
 
         [ProtoMember(1)]
         public string Operator { get; set; }
-        
-        public Expression Expression { get; set; }
 
-        [JsonIgnore]
-        [ProtoMember(2, Name = nameof(Expression))]
-        public Node ExpressionSerializable { get { return Expression; } set { Expression = (Expression)value; } }
+        [ProtoMember(2)]
+        public Expression Expression { get; set; }
 
         public UnaryOperatorExpression(string op, Expression expression)
         {

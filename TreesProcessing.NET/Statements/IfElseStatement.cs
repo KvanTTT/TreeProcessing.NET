@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using ProtoBuf;
+﻿using ProtoBuf;
 using System.Collections.Generic;
 
 namespace TreesProcessing.NET
@@ -9,24 +8,15 @@ namespace TreesProcessing.NET
     public class IfElseStatement : Statement
     {
         public override NodeType NodeType => NodeType.IfElseStatement;
-        
+
+        [ProtoMember(1)]
         public Expression Condition { get; set; }
 
+        [ProtoMember(2)]
         public Statement TrueStatement { get; set; }
 
+        [ProtoMember(3)]
         public Statement FalseStatement { get; set; }
-
-        [JsonIgnore]
-        [ProtoMember(1, Name = nameof(Condition))]
-        public Node ConditionSerializable { get { return Condition; } set { Condition = (Expression)value; } }
-
-        [JsonIgnore]
-        [ProtoMember(2, Name = nameof(TrueStatement))]
-        public Node TrueStatementSerializable { get { return TrueStatement; } set { TrueStatement = (Statement)value; } }
-
-        [JsonIgnore]
-        [ProtoMember(3, Name = nameof(FalseStatement))]
-        public Node FalseStatementSerializable { get { return FalseStatement; } set { FalseStatement = (Statement)value; } }
 
         public IfElseStatement(Expression condition, Statement trueStatement, Statement falseStatement = null)
         {

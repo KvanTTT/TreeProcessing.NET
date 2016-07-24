@@ -13,16 +13,9 @@ namespace TreesProcessing.NET
     public class MemberReferenceExpression : Expression
     {
         public override NodeType NodeType => NodeType.MemberReferenceExpression;
-        
-        public Expression Target { get; set; }
 
-        [JsonIgnore]
-        [ProtoMember(1, Name = nameof(Target))]
-        public Node TargetSerializable
-        {
-            get { return Target; }
-            set { Target = (Expression)value; }
-        }
+        [ProtoMember(1)]
+        public Expression Target { get; set; }
 
         [ProtoMember(2)]
         public Identifier Name { get; set; }

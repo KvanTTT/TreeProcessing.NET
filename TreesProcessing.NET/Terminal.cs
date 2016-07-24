@@ -1,9 +1,6 @@
 ﻿using ProtoBuf;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TreesProcessing.NET
 {
@@ -13,12 +10,6 @@ namespace TreesProcessing.NET
     {
         public override NodeType NodeType => NodeType.Terminal;
 
-        public override IEnumerable<Node> Descendants
-        {
-            get
-            {
-                return Enumerable.Empty<Node>();
-            }
-        }
+        public override IEnumerable<Node> Descendants => Enumerable.Empty<Node>();
     }
 }

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using ProtoBuf;
+﻿using ProtoBuf;
 using System.Collections.Generic;
 
 namespace TreesProcessing.NET
@@ -10,11 +9,8 @@ namespace TreesProcessing.NET
     {
         public override NodeType NodeType => NodeType.ExpressionStatement;
 
+        [ProtoMember(1)]
         public Expression Expression { get; set; }
-
-        [JsonIgnore]
-        [ProtoMember(1, Name = nameof(Expression))]
-        public Node ExpressionSerializable { get { return Expression; } set { Expression = (Expression)value; } }
 
         public ExpressionStatement(Expression expression)
         {

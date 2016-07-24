@@ -12,20 +12,14 @@ namespace TreesProcessing.NET
     {
         public override NodeType NodeType => NodeType.BinaryOperatorExpression;
 
+        [ProtoMember(1)]
         public Expression Left { get; set; }
-
-        [JsonIgnore]
-        [ProtoMember(1, Name = nameof(Left))]
-        public Node LeftSerializable { get { return Left; } set { Left = (Expression)value; } }
 
         [ProtoMember(2)]
         public string Operator { get; set; }
-        
-        public Expression Right { get; set; }
 
-        [JsonIgnore]
-        [ProtoMember(3, Name = nameof(Right))]
-        public Node RightSerializable { get { return Right; } set { Right = (Expression)value; } }
+        [ProtoMember(3)]
+        public Expression Right { get; set; }
 
         public BinaryOperatorExpression(Expression left, string op, Expression right)
         {

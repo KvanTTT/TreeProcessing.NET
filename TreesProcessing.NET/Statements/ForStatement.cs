@@ -13,40 +13,20 @@ namespace TreesProcessing.NET
     public class ForStatement : Statement
     {
         public override NodeType NodeType => NodeType.ForStatement;
-        
-        public IList<Statement> Initializers { get; set; }
 
+        [ProtoMember(1)]
+        public List<Statement> Initializers { get; set; }
+
+        [ProtoMember(2)]
         public Expression Condition { get; set; }
 
-        public IList<Expression> Iterators { get; set; }
+        [ProtoMember(3)]
+        public List<Expression> Iterators { get; set; }
 
+        [ProtoMember(4)]
         public Statement Statement { get; set; }
 
-        [JsonIgnore]
-        [ProtoMember(1, Name = nameof(Initializers), OverwriteList = true)]
-        public IList<Node> InitializersSerializable
-        {
-            get { return Initializers.Select(s => (Node)s).ToList(); }
-            set { Initializers = value.Select(s => (Statement)s).ToList(); }
-        }
-
-        [JsonIgnore]
-        [ProtoMember(2, Name = nameof(Condition))]
-        public Node ConditionSerializable { get { return Condition; } set { Condition = (Expression)value; } }
-
-        [JsonIgnore]
-        [ProtoMember(3, Name = nameof(Iterators), OverwriteList = true)]
-        public IList<Node> IteratorsSerializable
-        {
-            get { return Iterators.Select(s => (Node)s).ToList(); }
-            set { Iterators = value.Select(s => (Expression)s).ToList(); }
-        }
-
-        [JsonIgnore]
-        [ProtoMember(4, Name = nameof(Statement))]
-        public Node StatementSerializable { get { return Statement; } set { Statement = (Statement)value; } }
-
-        public ForStatement(IList<Statement> initializers, Expression condition, IList<Expression> iterators, Statement statement)
+        public ForStatement(List<Statement> initializers, Expression condition, List<Expression> iterators, Statement statement)
         {
             Initializers = initializers;
             Condition = condition;

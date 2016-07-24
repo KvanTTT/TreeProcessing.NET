@@ -6,12 +6,36 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace TreesProcessing.NET.Tests
 {
     [TestFixture]
     public class SerializationTests
     {
+        [Test]
+        public void Xml_Serialization()
+        {
+            Statement tree = SampleTree.Init();
+            XmlSerializer serializer = new XmlSerializer(typeof(Statement));
+
+            Statement actualTree;
+            using (var memoryStream = new System.IO.MemoryStream())
+            {
+                serializer.Serialize(memoryStream, tree);
+                memoryStream.Position = 0;
+
+                var chars = new byte[memoryStream.Length];
+                memoryStream.Read(chars, 0, (int)memoryStream.Length);
+                var str = Encoding.Default.GetString(chars);
+
+                memoryStream.Position = 0;
+                actualTree = (Statement)serializer.Deserialize(memoryStream);
+            }
+
+            Assert.AreEqual(0, tree.CompareTo(actualTree));
+        }
+
         [Test]
         public void JsonNET_FullTypeNameSerialization()
         {
@@ -89,15 +113,15 @@ namespace TreesProcessing.NET.Tests
         [Test]
         public void Protobuf_Seialization()
         {
-            Node tree = SampleTree.Init();
+            Statement tree = SampleTree.Init();
 
-            var proto = ProtoBuf.Serializer.GetProto<Node>();
+            var proto = ProtoBuf.Serializer.GetProto<Statement>();
             Node actualTree;
             using (var memoryStream = new System.IO.MemoryStream())
             {
                 ProtoBuf.Serializer.Serialize(memoryStream, tree);
                 memoryStream.Position = 0;
-                actualTree = ProtoBuf.Serializer.Deserialize<Node>(memoryStream);
+                actualTree = ProtoBuf.Serializer.Deserialize<Statement>(memoryStream);
             }
 
             Assert.AreEqual(0, tree.CompareTo(actualTree));

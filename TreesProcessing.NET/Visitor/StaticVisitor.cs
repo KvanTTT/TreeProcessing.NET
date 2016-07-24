@@ -100,7 +100,7 @@ namespace TreesProcessing.NET
 
         public virtual Node Visit(BlockStatement blockStatement)
         {
-            IList<Statement> statements = blockStatement.Statements.Select(s => (Statement)Visit(s)).ToArray();
+            List<Statement> statements = blockStatement.Statements.Select(s => (Statement)Visit(s)).ToList();
             return new BlockStatement(statements);
         }
 
@@ -121,9 +121,9 @@ namespace TreesProcessing.NET
 
         public virtual Node Visit(ForStatement forStatement)
         {
-            IList<Statement> initializers = forStatement.Initializers.Select(init => (Statement)Visit(init)).ToArray();
+            List<Statement> initializers = forStatement.Initializers.Select(init => (Statement)Visit(init)).ToList();
             Expression condition = (Expression)Visit(forStatement.Condition);
-            IList<Expression> iterators = forStatement.Iterators.Select(iter => (Expression)Visit(iter)).ToArray();
+            List<Expression> iterators = forStatement.Iterators.Select(iter => (Expression)Visit(iter)).ToList();
             Statement statement = (Statement)Visit(forStatement.Statement);
             return new ForStatement(initializers, condition, iterators, statement);
         }
@@ -142,7 +142,7 @@ namespace TreesProcessing.NET
 
         public virtual Node Visit(InvocationExpression invocationExpression)
         {
-            IList<Expression> args = invocationExpression.Args.Select(arg => (Expression)Visit(arg)).ToArray();
+            List<Expression> args = invocationExpression.Args.Select(arg => (Expression)Visit(arg)).ToList();
             return new InvocationExpression((Expression)Visit(invocationExpression.Target), args);
         }
 

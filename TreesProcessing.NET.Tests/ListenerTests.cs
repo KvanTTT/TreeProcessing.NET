@@ -189,8 +189,7 @@ namespace TreesProcessing.NET.Tests
             var invokesSequence = new List<string>();
             var sampleTree = SampleTree.Init();
             var mock = new Mock<DynamicListener>();
-
-            mock.Setup(listener => listener.Enter(It.IsAny<Node>())).Callback((Node s) => invokesSequence.Add(Enter + nameof(Node)));
+            
             mock.Setup(listener => listener.Enter(It.IsAny<Expression>())).Callback((Expression s) => invokesSequence.Add(Enter + nameof(Expression)));
             mock.Setup(listener => listener.Enter(It.IsAny<Terminal>())).Callback((Terminal s) => invokesSequence.Add(Enter + nameof(Terminal)));
             mock.Setup(listener => listener.Enter(It.IsAny<Statement>())).Callback((Statement s) => invokesSequence.Add(Enter + nameof(Statement)));
@@ -208,8 +207,7 @@ namespace TreesProcessing.NET.Tests
             mock.Setup(listener => listener.Enter(It.IsAny<ExpressionStatement>())).Callback((ExpressionStatement s) => invokesSequence.Add(Enter + nameof(ExpressionStatement)));
             mock.Setup(listener => listener.Enter(It.IsAny<ForStatement>())).Callback((ForStatement s) => invokesSequence.Add(Enter + nameof(ForStatement)));
             mock.Setup(listener => listener.Enter(It.IsAny<IfElseStatement>())).Callback((IfElseStatement s) => invokesSequence.Add(Enter + nameof(IfElseStatement)));
-
-            mock.Setup(listener => listener.Exit(It.IsAny<Node>())).Callback((Node s) => invokesSequence.Add(Exit + nameof(Node)));
+            
             mock.Setup(listener => listener.Exit(It.IsAny<Expression>())).Callback((Expression s) => invokesSequence.Add(Exit + nameof(Expression)));
             mock.Setup(listener => listener.Exit(It.IsAny<Terminal>())).Callback((Terminal s) => invokesSequence.Add(Exit + nameof(Terminal)));
             mock.Setup(listener => listener.Exit(It.IsAny<Statement>())).Callback((Statement s) => invokesSequence.Add(Exit + nameof(Statement)));
