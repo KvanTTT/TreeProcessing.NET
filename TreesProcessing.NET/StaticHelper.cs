@@ -15,7 +15,7 @@ namespace TreesProcessing.NET
             if (node1 == null && node2 == null)
             {
                 return 0;
-            }
+            } 
             else if (node1 != null && node2 == null)
             {
                 return (int)node1.NodeType;

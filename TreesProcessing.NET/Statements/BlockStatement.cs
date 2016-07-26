@@ -1,16 +1,19 @@
 ﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.BlockStatement)]
     [Serializable]
+    [DataContract]
     [ProtoContract]
     public class BlockStatement : Statement
     {
         public override NodeType NodeType => NodeType.BlockStatement;
 
+        [DataMember]
         [ProtoMember(1)]
         public List<Statement> Statements { get; set; }
 

@@ -1,19 +1,23 @@
 ﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.UnaryOperatorExpression)]
     [Serializable]
+    [DataContract]
     [ProtoContract]
     public class UnaryOperatorExpression : Expression
     {
         public override NodeType NodeType => NodeType.UnaryOperatorExpression;
 
+        [DataMember]
         [ProtoMember(1)]
         public string Operator { get; set; }
 
+        [DataMember]
         [ProtoMember(2)]
         public Expression Expression { get; set; }
 

@@ -1,16 +1,19 @@
 ﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.ExpressionStatement)]
     [Serializable]
+    [DataContract]
     [ProtoContract]
     public class ExpressionStatement : Statement
     {
         public override NodeType NodeType => NodeType.ExpressionStatement;
 
+        [DataMember]
         [ProtoMember(1)]
         public Expression Expression { get; set; }
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,11 +10,13 @@ namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.IntegerLiteral)]
     [Serializable]
+    [DataContract]
     [ProtoContract]
     public class IntegerLiteral : Terminal
     {
         public override NodeType NodeType => NodeType.IntegerLiteral;
 
+        [DataMember]
         [ProtoMember(1)]
         public int Value { get; set; }
 

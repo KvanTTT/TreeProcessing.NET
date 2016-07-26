@@ -1,22 +1,27 @@
 ﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.IfElseStatement)]
     [Serializable]
+    [DataContract]
     [ProtoContract]
     public class IfElseStatement : Statement
     {
         public override NodeType NodeType => NodeType.IfElseStatement;
 
+        [DataMember]
         [ProtoMember(1)]
         public Expression Condition { get; set; }
 
+        [DataMember]
         [ProtoMember(2)]
         public Statement TrueStatement { get; set; }
 
+        [DataMember]
         [ProtoMember(3)]
         public Statement FalseStatement { get; set; }
 

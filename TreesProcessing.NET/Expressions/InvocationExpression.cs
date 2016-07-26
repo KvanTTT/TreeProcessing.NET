@@ -1,19 +1,23 @@
 ﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.InvocationExpression)]
     [Serializable]
+    [DataContract]
     [ProtoContract]
     public class InvocationExpression : Expression
     {
         public override NodeType NodeType => NodeType.InvocationExpression;
 
+        [DataMember]
         [ProtoMember(1)]
         public Expression Target { get; set; }
 
+        [DataMember]
         [ProtoMember(2)]
         public List<Expression> Args { get; set; }
 

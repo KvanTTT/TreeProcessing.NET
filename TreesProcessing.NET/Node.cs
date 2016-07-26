@@ -1,4 +1,5 @@
-﻿using ProtoBuf;
+﻿using Newtonsoft.Json;
+using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -7,9 +8,11 @@ namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.Node)]
     [Serializable]
+    [DataContract]
     [ProtoContract]
     public abstract class Node : IComparable, IComparable<Node>, IEquatable<Node>
     {
+        [JsonProperty]
         public abstract NodeType NodeType { get; }
 
         public bool Equals(Node other)

@@ -3,6 +3,7 @@ using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,14 +11,17 @@ namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.MemberReferenceExpression)]
     [Serializable]
+    [DataContract]
     [ProtoContract]
     public class MemberReferenceExpression : Expression
     {
         public override NodeType NodeType => NodeType.MemberReferenceExpression;
 
+        [DataMember]
         [ProtoMember(1)]
         public Expression Target { get; set; }
 
+        [DataMember]
         [ProtoMember(2)]
         public Identifier Name { get; set; }
 

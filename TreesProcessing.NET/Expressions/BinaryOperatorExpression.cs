@@ -2,23 +2,28 @@
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.BinaryOperatorExpression)]
     [Serializable]
+    [DataContract]
     [ProtoContract]
     public class BinaryOperatorExpression : Expression
     {
         public override NodeType NodeType => NodeType.BinaryOperatorExpression;
 
+        [DataMember]
         [ProtoMember(1)]
         public Expression Left { get; set; }
 
+        [DataMember]
         [ProtoMember(2)]
         public string Operator { get; set; }
 
+        [DataMember]
         [ProtoMember(3)]
         public Expression Right { get; set; }
 

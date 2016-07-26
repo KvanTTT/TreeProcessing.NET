@@ -1,25 +1,31 @@
 ﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.ForStatement)]
     [Serializable]
+    [DataContract]
     [ProtoContract]
     public class ForStatement : Statement
     {
         public override NodeType NodeType => NodeType.ForStatement;
 
+        [DataMember]
         [ProtoMember(1)]
         public List<Statement> Initializers { get; set; }
 
+        [DataMember]
         [ProtoMember(2)]
         public Expression Condition { get; set; }
 
+        [DataMember]
         [ProtoMember(3)]
         public List<Expression> Iterators { get; set; }
 
+        [DataMember]
         [ProtoMember(4)]
         public Statement Statement { get; set; }
 
