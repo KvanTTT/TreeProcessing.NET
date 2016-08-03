@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+
+#pragma warning disable CS0067
 
 namespace TreesProcessing.NET
 {
     public class DynamicEventListener : IEventListener
     {
+        private Dictionary<Type, Delegate> enterEvents;
+        private Dictionary<Type, Delegate> exitEvents;
+
         public event EventHandler<BinaryOperatorExpression> EnterBinaryOperatorExpression;
         public event EventHandler<BlockStatement> EnterBlockStatement;
         public event EventHandler<BooleanLiteral> EnterBooleanLiteral;
@@ -47,12 +50,38 @@ namespace TreesProcessing.NET
         public event EventHandler<Terminal> ExitTerminal;
         public event EventHandler<UnaryOperatorExpression> ExitUnaryOperatorExpression;
 
-        public void Walk(Node node)
+        public DynamicEventListener()
         {
-            throw new NotImplementedException();
+            var dynamicEventListenerType = typeof(DynamicEventListener);
+            IEnumerable<EventInfo> events = dynamicEventListenerType.GetRuntimeEvents();
+
+            enterEvents = new Dictionary<Type, Delegate>();
+            exitEvents = new Dictionary<Type, Delegate>();
+            foreach (var ev in events)
+            {
+                var type = ev.EventHandlerType.GenericTypeArguments.First();
+                var deleg = (Delegate)dynamicEventListenerType
+                    .GetField(ev.Name, BindingFlags.Instance | BindingFlags.NonPublic)
+                    .GetValue(this);
+                if (ev.Name.StartsWith("Enter"))
+                {
+                    enterEvents[type] = deleg;
+                }
+                else if (ev.Name.StartsWith("Exit"))
+                {
+                    enterEvents[type] = deleg;
+                }
+            }
         }
 
-        /*private void Visit(Node node)
+        public void Walk(Node node)
+        {
+            InvokeEnterEvent(node);
+            Visit(node);
+            InvokeExitEvent(node);
+        }
+
+        private void Visit(Node node)
         {
             if (node == null)
             {
@@ -64,29 +93,33 @@ namespace TreesProcessing.NET
             foreach (PropertyInfo prop in properties)
             {
                 Type propType = prop.PropertyType;
-                TypeInfo typeInfo = propType.GetTypeInfo();
-                if (typeInfo.IsSubclassOf(typeof(Node)) || propType == typeof(Node))
+                TypeInfo propTypeInfo = propType.GetTypeInfo();
+                if (propType == typeof(string) || propTypeInfo.IsValueType)
+                {
+                    // Ignore terminals
+                }
+                else if (propTypeInfo.IsSubclassOf(typeof(Node)) || propType == typeof(Node))
                 {
                     Node value = (Node)prop.GetValue(node);
-                    Enter(value);
-                    Visit(value);
-                    Exit(value);
+                    if (value != null)
+                    {
+                        InvokeEnterEvent(value);
+                        Visit(value);
+                        InvokeExitEvent(value);
+                    }
                 }
-                else if (typeInfo.ImplementedInterfaces.Contains(typeof(IEnumerable)))
+                else if (propTypeInfo.ImplementedInterfaces.Contains(typeof(IEnumerable)))
                 {
-                    Type itemType = typeInfo.GenericTypeArguments[0];
+                    Type itemType = propTypeInfo.GenericTypeArguments[0];
                     var collection = (IEnumerable<object>)prop.GetValue(node);
                     if (collection != null)
                     {
                         foreach (var item in collection)
                         {
-                            var nodeItem = item as Node;
-                            if (nodeItem != null)
-                            {
-                                Enter(nodeItem);
-                                Visit(nodeItem);
-                                Exit(nodeItem);
-                            }
+                            var nodeItem = (Node)item;
+                            InvokeEnterEvent(nodeItem);
+                            Visit(nodeItem);
+                            InvokeExitEvent(nodeItem);
                         }
                     }
                 }
@@ -95,6 +128,24 @@ namespace TreesProcessing.NET
                     throw new NotImplementedException($"Property \"{prop}\" processing is not implemented via reflection");
                 }
             }
-        }*/
+        }
+
+        private void InvokeEnterEvent(object obj)
+        {
+            Delegate eventDelegate = enterEvents[obj.GetType()];
+            if (eventDelegate != null)
+            {
+                eventDelegate.DynamicInvoke(obj);
+            }
+        }
+
+        private void InvokeExitEvent(object obj)
+        {
+            Delegate eventDelegate = (Delegate)exitEvents[obj.GetType()];
+            if (eventDelegate != null)
+            {
+                eventDelegate.DynamicInvoke(obj);
+            }
+        }
     }
 }

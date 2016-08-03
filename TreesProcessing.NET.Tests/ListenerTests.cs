@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TreesProcessing.NET.Tests
 {
@@ -104,6 +102,70 @@ namespace TreesProcessing.NET.Tests
             CheckInvokeSequence(invokeSequence, true);
         }
 
+        [Test]
+        public void EventListener_Static()
+        {
+            IEventListener listener = new StaticEventListener();
+            List<string> invokeSequence = CreateAndWalkTree(listener);
+            CheckInvokeSequence(invokeSequence, false);
+        }
+
+        [Test]
+        [Ignore("PlatformNotSupportedException for PCL")]
+        public void EventListener_Dynamic()
+        {
+            var listener = new DynamicEventListener();
+            List<string> invokeSequence = CreateAndWalkTree(listener);
+            CheckInvokeSequence(invokeSequence, true);
+        }
+
+        private static List<string> CreateAndWalkTree(IEventListener listener)
+        {
+            var sampleTree = SampleTree.Init();
+
+            var invokeSequence = new List<string>();
+            listener.EnterNode += (s, e) => invokeSequence.Add(Enter + nameof(Node));
+            listener.EnterExpression += (s, e) => invokeSequence.Add(Enter + nameof(Expression));
+            listener.EnterTerminal += (s, e) => invokeSequence.Add(Enter + nameof(Terminal));
+            listener.EnterStatement += (s, e) => invokeSequence.Add(Enter + nameof(Statement));
+            listener.EnterBinaryOperatorExpression += (s, e) => invokeSequence.Add(Enter + nameof(BinaryOperatorExpression));
+            listener.EnterInvocationExpression += (s, e) => invokeSequence.Add(Enter + nameof(InvocationExpression));
+            listener.EnterMemberReferenceExpression += (s, e) => invokeSequence.Add(Enter + nameof(MemberReferenceExpression));
+            listener.EnterUnaryOperatorExpression += (s, e) => invokeSequence.Add(Enter + nameof(UnaryOperatorExpression));
+            listener.EnterBooleanLiteral += (s, e) => invokeSequence.Add(Enter + nameof(BooleanLiteral));
+            listener.EnterFloatLiteral += (s, e) => invokeSequence.Add(Enter + nameof(FloatLiteral));
+            listener.EnterIntegerLiteral += (s, e) => invokeSequence.Add(Enter + nameof(IntegerLiteral));
+            listener.EnterNullLiteral += (s, e) => invokeSequence.Add(Enter + nameof(NullLiteral));
+            listener.EnterStringLiteral += (s, e) => invokeSequence.Add(Enter + nameof(StringLiteral));
+            listener.EnterIdentifier += (s, e) => invokeSequence.Add(Enter + nameof(Identifier));
+            listener.EnterBlockStatement += (s, e) => invokeSequence.Add(Enter + nameof(BlockStatement));
+            listener.EnterExpressionStatement += (s, e) => invokeSequence.Add(Enter + nameof(ExpressionStatement));
+            listener.EnterForStatement += (s, e) => invokeSequence.Add(Enter + nameof(ForStatement));
+            listener.EnterIfElseStatement += (s, e) => invokeSequence.Add(Enter + nameof(IfElseStatement));
+
+            listener.ExitNode += (s, e) => invokeSequence.Add(Exit + nameof(Node));
+            listener.ExitExpression += (s, e) => invokeSequence.Add(Exit + nameof(Expression));
+            listener.ExitTerminal += (s, e) => invokeSequence.Add(Exit + nameof(Terminal));
+            listener.ExitStatement += (s, e) => invokeSequence.Add(Exit + nameof(Statement));
+            listener.ExitBinaryOperatorExpression += (s, e) => invokeSequence.Add(Exit + nameof(BinaryOperatorExpression));
+            listener.ExitInvocationExpression += (s, e) => invokeSequence.Add(Exit + nameof(InvocationExpression));
+            listener.ExitMemberReferenceExpression += (s, e) => invokeSequence.Add(Exit + nameof(MemberReferenceExpression));
+            listener.ExitUnaryOperatorExpression += (s, e) => invokeSequence.Add(Exit + nameof(UnaryOperatorExpression));
+            listener.ExitBooleanLiteral += (s, e) => invokeSequence.Add(Exit + nameof(BooleanLiteral));
+            listener.ExitFloatLiteral += (s, e) => invokeSequence.Add(Exit + nameof(FloatLiteral));
+            listener.ExitIntegerLiteral += (s, e) => invokeSequence.Add(Exit + nameof(IntegerLiteral));
+            listener.ExitNullLiteral += (s, e) => invokeSequence.Add(Exit + nameof(NullLiteral));
+            listener.ExitStringLiteral += (s, e) => invokeSequence.Add(Exit + nameof(StringLiteral));
+            listener.ExitIdentifier += (s, e) => invokeSequence.Add(Exit + nameof(Identifier));
+            listener.ExitBlockStatement += (s, e) => invokeSequence.Add(Exit + nameof(BlockStatement));
+            listener.ExitExpressionStatement += (s, e) => invokeSequence.Add(Exit + nameof(ExpressionStatement));
+            listener.ExitForStatement += (s, e) => invokeSequence.Add(Exit + nameof(ForStatement));
+            listener.ExitIfElseStatement += (s, e) => invokeSequence.Add(Exit + nameof(IfElseStatement));
+
+            listener.Walk(sampleTree);
+            return invokeSequence;
+        }
+
         private static void CheckInvokeSequence(List<string> invokeSequence, bool excludeAbstract)
         {
             string[] beginExpectedSequence, endExpectedSequence;
@@ -137,98 +199,98 @@ namespace TreesProcessing.NET.Tests
 
         private static List<string> GetInvokeSequenceFromStaticListener()
         {
-            var invokesSequence = new List<string>();
+            var invokeSequence = new List<string>();
             var sampleTree = SampleTree.Init();
             var mock = new Mock<StaticListener>();
 
-            mock.Setup(listener => listener.Enter(It.IsAny<Node>())).Callback((Node s) => invokesSequence.Add(Enter + nameof(Node)));
-            mock.Setup(listener => listener.Enter(It.IsAny<Expression>())).Callback((Expression s) => invokesSequence.Add(Enter + nameof(Expression)));
-            mock.Setup(listener => listener.Enter(It.IsAny<Terminal>())).Callback((Terminal s) => invokesSequence.Add(Enter + nameof(Terminal)));
-            mock.Setup(listener => listener.Enter(It.IsAny<Statement>())).Callback((Statement s) => invokesSequence.Add(Enter + nameof(Statement)));
-            mock.Setup(listener => listener.Enter(It.IsAny<BinaryOperatorExpression>())).Callback((BinaryOperatorExpression s) => invokesSequence.Add(Enter + nameof(BinaryOperatorExpression)));
-            mock.Setup(listener => listener.Enter(It.IsAny<InvocationExpression>())).Callback((InvocationExpression s) => invokesSequence.Add(Enter + nameof(InvocationExpression)));
-            mock.Setup(listener => listener.Enter(It.IsAny<MemberReferenceExpression>())).Callback((MemberReferenceExpression s) => invokesSequence.Add(Enter + nameof(MemberReferenceExpression)));
-            mock.Setup(listener => listener.Enter(It.IsAny<UnaryOperatorExpression>())).Callback((UnaryOperatorExpression s) => invokesSequence.Add(Enter + nameof(UnaryOperatorExpression)));
-            mock.Setup(listener => listener.Enter(It.IsAny<BooleanLiteral>())).Callback((BooleanLiteral s) => invokesSequence.Add(Enter + nameof(BooleanLiteral)));
-            mock.Setup(listener => listener.Enter(It.IsAny<FloatLiteral>())).Callback((FloatLiteral s) => invokesSequence.Add(Enter + nameof(FloatLiteral)));
-            mock.Setup(listener => listener.Enter(It.IsAny<IntegerLiteral>())).Callback((IntegerLiteral s) => invokesSequence.Add(Enter + nameof(IntegerLiteral)));
-            mock.Setup(listener => listener.Enter(It.IsAny<NullLiteral>())).Callback((NullLiteral s) => invokesSequence.Add(Enter + nameof(NullLiteral)));
-            mock.Setup(listener => listener.Enter(It.IsAny<StringLiteral>())).Callback((StringLiteral s) => invokesSequence.Add(Enter + nameof(StringLiteral)));
-            mock.Setup(listener => listener.Enter(It.IsAny<Identifier>())).Callback((Identifier s) => invokesSequence.Add(Enter + nameof(Identifier)));
-            mock.Setup(listener => listener.Enter(It.IsAny<BlockStatement>())).Callback((BlockStatement s) => invokesSequence.Add(Enter + nameof(BlockStatement)));
-            mock.Setup(listener => listener.Enter(It.IsAny<ExpressionStatement>())).Callback((ExpressionStatement s) => invokesSequence.Add(Enter + nameof(ExpressionStatement)));
-            mock.Setup(listener => listener.Enter(It.IsAny<ForStatement>())).Callback((ForStatement s) => invokesSequence.Add(Enter + nameof(ForStatement)));
-            mock.Setup(listener => listener.Enter(It.IsAny<IfElseStatement>())).Callback((IfElseStatement s) => invokesSequence.Add(Enter + nameof(IfElseStatement)));
+            mock.Setup(listener => listener.Enter(It.IsAny<Node>())).Callback((Node s) => invokeSequence.Add(Enter + nameof(Node)));
+            mock.Setup(listener => listener.Enter(It.IsAny<Expression>())).Callback((Expression s) => invokeSequence.Add(Enter + nameof(Expression)));
+            mock.Setup(listener => listener.Enter(It.IsAny<Terminal>())).Callback((Terminal s) => invokeSequence.Add(Enter + nameof(Terminal)));
+            mock.Setup(listener => listener.Enter(It.IsAny<Statement>())).Callback((Statement s) => invokeSequence.Add(Enter + nameof(Statement)));
+            mock.Setup(listener => listener.Enter(It.IsAny<BinaryOperatorExpression>())).Callback((BinaryOperatorExpression s) => invokeSequence.Add(Enter + nameof(BinaryOperatorExpression)));
+            mock.Setup(listener => listener.Enter(It.IsAny<InvocationExpression>())).Callback((InvocationExpression s) => invokeSequence.Add(Enter + nameof(InvocationExpression)));
+            mock.Setup(listener => listener.Enter(It.IsAny<MemberReferenceExpression>())).Callback((MemberReferenceExpression s) => invokeSequence.Add(Enter + nameof(MemberReferenceExpression)));
+            mock.Setup(listener => listener.Enter(It.IsAny<UnaryOperatorExpression>())).Callback((UnaryOperatorExpression s) => invokeSequence.Add(Enter + nameof(UnaryOperatorExpression)));
+            mock.Setup(listener => listener.Enter(It.IsAny<BooleanLiteral>())).Callback((BooleanLiteral s) => invokeSequence.Add(Enter + nameof(BooleanLiteral)));
+            mock.Setup(listener => listener.Enter(It.IsAny<FloatLiteral>())).Callback((FloatLiteral s) => invokeSequence.Add(Enter + nameof(FloatLiteral)));
+            mock.Setup(listener => listener.Enter(It.IsAny<IntegerLiteral>())).Callback((IntegerLiteral s) => invokeSequence.Add(Enter + nameof(IntegerLiteral)));
+            mock.Setup(listener => listener.Enter(It.IsAny<NullLiteral>())).Callback((NullLiteral s) => invokeSequence.Add(Enter + nameof(NullLiteral)));
+            mock.Setup(listener => listener.Enter(It.IsAny<StringLiteral>())).Callback((StringLiteral s) => invokeSequence.Add(Enter + nameof(StringLiteral)));
+            mock.Setup(listener => listener.Enter(It.IsAny<Identifier>())).Callback((Identifier s) => invokeSequence.Add(Enter + nameof(Identifier)));
+            mock.Setup(listener => listener.Enter(It.IsAny<BlockStatement>())).Callback((BlockStatement s) => invokeSequence.Add(Enter + nameof(BlockStatement)));
+            mock.Setup(listener => listener.Enter(It.IsAny<ExpressionStatement>())).Callback((ExpressionStatement s) => invokeSequence.Add(Enter + nameof(ExpressionStatement)));
+            mock.Setup(listener => listener.Enter(It.IsAny<ForStatement>())).Callback((ForStatement s) => invokeSequence.Add(Enter + nameof(ForStatement)));
+            mock.Setup(listener => listener.Enter(It.IsAny<IfElseStatement>())).Callback((IfElseStatement s) => invokeSequence.Add(Enter + nameof(IfElseStatement)));
 
-            mock.Setup(listener => listener.Exit(It.IsAny<Node>())).Callback((Node s) => invokesSequence.Add(Exit + nameof(Node)));
-            mock.Setup(listener => listener.Exit(It.IsAny<Expression>())).Callback((Expression s) => invokesSequence.Add(Exit + nameof(Expression)));
-            mock.Setup(listener => listener.Exit(It.IsAny<Terminal>())).Callback((Terminal s) => invokesSequence.Add(Exit + nameof(Terminal)));
-            mock.Setup(listener => listener.Exit(It.IsAny<Statement>())).Callback((Statement s) => invokesSequence.Add(Exit + nameof(Statement)));
-            mock.Setup(listener => listener.Exit(It.IsAny<BinaryOperatorExpression>())).Callback((BinaryOperatorExpression s) => invokesSequence.Add(Exit + nameof(BinaryOperatorExpression)));
-            mock.Setup(listener => listener.Exit(It.IsAny<InvocationExpression>())).Callback((InvocationExpression s) => invokesSequence.Add(Exit + nameof(InvocationExpression)));
-            mock.Setup(listener => listener.Exit(It.IsAny<MemberReferenceExpression>())).Callback((MemberReferenceExpression s) => invokesSequence.Add(Exit + nameof(MemberReferenceExpression)));
-            mock.Setup(listener => listener.Exit(It.IsAny<UnaryOperatorExpression>())).Callback((UnaryOperatorExpression s) => invokesSequence.Add(Exit + nameof(UnaryOperatorExpression)));
-            mock.Setup(listener => listener.Exit(It.IsAny<BooleanLiteral>())).Callback((BooleanLiteral s) => invokesSequence.Add(Exit + nameof(BooleanLiteral)));
-            mock.Setup(listener => listener.Exit(It.IsAny<FloatLiteral>())).Callback((FloatLiteral s) => invokesSequence.Add(Exit + nameof(FloatLiteral)));
-            mock.Setup(listener => listener.Exit(It.IsAny<IntegerLiteral>())).Callback((IntegerLiteral s) => invokesSequence.Add(Exit + nameof(IntegerLiteral)));
-            mock.Setup(listener => listener.Exit(It.IsAny<NullLiteral>())).Callback((NullLiteral s) => invokesSequence.Add(Exit + nameof(NullLiteral)));
-            mock.Setup(listener => listener.Exit(It.IsAny<StringLiteral>())).Callback((StringLiteral s) => invokesSequence.Add(Exit + nameof(StringLiteral)));
-            mock.Setup(listener => listener.Exit(It.IsAny<Identifier>())).Callback((Identifier s) => invokesSequence.Add(Exit + nameof(Identifier)));
-            mock.Setup(listener => listener.Exit(It.IsAny<BlockStatement>())).Callback((BlockStatement s) => invokesSequence.Add(Exit + nameof(BlockStatement)));
-            mock.Setup(listener => listener.Exit(It.IsAny<ExpressionStatement>())).Callback((ExpressionStatement s) => invokesSequence.Add(Exit + nameof(ExpressionStatement)));
-            mock.Setup(listener => listener.Exit(It.IsAny<ForStatement>())).Callback((ForStatement s) => invokesSequence.Add(Exit + nameof(ForStatement)));
-            mock.Setup(listener => listener.Exit(It.IsAny<IfElseStatement>())).Callback((IfElseStatement s) => invokesSequence.Add(Exit + nameof(IfElseStatement)));
+            mock.Setup(listener => listener.Exit(It.IsAny<Node>())).Callback((Node s) => invokeSequence.Add(Exit + nameof(Node)));
+            mock.Setup(listener => listener.Exit(It.IsAny<Expression>())).Callback((Expression s) => invokeSequence.Add(Exit + nameof(Expression)));
+            mock.Setup(listener => listener.Exit(It.IsAny<Terminal>())).Callback((Terminal s) => invokeSequence.Add(Exit + nameof(Terminal)));
+            mock.Setup(listener => listener.Exit(It.IsAny<Statement>())).Callback((Statement s) => invokeSequence.Add(Exit + nameof(Statement)));
+            mock.Setup(listener => listener.Exit(It.IsAny<BinaryOperatorExpression>())).Callback((BinaryOperatorExpression s) => invokeSequence.Add(Exit + nameof(BinaryOperatorExpression)));
+            mock.Setup(listener => listener.Exit(It.IsAny<InvocationExpression>())).Callback((InvocationExpression s) => invokeSequence.Add(Exit + nameof(InvocationExpression)));
+            mock.Setup(listener => listener.Exit(It.IsAny<MemberReferenceExpression>())).Callback((MemberReferenceExpression s) => invokeSequence.Add(Exit + nameof(MemberReferenceExpression)));
+            mock.Setup(listener => listener.Exit(It.IsAny<UnaryOperatorExpression>())).Callback((UnaryOperatorExpression s) => invokeSequence.Add(Exit + nameof(UnaryOperatorExpression)));
+            mock.Setup(listener => listener.Exit(It.IsAny<BooleanLiteral>())).Callback((BooleanLiteral s) => invokeSequence.Add(Exit + nameof(BooleanLiteral)));
+            mock.Setup(listener => listener.Exit(It.IsAny<FloatLiteral>())).Callback((FloatLiteral s) => invokeSequence.Add(Exit + nameof(FloatLiteral)));
+            mock.Setup(listener => listener.Exit(It.IsAny<IntegerLiteral>())).Callback((IntegerLiteral s) => invokeSequence.Add(Exit + nameof(IntegerLiteral)));
+            mock.Setup(listener => listener.Exit(It.IsAny<NullLiteral>())).Callback((NullLiteral s) => invokeSequence.Add(Exit + nameof(NullLiteral)));
+            mock.Setup(listener => listener.Exit(It.IsAny<StringLiteral>())).Callback((StringLiteral s) => invokeSequence.Add(Exit + nameof(StringLiteral)));
+            mock.Setup(listener => listener.Exit(It.IsAny<Identifier>())).Callback((Identifier s) => invokeSequence.Add(Exit + nameof(Identifier)));
+            mock.Setup(listener => listener.Exit(It.IsAny<BlockStatement>())).Callback((BlockStatement s) => invokeSequence.Add(Exit + nameof(BlockStatement)));
+            mock.Setup(listener => listener.Exit(It.IsAny<ExpressionStatement>())).Callback((ExpressionStatement s) => invokeSequence.Add(Exit + nameof(ExpressionStatement)));
+            mock.Setup(listener => listener.Exit(It.IsAny<ForStatement>())).Callback((ForStatement s) => invokeSequence.Add(Exit + nameof(ForStatement)));
+            mock.Setup(listener => listener.Exit(It.IsAny<IfElseStatement>())).Callback((IfElseStatement s) => invokeSequence.Add(Exit + nameof(IfElseStatement)));
 
             mock.Object.Walk(sampleTree);
 
-            return invokesSequence;
+            return invokeSequence;
         }
 
         private static List<string> GetInvokeSequenceFromDynamicListener()
         {
-            var invokesSequence = new List<string>();
+            var invokeSequence = new List<string>();
             var sampleTree = SampleTree.Init();
             var mock = new Mock<DynamicListener>();
             
-            mock.Setup(listener => listener.Enter(It.IsAny<Expression>())).Callback((Expression s) => invokesSequence.Add(Enter + nameof(Expression)));
-            mock.Setup(listener => listener.Enter(It.IsAny<Terminal>())).Callback((Terminal s) => invokesSequence.Add(Enter + nameof(Terminal)));
-            mock.Setup(listener => listener.Enter(It.IsAny<Statement>())).Callback((Statement s) => invokesSequence.Add(Enter + nameof(Statement)));
-            mock.Setup(listener => listener.Enter(It.IsAny<BinaryOperatorExpression>())).Callback((BinaryOperatorExpression s) => invokesSequence.Add(Enter + nameof(BinaryOperatorExpression)));
-            mock.Setup(listener => listener.Enter(It.IsAny<InvocationExpression>())).Callback((InvocationExpression s) => invokesSequence.Add(Enter + nameof(InvocationExpression)));
-            mock.Setup(listener => listener.Enter(It.IsAny<MemberReferenceExpression>())).Callback((MemberReferenceExpression s) => invokesSequence.Add(Enter + nameof(MemberReferenceExpression)));
-            mock.Setup(listener => listener.Enter(It.IsAny<UnaryOperatorExpression>())).Callback((UnaryOperatorExpression s) => invokesSequence.Add(Enter + nameof(UnaryOperatorExpression)));
-            mock.Setup(listener => listener.Enter(It.IsAny<BooleanLiteral>())).Callback((BooleanLiteral s) => invokesSequence.Add(Enter + nameof(BooleanLiteral)));
-            mock.Setup(listener => listener.Enter(It.IsAny<FloatLiteral>())).Callback((FloatLiteral s) => invokesSequence.Add(Enter + nameof(FloatLiteral)));
-            mock.Setup(listener => listener.Enter(It.IsAny<IntegerLiteral>())).Callback((IntegerLiteral s) => invokesSequence.Add(Enter + nameof(IntegerLiteral)));
-            mock.Setup(listener => listener.Enter(It.IsAny<NullLiteral>())).Callback((NullLiteral s) => invokesSequence.Add(Enter + nameof(NullLiteral)));
-            mock.Setup(listener => listener.Enter(It.IsAny<StringLiteral>())).Callback((StringLiteral s) => invokesSequence.Add(Enter + nameof(StringLiteral)));
-            mock.Setup(listener => listener.Enter(It.IsAny<Identifier>())).Callback((Identifier s) => invokesSequence.Add(Enter + nameof(Identifier)));
-            mock.Setup(listener => listener.Enter(It.IsAny<BlockStatement>())).Callback((BlockStatement s) => invokesSequence.Add(Enter + nameof(BlockStatement)));
-            mock.Setup(listener => listener.Enter(It.IsAny<ExpressionStatement>())).Callback((ExpressionStatement s) => invokesSequence.Add(Enter + nameof(ExpressionStatement)));
-            mock.Setup(listener => listener.Enter(It.IsAny<ForStatement>())).Callback((ForStatement s) => invokesSequence.Add(Enter + nameof(ForStatement)));
-            mock.Setup(listener => listener.Enter(It.IsAny<IfElseStatement>())).Callback((IfElseStatement s) => invokesSequence.Add(Enter + nameof(IfElseStatement)));
+            mock.Setup(listener => listener.Enter(It.IsAny<Expression>())).Callback((Expression s) => invokeSequence.Add(Enter + nameof(Expression)));
+            mock.Setup(listener => listener.Enter(It.IsAny<Terminal>())).Callback((Terminal s) => invokeSequence.Add(Enter + nameof(Terminal)));
+            mock.Setup(listener => listener.Enter(It.IsAny<Statement>())).Callback((Statement s) => invokeSequence.Add(Enter + nameof(Statement)));
+            mock.Setup(listener => listener.Enter(It.IsAny<BinaryOperatorExpression>())).Callback((BinaryOperatorExpression s) => invokeSequence.Add(Enter + nameof(BinaryOperatorExpression)));
+            mock.Setup(listener => listener.Enter(It.IsAny<InvocationExpression>())).Callback((InvocationExpression s) => invokeSequence.Add(Enter + nameof(InvocationExpression)));
+            mock.Setup(listener => listener.Enter(It.IsAny<MemberReferenceExpression>())).Callback((MemberReferenceExpression s) => invokeSequence.Add(Enter + nameof(MemberReferenceExpression)));
+            mock.Setup(listener => listener.Enter(It.IsAny<UnaryOperatorExpression>())).Callback((UnaryOperatorExpression s) => invokeSequence.Add(Enter + nameof(UnaryOperatorExpression)));
+            mock.Setup(listener => listener.Enter(It.IsAny<BooleanLiteral>())).Callback((BooleanLiteral s) => invokeSequence.Add(Enter + nameof(BooleanLiteral)));
+            mock.Setup(listener => listener.Enter(It.IsAny<FloatLiteral>())).Callback((FloatLiteral s) => invokeSequence.Add(Enter + nameof(FloatLiteral)));
+            mock.Setup(listener => listener.Enter(It.IsAny<IntegerLiteral>())).Callback((IntegerLiteral s) => invokeSequence.Add(Enter + nameof(IntegerLiteral)));
+            mock.Setup(listener => listener.Enter(It.IsAny<NullLiteral>())).Callback((NullLiteral s) => invokeSequence.Add(Enter + nameof(NullLiteral)));
+            mock.Setup(listener => listener.Enter(It.IsAny<StringLiteral>())).Callback((StringLiteral s) => invokeSequence.Add(Enter + nameof(StringLiteral)));
+            mock.Setup(listener => listener.Enter(It.IsAny<Identifier>())).Callback((Identifier s) => invokeSequence.Add(Enter + nameof(Identifier)));
+            mock.Setup(listener => listener.Enter(It.IsAny<BlockStatement>())).Callback((BlockStatement s) => invokeSequence.Add(Enter + nameof(BlockStatement)));
+            mock.Setup(listener => listener.Enter(It.IsAny<ExpressionStatement>())).Callback((ExpressionStatement s) => invokeSequence.Add(Enter + nameof(ExpressionStatement)));
+            mock.Setup(listener => listener.Enter(It.IsAny<ForStatement>())).Callback((ForStatement s) => invokeSequence.Add(Enter + nameof(ForStatement)));
+            mock.Setup(listener => listener.Enter(It.IsAny<IfElseStatement>())).Callback((IfElseStatement s) => invokeSequence.Add(Enter + nameof(IfElseStatement)));
             
-            mock.Setup(listener => listener.Exit(It.IsAny<Expression>())).Callback((Expression s) => invokesSequence.Add(Exit + nameof(Expression)));
-            mock.Setup(listener => listener.Exit(It.IsAny<Terminal>())).Callback((Terminal s) => invokesSequence.Add(Exit + nameof(Terminal)));
-            mock.Setup(listener => listener.Exit(It.IsAny<Statement>())).Callback((Statement s) => invokesSequence.Add(Exit + nameof(Statement)));
-            mock.Setup(listener => listener.Exit(It.IsAny<BinaryOperatorExpression>())).Callback((BinaryOperatorExpression s) => invokesSequence.Add(Exit + nameof(BinaryOperatorExpression)));
-            mock.Setup(listener => listener.Exit(It.IsAny<InvocationExpression>())).Callback((InvocationExpression s) => invokesSequence.Add(Exit + nameof(InvocationExpression)));
-            mock.Setup(listener => listener.Exit(It.IsAny<MemberReferenceExpression>())).Callback((MemberReferenceExpression s) => invokesSequence.Add(Exit + nameof(MemberReferenceExpression)));
-            mock.Setup(listener => listener.Exit(It.IsAny<UnaryOperatorExpression>())).Callback((UnaryOperatorExpression s) => invokesSequence.Add(Exit + nameof(UnaryOperatorExpression)));
-            mock.Setup(listener => listener.Exit(It.IsAny<BooleanLiteral>())).Callback((BooleanLiteral s) => invokesSequence.Add(Exit + nameof(BooleanLiteral)));
-            mock.Setup(listener => listener.Exit(It.IsAny<FloatLiteral>())).Callback((FloatLiteral s) => invokesSequence.Add(Exit + nameof(FloatLiteral)));
-            mock.Setup(listener => listener.Exit(It.IsAny<IntegerLiteral>())).Callback((IntegerLiteral s) => invokesSequence.Add(Exit + nameof(IntegerLiteral)));
-            mock.Setup(listener => listener.Exit(It.IsAny<NullLiteral>())).Callback((NullLiteral s) => invokesSequence.Add(Exit + nameof(NullLiteral)));
-            mock.Setup(listener => listener.Exit(It.IsAny<StringLiteral>())).Callback((StringLiteral s) => invokesSequence.Add(Exit + nameof(StringLiteral)));
-            mock.Setup(listener => listener.Exit(It.IsAny<Identifier>())).Callback((Identifier s) => invokesSequence.Add(Exit + nameof(Identifier)));
-            mock.Setup(listener => listener.Exit(It.IsAny<BlockStatement>())).Callback((BlockStatement s) => invokesSequence.Add(Exit + nameof(BlockStatement)));
-            mock.Setup(listener => listener.Exit(It.IsAny<ExpressionStatement>())).Callback((ExpressionStatement s) => invokesSequence.Add(Exit + nameof(ExpressionStatement)));
-            mock.Setup(listener => listener.Exit(It.IsAny<ForStatement>())).Callback((ForStatement s) => invokesSequence.Add(Exit + nameof(ForStatement)));
-            mock.Setup(listener => listener.Exit(It.IsAny<IfElseStatement>())).Callback((IfElseStatement s) => invokesSequence.Add(Exit + nameof(IfElseStatement)));
+            mock.Setup(listener => listener.Exit(It.IsAny<Expression>())).Callback((Expression s) => invokeSequence.Add(Exit + nameof(Expression)));
+            mock.Setup(listener => listener.Exit(It.IsAny<Terminal>())).Callback((Terminal s) => invokeSequence.Add(Exit + nameof(Terminal)));
+            mock.Setup(listener => listener.Exit(It.IsAny<Statement>())).Callback((Statement s) => invokeSequence.Add(Exit + nameof(Statement)));
+            mock.Setup(listener => listener.Exit(It.IsAny<BinaryOperatorExpression>())).Callback((BinaryOperatorExpression s) => invokeSequence.Add(Exit + nameof(BinaryOperatorExpression)));
+            mock.Setup(listener => listener.Exit(It.IsAny<InvocationExpression>())).Callback((InvocationExpression s) => invokeSequence.Add(Exit + nameof(InvocationExpression)));
+            mock.Setup(listener => listener.Exit(It.IsAny<MemberReferenceExpression>())).Callback((MemberReferenceExpression s) => invokeSequence.Add(Exit + nameof(MemberReferenceExpression)));
+            mock.Setup(listener => listener.Exit(It.IsAny<UnaryOperatorExpression>())).Callback((UnaryOperatorExpression s) => invokeSequence.Add(Exit + nameof(UnaryOperatorExpression)));
+            mock.Setup(listener => listener.Exit(It.IsAny<BooleanLiteral>())).Callback((BooleanLiteral s) => invokeSequence.Add(Exit + nameof(BooleanLiteral)));
+            mock.Setup(listener => listener.Exit(It.IsAny<FloatLiteral>())).Callback((FloatLiteral s) => invokeSequence.Add(Exit + nameof(FloatLiteral)));
+            mock.Setup(listener => listener.Exit(It.IsAny<IntegerLiteral>())).Callback((IntegerLiteral s) => invokeSequence.Add(Exit + nameof(IntegerLiteral)));
+            mock.Setup(listener => listener.Exit(It.IsAny<NullLiteral>())).Callback((NullLiteral s) => invokeSequence.Add(Exit + nameof(NullLiteral)));
+            mock.Setup(listener => listener.Exit(It.IsAny<StringLiteral>())).Callback((StringLiteral s) => invokeSequence.Add(Exit + nameof(StringLiteral)));
+            mock.Setup(listener => listener.Exit(It.IsAny<Identifier>())).Callback((Identifier s) => invokeSequence.Add(Exit + nameof(Identifier)));
+            mock.Setup(listener => listener.Exit(It.IsAny<BlockStatement>())).Callback((BlockStatement s) => invokeSequence.Add(Exit + nameof(BlockStatement)));
+            mock.Setup(listener => listener.Exit(It.IsAny<ExpressionStatement>())).Callback((ExpressionStatement s) => invokeSequence.Add(Exit + nameof(ExpressionStatement)));
+            mock.Setup(listener => listener.Exit(It.IsAny<ForStatement>())).Callback((ForStatement s) => invokeSequence.Add(Exit + nameof(ForStatement)));
+            mock.Setup(listener => listener.Exit(It.IsAny<IfElseStatement>())).Callback((IfElseStatement s) => invokeSequence.Add(Exit + nameof(IfElseStatement)));
 
             mock.Object.Walk(sampleTree);
 
-            return invokesSequence;
+            return invokeSequence;
         }
     }
 }

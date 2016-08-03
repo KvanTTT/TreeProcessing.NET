@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TreesProcessing.NET
 {
@@ -47,7 +43,6 @@ namespace TreesProcessing.NET
 
         public StaticEventListener()
         {
-
         }
 
         public void Walk(Node node)
@@ -122,8 +117,6 @@ namespace TreesProcessing.NET
                 Visit(terminal);
                 ExitTerminal?.Invoke(this, terminal);
             }
-
-            throw new InvalidOperationException();
         }
 
         private void Visit(Terminal terminal)
@@ -272,6 +265,9 @@ namespace TreesProcessing.NET
                 Visit(iterator);
                 ExitExpression?.Invoke(this, iterator);
             }
+            EnterStatement?.Invoke(this, forStatement.Statement);
+            Visit(forStatement.Statement);
+            ExitStatement?.Invoke(this, forStatement.Statement);
         }
 
         private void Visit(IfElseStatement ifElseStatement)
