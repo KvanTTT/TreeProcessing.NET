@@ -1,12 +1,7 @@
-﻿using MsgPack.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using NUnit.Framework;
-using ProtoBuf;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Serialization;
@@ -100,8 +95,8 @@ namespace TreesProcessing.NET.Tests
                 TypeNameHandling = TypeNameHandling.All,
             };
             string expectedJson = JsonConvert.SerializeObject(tree, settings);
-            Node deserialzied = JsonConvert.DeserializeObject<Node>(expectedJson, settings);
-            string actualJson = JsonConvert.SerializeObject(deserialzied, settings);
+            Node deserialized = JsonConvert.DeserializeObject<Node>(expectedJson, settings);
+            string actualJson = JsonConvert.SerializeObject(deserialized, settings);
 
             Assert.AreEqual(expectedJson, actualJson);
         }
@@ -122,8 +117,8 @@ namespace TreesProcessing.NET.Tests
                 Converters = new JsonConverter[] { new StringEnumConverter(), new PropertyJsonConverter() },
             };
             string expectedJson = JsonConvert.SerializeObject(tree, serializeSettings);
-            Node deserialzied = JsonConvert.DeserializeObject<Node>(expectedJson, deserializeSettings);
-            string actualJson = JsonConvert.SerializeObject(deserialzied, serializeSettings);
+            Node deserialized = JsonConvert.DeserializeObject<Node>(expectedJson, deserializeSettings);
+            string actualJson = JsonConvert.SerializeObject(deserialized, serializeSettings);
 
             Assert.AreEqual(expectedJson, actualJson);
         }
@@ -139,8 +134,8 @@ namespace TreesProcessing.NET.Tests
                 Converters = new JsonConverter[] { new ClassNameJsonConverter() },
             };
             string expectedJson = JsonConvert.SerializeObject(tree, settings);
-            Node deserialzied = JsonConvert.DeserializeObject<Node>(expectedJson, settings);
-            string actualJson = JsonConvert.SerializeObject(deserialzied, settings);
+            Node deserialized = JsonConvert.DeserializeObject<Node>(expectedJson, settings);
+            string actualJson = JsonConvert.SerializeObject(deserialized, settings);
 
             Assert.AreEqual(expectedJson, actualJson);
         }
@@ -156,8 +151,8 @@ namespace TreesProcessing.NET.Tests
                 Converters = new JsonConverter[] { new AttributeJsonConverter() },
             };
             string expectedJson = JsonConvert.SerializeObject(tree, settings);
-            Node deserialzied = JsonConvert.DeserializeObject<Node>(expectedJson, settings);
-            string actualJson = JsonConvert.SerializeObject(deserialzied, settings);
+            Node deserialized = JsonConvert.DeserializeObject<Node>(expectedJson, settings);
+            string actualJson = JsonConvert.SerializeObject(deserialized, settings);
 
             Assert.AreEqual(expectedJson, actualJson);
         }
@@ -180,10 +175,9 @@ namespace TreesProcessing.NET.Tests
         }
 
         [Test]
+        [Ignore("MessagePack is not supported")]
         public void MessagePack_Serialization()
         {
-            Assert.Ignore();
-
             Statement tree = SampleTree.Init();
 
             Node actualTree;
@@ -194,6 +188,17 @@ namespace TreesProcessing.NET.Tests
                 memoryStream.Position = 0;
                 actualTree = serializer.Unpack(memoryStream);
             }
+        }
+
+        [Test]
+        public void ServiceStack_Serialization()
+        {
+            Statement tree = SampleTree.Init();
+            var expectedJson = ServiceStack.Text.JsonSerializer.SerializeToString<Statement>(tree);
+            Statement deserialized = ServiceStack.Text.JsonSerializer.DeserializeFromString<Statement>(expectedJson);
+            string actualJson = ServiceStack.Text.JsonSerializer.SerializeToString<Statement>(deserialized);
+
+            Assert.AreEqual(expectedJson, actualJson);
         }
     }
 }
