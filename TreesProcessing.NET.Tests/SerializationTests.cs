@@ -191,12 +191,23 @@ namespace TreesProcessing.NET.Tests
         }
 
         [Test]
-        public void ServiceStack_Serialization()
+        public void ServiceStackJson_Serialization()
         {
             Statement tree = SampleTree.Init();
             var expectedJson = ServiceStack.Text.JsonSerializer.SerializeToString<Statement>(tree);
             Statement deserialized = ServiceStack.Text.JsonSerializer.DeserializeFromString<Statement>(expectedJson);
             string actualJson = ServiceStack.Text.JsonSerializer.SerializeToString<Statement>(deserialized);
+
+            Assert.AreEqual(expectedJson, actualJson);
+        }
+
+        [Test]
+        public void ServiceStackType_Serialization()
+        {
+            Statement tree = SampleTree.Init();
+            var expectedJson = ServiceStack.Text.TypeSerializer.SerializeToString<Statement>(tree);
+            Statement deserialized = ServiceStack.Text.TypeSerializer.DeserializeFromString<Statement>(expectedJson);
+            string actualJson = ServiceStack.Text.TypeSerializer.SerializeToString<Statement>(deserialized);
 
             Assert.AreEqual(expectedJson, actualJson);
         }
