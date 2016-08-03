@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TreesProcessing.NET
 {
     public static class ReflectionCache
     {
-        private static Dictionary<Type, PropertyInfo[]> nodeProperties
-            = new Dictionary<Type, PropertyInfo[]>();
+        private static Dictionary<Type, PropertyInfo[]> nodeProperties = new Dictionary<Type, PropertyInfo[]>();
 
         public static PropertyInfo[] GetClassProperties(Type objectType)
         {
