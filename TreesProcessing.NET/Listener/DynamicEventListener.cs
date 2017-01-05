@@ -52,6 +52,10 @@ namespace TreesProcessing.NET
 
         public DynamicEventListener()
         {
+        }
+
+        public void InitializeEvents()
+        {
             var dynamicEventListenerType = typeof(DynamicEventListener);
             IEnumerable<EventInfo> events = dynamicEventListenerType.GetRuntimeEvents();
 
@@ -60,16 +64,17 @@ namespace TreesProcessing.NET
             foreach (var ev in events)
             {
                 var type = ev.EventHandlerType.GenericTypeArguments.First();
-                var deleg = (Delegate)dynamicEventListenerType
+
+                var d = (Delegate)dynamicEventListenerType
                     .GetField(ev.Name, BindingFlags.Instance | BindingFlags.NonPublic)
                     .GetValue(this);
                 if (ev.Name.StartsWith("Enter"))
                 {
-                    enterEvents[type] = deleg;
+                    enterEvents[type] = d;
                 }
                 else if (ev.Name.StartsWith("Exit"))
                 {
-                    enterEvents[type] = deleg;
+                    exitEvents[type] = d;
                 }
             }
         }
@@ -132,19 +137,21 @@ namespace TreesProcessing.NET
 
         private void InvokeEnterEvent(object obj)
         {
+            var t = obj.GetType();
             Delegate eventDelegate = enterEvents[obj.GetType()];
             if (eventDelegate != null)
             {
-                eventDelegate.DynamicInvoke(obj);
+                eventDelegate.DynamicInvoke(new object[] { this, obj });
             }
         }
 
         private void InvokeExitEvent(object obj)
         {
+            var t = obj.GetType();
             Delegate eventDelegate = (Delegate)exitEvents[obj.GetType()];
             if (eventDelegate != null)
             {
-                eventDelegate.DynamicInvoke(obj);
+                eventDelegate.DynamicInvoke(new object[] { this, obj });
             }
         }
     }
