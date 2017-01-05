@@ -80,10 +80,7 @@ namespace TreesProcessing.NET.Tests
                     $"Enter method for Type {type} is not exists");
 
                 Assert.IsTrue(listenerEvents
-                    .FirstOrDefault(listenerEvent =>
-                    {;
-                        return listenerEvent.Name == exitEventName;
-                    }) != null,
+                    .FirstOrDefault(listenerEvent => listenerEvent.Name == exitEventName) != null,
                     $"Visitor for Type {type} is not exists");
             }
         }
