@@ -54,6 +54,7 @@
     <Compile Include="Dto\UnaryOperatorExpressionDto.cs" />
     <Compile Include="Json\AttributeJsonConverter.cs" />
     <Compile Include="Json\ClassNameJsonConverter.cs" />
+    <Compile Include="MapperHelper.cs" />
     <Compile Include="StaticHelper.cs" />
     <Compile Include="Listener\DynamicListener.cs" />
     <Compile Include="Nodes\Expressions\BinaryOperatorExpression.cs" />

@@ -2,7 +2,7 @@
 
 namespace TreesProcessing.NET
 {
-    public class MapperHelper
+    public class AutoMapperHelper
     {
         public static void Initialize()
         {

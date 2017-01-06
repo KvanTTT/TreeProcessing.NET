@@ -7,9 +7,9 @@ namespace TreesProcessing.NET.Tests
     public class MapperTests
     {
         [Test]
-        public void Map_ModelToDtoAndBack()
+        public void AutoMapper_ModelToDtoAndBack()
         {
-            MapperHelper.Initialize();
+            AutoMapperHelper.Initialize();
 
             Statement sampleTree = SampleTree.Init();
             NodeDto sampleTreeDto = Mapper.Map<NodeDto>(sampleTree);

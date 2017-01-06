@@ -208,7 +208,7 @@
       <Link>Visitor\StaticVisitor.cs</Link>
     </Compile>
     <Compile Include="Listener\DynamicEventListener.cs" />
-    <Compile Include="MapperHelper.cs" />
+    <Compile Include="AutoMapperHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
