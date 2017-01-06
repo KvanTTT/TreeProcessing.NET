@@ -1,13 +1,5 @@
-﻿using ProtoBuf;
-using System;
-using System.Runtime.Serialization;
-
-namespace TreesProcessing.NET
+﻿namespace TreesProcessing.NET
 {
-    [NodeAttr(NodeType.BinaryOperatorExpression)]
-    [Serializable]
-    [DataContract]
-    [ProtoContract]
     public class BinaryOperatorExpressionDto : ExpressionDto
     {
         public override NodeType NodeType => NodeType.BinaryOperatorExpression;

@@ -1,9 +1,4 @@
-﻿using ProtoBuf;
-using System;
-using System.Runtime.Serialization;
-using System.Xml.Serialization;
-
-namespace TreesProcessing.NET
+﻿namespace TreesProcessing.NET
 {
     public abstract class ExpressionDto : NodeDto
     {

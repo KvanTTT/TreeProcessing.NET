@@ -1,24 +1,13 @@
-﻿using ProtoBuf;
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
 
 namespace TreesProcessing.NET
 {
-    [NodeAttr(NodeType.InvocationExpression)]
-    [Serializable]
-    [DataContract]
-    [ProtoContract]
     public class InvocationExpressionDto : ExpressionDto
     {
         public override NodeType NodeType => NodeType.InvocationExpression;
 
-        [DataMember]
-        [ProtoMember(1)]
         public ExpressionDto Target { get; set; }
 
-        [DataMember]
-        [ProtoMember(2)]
         public List<ExpressionDto> Args { get; set; }
 
         public InvocationExpressionDto(ExpressionDto target, List<ExpressionDto> args)
