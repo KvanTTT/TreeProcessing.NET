@@ -40,7 +40,7 @@ namespace TreesProcessing.NET
         public ForStatement()
         {
             Initializers = new List<Statement>();
-            Iterators = Iterators = new List<Expression>();
+            Iterators = new List<Expression>();
         }
 
         public override int CompareTo(Node other)

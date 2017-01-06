@@ -40,7 +40,7 @@ namespace TreesProcessing.NET
         public ForStatementDto()
         {
             Initializers = new List<StatementDto>();
-            Iterators = Iterators = new List<ExpressionDto>();
+            Iterators = new List<ExpressionDto>();
         }
 
         public override string ToString()

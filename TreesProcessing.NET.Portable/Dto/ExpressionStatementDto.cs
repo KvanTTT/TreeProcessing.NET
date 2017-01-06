@@ -15,11 +15,11 @@ namespace TreesProcessing.NET
 
         [DataMember]
         [ProtoMember(1)]
-        public Expression ExpressionDto { get; set; }
+        public ExpressionDto Expression { get; set; }
 
-        public ExpressionStatementDto(Expression expression)
+        public ExpressionStatementDto(ExpressionDto expression)
         {
-            ExpressionDto = expression;
+            Expression = expression;
         }
 
         public ExpressionStatementDto()
@@ -28,7 +28,7 @@ namespace TreesProcessing.NET
 
         public override string ToString()
         {
-            return ExpressionDto + ";";
+            return Expression + ";";
         }
     }
 }
