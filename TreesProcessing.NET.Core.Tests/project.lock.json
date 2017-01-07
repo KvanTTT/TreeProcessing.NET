@@ -4717,8 +4717,10 @@
     "": [
       "NETStandard.Library >= 1.6.0",
       "NUnit >= 3.5.0",
+      "Newtonsoft.Json >= 9.0.1",
       "System.Runtime.Serialization.Xml >= 4.1.1",
-      "TreesProcessing.NET.Core >= 1.0.0-*"
+      "TreesProcessing.NET.Core >= 1.0.0-*",
+      "protobuf-net >= 2.1.0"
     ],
     ".NETStandard,Version=v1.6": []
   },

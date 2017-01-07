@@ -11,9 +11,9 @@ namespace TreesProcessing.NET.Tests
     [TestFixture]
     public class SerializationTests
     {
-#if !NETCORE
-        [Test]
-        public void Binary_Serialization()
+#if !CORE
+        [TestCase(TestHelper.Platform)]
+        public void Binary_Serialization(string platform)
         {
             Statement tree = SampleTree.Init();
 
@@ -36,8 +36,8 @@ namespace TreesProcessing.NET.Tests
         }
 #endif
 
-        [Test]
-        public void DataContract_Serialization()
+        [TestCase(TestHelper.Platform)]
+        public void DataContract_Serialization(string platform)
         {
             Statement tree = SampleTree.Init();
 
@@ -62,8 +62,8 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(0, tree.CompareTo(actualTree));
         }
 
-        [Test]
-        public void Xml_Serialization()
+        [TestCase(TestHelper.Platform)]
+        public void Xml_Serialization(string platform)
         {
             Statement tree = SampleTree.Init();
             XmlSerializer serializer = new XmlSerializer(typeof(Statement));
@@ -85,8 +85,8 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(0, tree.CompareTo(actualTree));
         }
 
-        [Test]
-        public void JsonNET_FullTypeNameSerialization()
+        [TestCase(TestHelper.Platform)]
+        public void JsonNET_FullTypeNameSerialization(string platform)
         {
             Node tree = SampleTree.Init();
 
@@ -103,8 +103,8 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(expectedJson, actualJson);
         }
 
-        [Test]
-        public void JsonNET_PropertySerialization()
+        [TestCase(TestHelper.Platform)]
+        public void JsonNET_PropertySerialization(string platform)
         {
             Node tree = SampleTree.Init();
 
@@ -125,8 +125,8 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(expectedJson, actualJson);
         }
 
-        [Test]
-        public void JsonNET_ClassNameSerialization()
+        [TestCase(TestHelper.Platform)]
+        public void JsonNET_ClassNameSerialization(string platform)
         {
             Node tree = SampleTree.Init();
 
@@ -142,8 +142,8 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(expectedJson, actualJson);
         }
 
-        [Test]
-        public void JsonNET_AttributeSerialization()
+        [TestCase(TestHelper.Platform)]
+        public void JsonNET_AttributeSerialization(string platform)
         {
             Node tree = SampleTree.Init();
 
@@ -159,8 +159,8 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(expectedJson, actualJson);
         }
 
-        [Test]
-        public void Protobuf_Seialization()
+        [TestCase(TestHelper.Platform)]
+        public void Protobuf_Seialization(string platform)
         {
             Statement tree = SampleTree.Init();
 
@@ -176,10 +176,10 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(0, tree.CompareTo(actualTree));
         }
 
-#if !NETCORE
-        [Test]
+#if !CORE
+        [TestCase(TestHelper.Platform)]
         [Ignore("MessagePack is not supported")]
-        public void MessagePack_Serialization()
+        public void MessagePack_Serialization(string platform)
         {
             Statement tree = SampleTree.Init();
 
@@ -193,8 +193,8 @@ namespace TreesProcessing.NET.Tests
             }
         }
 
-        [Test]
-        public void ServiceStackJson_Serialization()
+        [TestCase(TestHelper.Platform)]
+        public void ServiceStackJson_Serialization(string platform)
         {
             Statement tree = SampleTree.Init();
             var expectedJson = ServiceStack.Text.JsonSerializer.SerializeToString<Statement>(tree);
@@ -204,8 +204,8 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(expectedJson, actualJson);
         }
 
-        [Test]
-        public void ServiceStackType_Serialization()
+        [TestCase(TestHelper.Platform)]
+        public void ServiceStackType_Serialization(string platform)
         {
             Statement tree = SampleTree.Init();
             var expectedJson = ServiceStack.Text.TypeSerializer.SerializeToString<Statement>(tree);

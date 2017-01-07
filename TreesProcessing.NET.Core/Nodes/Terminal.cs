@@ -7,7 +7,7 @@ namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.Terminal)]
     [ProtoContract]
-#if !NETCORE
+#if !CORE
     [Serializable]
 #endif
     public abstract class Terminal : Expression

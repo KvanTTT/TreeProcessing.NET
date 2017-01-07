@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.Expression)]
-#if !NETCORE
+#if !CORE
     [Serializable]
 #endif
     [ProtoContract]

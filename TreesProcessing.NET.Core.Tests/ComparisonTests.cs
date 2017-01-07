@@ -7,8 +7,8 @@ namespace TreesProcessing.NET.Tests
     [TestFixture]
     public class ComparisonTests
     {
-        [Test]
-        public void Comparison_Static_Equals()
+        [TestCase(TestHelper.Platform)]
+        public void Comparison_Static_Equals(string platform)
         {
             var tree1 = SampleTree.Init();
             var tree2 = SampleTree.Init();
@@ -16,8 +16,8 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(0, tree1.CompareTo(tree2));
         }
 
-        [Test]
-        public void Comparison_Dynamic_Equals()
+        [TestCase(TestHelper.Platform)]
+        public void Comparison_Dynamic_Equals(string platform)
         {
             var tree1 = SampleTree.Init();
             var tree2 = SampleTree.Init();
@@ -25,8 +25,8 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(0, tree1.Compare(tree2));
         }
 
-        [Test]
-        public void Comparison_NotEquals()
+        [TestCase(TestHelper.Platform)]
+        public void Comparison_NotEquals(string platform)
         {
             var tree1 = SampleTree.Init();
             var tree2 = SampleTree.Init();
@@ -45,14 +45,14 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(2, tree1.Compare((Node)treeWithChangedListCount));
         }
 
-        [Test]
-        public void Descendants_Static()
+        [TestCase(TestHelper.Platform)]
+        public void Descendants_Static(string platform)
         {
             TestDescendants(SampleTree.Init().Descendants);
         }
 
-        [Test]
-        public void Descendants_Dynamic()
+        [TestCase(TestHelper.Platform)]
+        public void Descendants_Dynamic(string platform)
         {
             TestDescendants(SampleTree.Init().GetDescendants());
         }

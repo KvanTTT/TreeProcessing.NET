@@ -11,6 +11,6 @@
         }
     },
     "buildOptions": {
-        "define": [ "NETCORE" ]
+        "define": [ "CORE" ]
     }
 }

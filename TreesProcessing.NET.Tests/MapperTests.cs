@@ -6,8 +6,8 @@ namespace TreesProcessing.NET.Tests
     [TestFixture]
     public class MapperTests
     {
-        [Test]
-        public void AutoMapper_ModelToDtoAndBack()
+        [TestCase(TestHelper.Platform)]
+        public void AutoMapper_ModelToDtoAndBack(string platform)
         {
             AutoMapperHelper.Initialize();
 

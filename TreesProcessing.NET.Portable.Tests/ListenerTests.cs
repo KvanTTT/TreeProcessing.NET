@@ -12,8 +12,8 @@ namespace TreesProcessing.NET.Tests
         private const string Enter = "Enter";
         private const string Exit = "Exit";
 
-        [Test]
-        public void CheckAllListenerMethodsExists()
+        [TestCase(TestHelper.Platform)]
+        public void CheckAllListenerMethodsExists(string platform)
         {
             MethodInfo[] listenerMethods = typeof(IListener).GetMethods();
             IEnumerable<Type> nodeTypes = Assembly.GetAssembly(typeof(Node)).GetTypes()
@@ -38,8 +38,8 @@ namespace TreesProcessing.NET.Tests
             }
         }
 
-        [Test]
-        public void CheckAllEventListenerMethodsExists()
+        [TestCase(TestHelper.Platform)]
+        public void CheckAllEventListenerMethodsExists(string platform)
         {
             EventInfo[] listenerEvents = typeof(IEventListener).GetEvents();
             IEnumerable<Type> nodeTypes = Assembly.GetAssembly(typeof(Node)).GetTypes()
@@ -61,28 +61,40 @@ namespace TreesProcessing.NET.Tests
             }
         }
 
-        [Test]
-        public void Listener_Static()
+        [TestCase(TestHelper.Platform)]
+        public void Listener_Static(string platform)
         {
             var invokeSequence = GetInvokeSequenceFromStaticListener();
             ListenerUtils.CheckInvokeSequence(invokeSequence, false);
         }
 
-        [Test]
-        public void Listener_Dynamic()
+        [TestCase(TestHelper.Platform)]
+        public void Listener_Dynamic(string platform)
         {
             var invokeSequence = GetInvokeSequenceFromDynamicListener();
             ListenerUtils.CheckInvokeSequence(invokeSequence, true);
         }
 
-        [Test]
-        public void EventListener_Static()
+        [TestCase(TestHelper.Platform)]
+        public void EventListener_Static(string platform)
         {
             IEventListener listener = new StaticEventListener();
             List<string> invokeSequence = ListenerUtils.AppendEvents(listener);
             listener.Walk(SampleTree.Init());
             ListenerUtils.CheckInvokeSequence(invokeSequence, false);
         }
+
+#if !CORE && !PORTABLE
+        [TestCase(TestHelper.Platform)]
+        public void EventListener_Dynamic(string platform)
+        {
+            var listener = new DynamicEventListener();
+            List<string> invokeSequence = ListenerUtils.AppendEvents(listener);
+            listener.InitializeEvents();
+            listener.Walk(SampleTree.Init());
+            ListenerUtils.CheckInvokeSequence(invokeSequence, true);
+        }
+#endif
 
         private static List<string> GetInvokeSequenceFromStaticListener()
         {

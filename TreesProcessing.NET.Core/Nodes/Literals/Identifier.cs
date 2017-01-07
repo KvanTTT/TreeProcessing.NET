@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.Identifier)]
-#if !NETCORE
+#if !CORE
     [Serializable]
 #endif
     [DataContract]

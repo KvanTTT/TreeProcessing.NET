@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.BinaryOperatorExpression)]
-#if !NETCORE
+#if !CORE
     [Serializable]
 #endif
     [DataContract]

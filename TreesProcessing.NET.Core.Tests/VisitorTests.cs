@@ -13,9 +13,9 @@ namespace TreesProcessing.NET.Tests
     [TestFixture]
     public class VisitorTests
     {
-#if !NETCORE
-        [Test]
-        public void CheckAllVisitorMethodsExists()
+#if !CORE
+        [TestCase(TestHelper.Platform)]
+        public void CheckAllVisitorMethodsExists(string platform)
         {
             MethodInfo[] visitorMethods = typeof(IVisitor<>).GetMethods();
             IEnumerable<Type> nodeTypes = Assembly.GetAssembly(typeof(Node)).GetTypes()
@@ -33,14 +33,14 @@ namespace TreesProcessing.NET.Tests
         }
 #endif
 
-        [Test]
-        public void Visitor_Static()
+        [TestCase(TestHelper.Platform)]
+        public void Visitor_Static(string platform)
         {
             TestVisitor(new StaticVisitor());
         }
 
-        [Test]
-        public void Visitor_Dynamic()
+        [TestCase(TestHelper.Platform)]
+        public void Visitor_Dynamic(string platform)
         {
             TestVisitor(new DynamicVisitor());
         }

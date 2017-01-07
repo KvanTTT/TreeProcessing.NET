@@ -112,6 +112,9 @@
     <Compile Include="..\TreesProcessing.NET.Core\Listener\StaticListener.cs">
       <Link>Listener\StaticListener.cs</Link>
     </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\MapperHelper.cs">
+      <Link>MapperHelper.cs</Link>
+    </Compile>
     <Compile Include="..\TreesProcessing.NET.Core\NodeAttribute.cs">
       <Link>NodeAttribute.cs</Link>
     </Compile>
@@ -187,7 +190,6 @@
     <Compile Include="..\TreesProcessing.NET.Core\Visitor\StaticVisitor.cs">
       <Link>Visitor\StaticVisitor.cs</Link>
     </Compile>
-    <Compile Include="MapperHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

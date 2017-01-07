@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.NullLiteral)]
-#if !NETCORE
+#if !CORE
     [Serializable]
 #endif
     [DataContract]
