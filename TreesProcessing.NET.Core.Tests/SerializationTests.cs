@@ -11,6 +11,7 @@ namespace TreesProcessing.NET.Tests
     [TestFixture]
     public class SerializationTests
     {
+#if !NETCORE
         [Test]
         public void Binary_Serialization()
         {
@@ -25,7 +26,7 @@ namespace TreesProcessing.NET.Tests
                 memoryStream.Position = 0;
                 var chars = new byte[memoryStream.Length];
                 memoryStream.Read(chars, 0, (int)memoryStream.Length);
-                var str = Encoding.Default.GetString(chars);
+                var str = Encoding.UTF8.GetString(chars);
 
                 memoryStream.Position = 0;
                 actualTree = (Statement)binaryFormatter.Deserialize(memoryStream);
@@ -33,6 +34,7 @@ namespace TreesProcessing.NET.Tests
 
             Assert.AreEqual(0, tree.CompareTo(actualTree));
         }
+#endif
 
         [Test]
         public void DataContract_Serialization()
@@ -50,7 +52,7 @@ namespace TreesProcessing.NET.Tests
                     memoryStream.Position = 0;
                     var chars = new byte[memoryStream.Length];
                     memoryStream.Read(chars, 0, (int)memoryStream.Length);
-                    var str = Encoding.Default.GetString(chars);
+                    var str = Encoding.UTF8.GetString(chars);
 
                     memoryStream.Position = 0;
                     actualTree = (Statement)serializer.ReadObject(memoryStream);
@@ -74,7 +76,7 @@ namespace TreesProcessing.NET.Tests
                 memoryStream.Position = 0;
                 var chars = new byte[memoryStream.Length];
                 memoryStream.Read(chars, 0, (int)memoryStream.Length);
-                var str = Encoding.Default.GetString(chars);
+                var str = Encoding.UTF8.GetString(chars);
 
                 memoryStream.Position = 0;
                 actualTree = (Statement)serializer.Deserialize(memoryStream);
@@ -174,6 +176,7 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(0, tree.CompareTo(actualTree));
         }
 
+#if !NETCORE
         [Test]
         [Ignore("MessagePack is not supported")]
         public void MessagePack_Serialization()
@@ -211,5 +214,6 @@ namespace TreesProcessing.NET.Tests
 
             Assert.AreEqual(expectedJson, actualJson);
         }
+#endif
     }
 }

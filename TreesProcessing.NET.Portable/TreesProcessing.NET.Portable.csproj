@@ -34,59 +34,160 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Dto\BinaryOperatorExpressionDto.cs" />
-    <Compile Include="Dto\BlockStatementDto.cs" />
-    <Compile Include="Dto\BooleanLiteralDto.cs" />
-    <Compile Include="Dto\ExpressionDto.cs" />
-    <Compile Include="Dto\ExpressionStatementDto.cs" />
-    <Compile Include="Dto\FloatLiteralDto.cs" />
-    <Compile Include="Dto\ForStatementDto.cs" />
-    <Compile Include="Dto\IdentifierDto.cs" />
-    <Compile Include="Dto\IfElseStatementDto.cs" />
-    <Compile Include="Dto\IntegerLiteralDto.cs" />
-    <Compile Include="Dto\InvocationExpressionDto.cs" />
-    <Compile Include="Dto\MemberReferenceExpressionDto.cs" />
-    <Compile Include="Dto\NodeDto.cs" />
-    <Compile Include="Dto\NullLiteralDto.cs" />
-    <Compile Include="Dto\StatementDto.cs" />
-    <Compile Include="Dto\StringLiteralDto.cs" />
-    <Compile Include="Dto\TerminalDto.cs" />
-    <Compile Include="Dto\UnaryOperatorExpressionDto.cs" />
-    <Compile Include="Json\AttributeJsonConverter.cs" />
-    <Compile Include="Json\ClassNameJsonConverter.cs" />
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\BinaryOperatorExpressionDto.cs">
+      <Link>Dto\BinaryOperatorExpressionDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\BlockStatementDto.cs">
+      <Link>Dto\BlockStatementDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\BooleanLiteralDto.cs">
+      <Link>Dto\BooleanLiteralDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\ExpressionDto.cs">
+      <Link>Dto\ExpressionDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\ExpressionStatementDto.cs">
+      <Link>Dto\ExpressionStatementDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\FloatLiteralDto.cs">
+      <Link>Dto\FloatLiteralDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\ForStatementDto.cs">
+      <Link>Dto\ForStatementDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\IdentifierDto.cs">
+      <Link>Dto\IdentifierDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\IfElseStatementDto.cs">
+      <Link>Dto\IfElseStatementDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\IntegerLiteralDto.cs">
+      <Link>Dto\IntegerLiteralDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\InvocationExpressionDto.cs">
+      <Link>Dto\InvocationExpressionDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\MemberReferenceExpressionDto.cs">
+      <Link>Dto\MemberReferenceExpressionDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\NodeDto.cs">
+      <Link>Dto\NodeDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\NullLiteralDto.cs">
+      <Link>Dto\NullLiteralDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\StatementDto.cs">
+      <Link>Dto\StatementDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\StringLiteralDto.cs">
+      <Link>Dto\StringLiteralDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\TerminalDto.cs">
+      <Link>Dto\TerminalDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Dto\UnaryOperatorExpressionDto.cs">
+      <Link>Dto\UnaryOperatorExpressionDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Json\AttributeJsonConverter.cs">
+      <Link>Json\AttributeJsonConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Json\ClassNameJsonConverter.cs">
+      <Link>Json\ClassNameJsonConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Json\PropertyJsonConverter.cs">
+      <Link>Json\PropertyJsonConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Listener\DynamicListener.cs">
+      <Link>Listener\DynamicListener.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Listener\IEventListener.cs">
+      <Link>Listener\IEventListener.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Listener\IListener.cs">
+      <Link>Listener\IListener.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Listener\StaticEventListener.cs">
+      <Link>Listener\StaticEventListener.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Listener\StaticListener.cs">
+      <Link>Listener\StaticListener.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\NodeAttribute.cs">
+      <Link>NodeAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Expressions\BinaryOperatorExpression.cs">
+      <Link>Nodes\Expressions\BinaryOperatorExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Expressions\Expression.cs">
+      <Link>Nodes\Expressions\Expression.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Expressions\InvocationExpression.cs">
+      <Link>Nodes\Expressions\InvocationExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Expressions\MemberReferenceExpression.cs">
+      <Link>Nodes\Expressions\MemberReferenceExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Expressions\UnaryOperatorExpression.cs">
+      <Link>Nodes\Expressions\UnaryOperatorExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Literals\BooleanLiteral.cs">
+      <Link>Nodes\Literals\BooleanLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Literals\FloatLiteral.cs">
+      <Link>Nodes\Literals\FloatLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Literals\Identifier.cs">
+      <Link>Nodes\Literals\Identifier.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Literals\IntegerLiteral.cs">
+      <Link>Nodes\Literals\IntegerLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Literals\NullLiteral.cs">
+      <Link>Nodes\Literals\NullLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Literals\StringLiteral.cs">
+      <Link>Nodes\Literals\StringLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Node.cs">
+      <Link>Nodes\Node.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Statements\BlockStatement.cs">
+      <Link>Nodes\Statements\BlockStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Statements\ExpressionStatement.cs">
+      <Link>Nodes\Statements\ExpressionStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Statements\ForStatement.cs">
+      <Link>Nodes\Statements\ForStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Statements\IfElseStatement.cs">
+      <Link>Nodes\Statements\IfElseStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Statements\Statement.cs">
+      <Link>Nodes\Statements\Statement.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Nodes\Terminal.cs">
+      <Link>Nodes\Terminal.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\NodeType.cs">
+      <Link>NodeType.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\ReflectionCache.cs">
+      <Link>ReflectionCache.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\StaticHelper.cs">
+      <Link>StaticHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Visitor\DynamicVisitor.cs">
+      <Link>Visitor\DynamicVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Visitor\IVisitor.cs">
+      <Link>Visitor\IVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\Visitor\StaticVisitor.cs">
+      <Link>Visitor\StaticVisitor.cs</Link>
+    </Compile>
     <Compile Include="MapperHelper.cs" />
-    <Compile Include="StaticHelper.cs" />
-    <Compile Include="Listener\DynamicListener.cs" />
-    <Compile Include="Nodes\Expressions\BinaryOperatorExpression.cs" />
-    <Compile Include="Nodes\Expressions\InvocationExpression.cs" />
-    <Compile Include="Nodes\Expressions\MemberReferenceExpression.cs" />
-    <Compile Include="Nodes\Expressions\UnaryOperatorExpression.cs" />
-    <Compile Include="Listener\IEventListener.cs" />
-    <Compile Include="Visitor\IVisitor.cs" />
-    <Compile Include="Listener\IListener.cs" />
-    <Compile Include="Nodes\Literals\BooleanLiteral.cs" />
-    <Compile Include="Nodes\Expressions\Expression.cs" />
-    <Compile Include="NodeAttribute.cs" />
-    <Compile Include="Json\PropertyJsonConverter.cs" />
-    <Compile Include="ReflectionCache.cs" />
-    <Compile Include="Nodes\Statements\BlockStatement.cs" />
-    <Compile Include="Nodes\Statements\ExpressionStatement.cs" />
-    <Compile Include="Nodes\Literals\FloatLiteral.cs" />
-    <Compile Include="Nodes\Literals\Identifier.cs" />
-    <Compile Include="Nodes\Literals\IntegerLiteral.cs" />
-    <Compile Include="Nodes\Node.cs" />
-    <Compile Include="NodeType.cs" />
-    <Compile Include="Nodes\Literals\NullLiteral.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Nodes\Statements\ForStatement.cs" />
-    <Compile Include="Nodes\Statements\IfElseStatement.cs" />
-    <Compile Include="Nodes\Statements\Statement.cs" />
-    <Compile Include="Nodes\Literals\StringLiteral.cs" />
-    <Compile Include="Listener\StaticEventListener.cs" />
-    <Compile Include="Listener\StaticListener.cs" />
-    <Compile Include="Visitor\StaticVisitor.cs" />
-    <Compile Include="Nodes\Terminal.cs" />
-    <Compile Include="Visitor\DynamicVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

@@ -13,6 +13,7 @@ namespace TreesProcessing.NET.Tests
     [TestFixture]
     public class VisitorTests
     {
+#if !NETCORE
         [Test]
         public void CheckAllVisitorMethodsExists()
         {
@@ -30,6 +31,7 @@ namespace TreesProcessing.NET.Tests
                     $"Visitor for Type {type} is not exists");
             }
         }
+#endif
 
         [Test]
         public void Visitor_Static()

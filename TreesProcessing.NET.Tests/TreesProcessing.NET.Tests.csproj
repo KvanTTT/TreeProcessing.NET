@@ -48,11 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\TreesProcessing.NET.Core.Tests\SampleTree.cs">
+      <Link>SampleTree.cs</Link>
+    </Compile>
     <Compile Include="..\TreesProcessing.NET.Portable.Tests\ListenerUtils.cs">
       <Link>ListenerUtils.cs</Link>
-    </Compile>
-    <Compile Include="..\TreesProcessing.NET.Portable.Tests\SampleTree.cs">
-      <Link>SampleTree.cs</Link>
     </Compile>
     <Compile Include="ListenerTests.cs" />
     <Compile Include="MapperTests.cs" />

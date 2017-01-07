@@ -1,0 +1,19 @@
+﻿using ProtoBuf;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace TreesProcessing.NET
+{
+    [NodeAttr(NodeType.Terminal)]
+    [ProtoContract]
+#if !NETCORE
+    [Serializable]
+#endif
+    public abstract class Terminal : Expression
+    {
+        public override NodeType NodeType => NodeType.Terminal;
+
+        public override IEnumerable<Node> Descendants => Enumerable.Empty<Node>();
+    }
+}
