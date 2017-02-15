@@ -15,7 +15,7 @@ namespace TreesProcessing.NET
         {
             dynamic dynamicNode = node;
             Enter(dynamicNode);
-            Visit(node);
+            VisitChildren(node);
             Exit(dynamicNode);
         }
 
@@ -163,7 +163,7 @@ namespace TreesProcessing.NET
         {
         }
 
-        private void Visit(Node node)
+        private void VisitChildren(Node node)
         {
             if (node == null)
             {
@@ -186,7 +186,7 @@ namespace TreesProcessing.NET
                     if (value != null)
                     {
                         Enter(value);
-                        Visit(value);
+                        VisitChildren(value);
                         Exit(value);
                     }
                 }
@@ -200,7 +200,7 @@ namespace TreesProcessing.NET
                         {
                             dynamic nodeItem = item;
                             Enter(nodeItem);
-                            Visit(nodeItem);
+                            VisitChildren(nodeItem);
                             Exit(nodeItem);
                         }
                     }

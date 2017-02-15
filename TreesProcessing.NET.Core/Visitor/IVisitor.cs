@@ -42,7 +42,7 @@
 
         #endregion
 
-        #region Statemenets
+        #region Statements
 
         T Visit(BlockStatement blockStatement);
 

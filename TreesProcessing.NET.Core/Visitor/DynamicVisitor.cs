@@ -10,95 +10,95 @@ namespace TreesProcessing.NET
     {
         public virtual Node Visit(Terminal terminal)
         {
-            return VisitChild(terminal);
+            return VisitChildren(terminal);
         }
 
         public virtual Node Visit(Statement statement)
         {
-            return VisitChild(statement);
+            return VisitChildren(statement);
         }
 
         public virtual Node Visit(Identifier identifier)
         {
-            return VisitChild(identifier);
+            return VisitChildren(identifier);
         }
 
         public virtual Node Visit(Expression expression)
         {
-            return VisitChild(expression);
+            return VisitChildren(expression);
         }
 
         public virtual Node Visit(Node node)
         {
-            return VisitChild(node);
+            return VisitChildren(node);
         }
 
         public virtual Node Visit(BinaryOperatorExpression binaryOperatorExpression)
         {
-            return VisitChild(binaryOperatorExpression);
+            return VisitChildren(binaryOperatorExpression);
         }
 
         public virtual Node Visit(BlockStatement blockStatement)
         {
-            return VisitChild(blockStatement);
+            return VisitChildren(blockStatement);
         }
 
         public virtual Node Visit(BooleanLiteral unaryOperatorExpression)
         {
-            return VisitChild(unaryOperatorExpression);
+            return VisitChildren(unaryOperatorExpression);
         }
 
         public virtual Node Visit(ExpressionStatement expressionStatement)
         {
-            return VisitChild(expressionStatement);
+            return VisitChildren(expressionStatement);
         }
 
         public virtual Node Visit(FloatLiteral floatLiteral)
         {
-            return VisitChild(floatLiteral);
+            return VisitChildren(floatLiteral);
         }
 
         public virtual Node Visit(ForStatement forStatement)
         {
-            return VisitChild(forStatement);
+            return VisitChildren(forStatement);
         }
 
         public virtual Node Visit(IfElseStatement ifElseStatement)
         {
-            return VisitChild(ifElseStatement);
+            return VisitChildren(ifElseStatement);
         }
 
         public virtual Node Visit(IntegerLiteral integerLiteral)
         {
-            return VisitChild(integerLiteral);
+            return VisitChildren(integerLiteral);
         }
 
         public virtual Node Visit(InvocationExpression invocationExpression)
         {
-            return VisitChild(invocationExpression);
+            return VisitChildren(invocationExpression);
         }
 
         public virtual Node Visit(MemberReferenceExpression memberReferenceExpression)
         {
-            return VisitChild(memberReferenceExpression);
+            return VisitChildren(memberReferenceExpression);
         }
 
         public virtual Node Visit(NullLiteral nullLiteral)
         {
-            return VisitChild(nullLiteral);
+            return VisitChildren(nullLiteral);
         }
 
         public virtual Node Visit(StringLiteral stringLiteral)
         {
-            return VisitChild(stringLiteral);
+            return VisitChildren(stringLiteral);
         }
 
         public virtual Node Visit(UnaryOperatorExpression unaryOperatorExpression)
         {
-            return VisitChild(unaryOperatorExpression);
+            return VisitChildren(unaryOperatorExpression);
         }
 
-        protected Node VisitChild(Node node)
+        protected Node VisitChildren(Node node)
         {
             if (node == null)
             {
