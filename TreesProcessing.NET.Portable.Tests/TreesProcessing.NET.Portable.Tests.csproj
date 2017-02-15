@@ -72,6 +72,9 @@
     <Compile Include="..\TreesProcessing.NET.Core.Tests\ComparisonTests.cs">
       <Link>ComparisonTests.cs</Link>
     </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core.Tests\HashTests.cs">
+      <Link>HashTests.cs</Link>
+    </Compile>
     <Compile Include="..\TreesProcessing.NET.Core.Tests\MapperTests.cs">
       <Link>MapperTests.cs</Link>
     </Compile>
