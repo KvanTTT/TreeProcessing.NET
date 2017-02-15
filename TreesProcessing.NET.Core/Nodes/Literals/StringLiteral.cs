@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.StringLiteral)]
-#if !CORE
+#if PORTABLE || NET
     [Serializable]
 #endif
     [DataContract]
@@ -48,6 +48,8 @@ namespace TreesProcessing.NET
 
             return 0;
         }
+
+        public override int GetHashCode() => Value.GetHashCode();
 
         public override string ToString()
         {

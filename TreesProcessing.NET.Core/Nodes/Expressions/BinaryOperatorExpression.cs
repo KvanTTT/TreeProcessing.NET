@@ -1,14 +1,12 @@
-﻿using Newtonsoft.Json;
-using ProtoBuf;
+﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.BinaryOperatorExpression)]
-#if !CORE
+#if PORTABLE || NET
     [Serializable]
 #endif
     [DataContract]
@@ -86,6 +84,11 @@ namespace TreesProcessing.NET
         public override string ToString()
         {
             return $"{Left} {Operator} {Right}";
+        }
+
+        public override int GetHashCode()
+        {
+            return HashUtils.Combine(base.GetHashCode(), Operator.GetHashCode());
         }
     }
 }

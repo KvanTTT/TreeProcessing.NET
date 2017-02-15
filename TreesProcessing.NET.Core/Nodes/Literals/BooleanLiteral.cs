@@ -1,15 +1,11 @@
 ﻿using ProtoBuf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.BooleanLiteral)]
-#if !CORE
+#if PORTABLE || NET
     [Serializable]
 #endif
     [DataContract]
@@ -48,6 +44,8 @@ namespace TreesProcessing.NET
 
             return 0;
         }
+
+        public override int GetHashCode() => Value.GetHashCode();
 
         public override string ToString()
         {

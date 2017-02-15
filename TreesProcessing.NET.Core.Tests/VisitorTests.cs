@@ -13,7 +13,7 @@ namespace TreesProcessing.NET.Tests
     [TestFixture]
     public class VisitorTests
     {
-#if !CORE
+#if PORTABLE || NET
         [TestCase(TestHelper.Platform)]
         public void CheckAllVisitorMethodsExists(string platform)
         {

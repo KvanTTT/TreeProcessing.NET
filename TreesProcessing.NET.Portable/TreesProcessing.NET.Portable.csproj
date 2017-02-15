@@ -29,7 +29,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -87,6 +87,9 @@
     </Compile>
     <Compile Include="..\TreesProcessing.NET.Core\Dto\UnaryOperatorExpressionDto.cs">
       <Link>Dto\UnaryOperatorExpressionDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreesProcessing.NET.Core\HashUtils.cs">
+      <Link>HashUtils.cs</Link>
     </Compile>
     <Compile Include="..\TreesProcessing.NET.Core\Json\AttributeJsonConverter.cs">
       <Link>Json\AttributeJsonConverter.cs</Link>

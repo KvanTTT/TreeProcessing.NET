@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.MemberReferenceExpression)]
-#if !CORE
+#if PORTABLE || NET
     [Serializable]
 #endif
     [DataContract]

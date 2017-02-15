@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.UnaryOperatorExpression)]
-#if !CORE
+#if PORTABLE || NET
     [Serializable]
 #endif
     [DataContract]
@@ -66,6 +66,11 @@ namespace TreesProcessing.NET
                 result.AddRange(Expression.Descendants);
                 return result;
             }
+        }
+
+        public override int GetHashCode()
+        {
+            return HashUtils.Combine(Operator.GetHashCode(), base.GetHashCode());
         }
 
         public override string ToString()

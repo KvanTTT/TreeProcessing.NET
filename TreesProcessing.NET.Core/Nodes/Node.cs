@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.Node)]
-#if !CORE
+#if NET || PORTABLE
     [Serializable]
 #endif
     [DataContract]
@@ -43,5 +43,15 @@ namespace TreesProcessing.NET
         }
 
         public abstract IEnumerable<Node> Descendants { get; }
+
+        public override int GetHashCode()
+        {
+            int result = 0;
+            foreach (Node descendant in Descendants)
+            {
+                HashUtils.Combine(result, descendant.GetHashCode());
+            }
+            return result;
+        }
     }
 }

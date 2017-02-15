@@ -11,7 +11,7 @@ namespace TreesProcessing.NET.Tests
     [TestFixture]
     public class SerializationTests
     {
-#if !CORE
+#if PORTABLE || NET
         [TestCase(TestHelper.Platform)]
         public void Binary_Serialization(string platform)
         {
@@ -176,7 +176,7 @@ namespace TreesProcessing.NET.Tests
             Assert.AreEqual(0, tree.CompareTo(actualTree));
         }
 
-#if !CORE
+#if PORTABLE || NET
         [TestCase(TestHelper.Platform)]
         [Ignore("MessagePack is not supported")]
         public void MessagePack_Serialization(string platform)

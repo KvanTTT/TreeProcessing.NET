@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace TreesProcessing.NET
 {
     [NodeAttr(NodeType.Identifier)]
-#if !CORE
+#if PORTABLE || NET
     [Serializable]
 #endif
     [DataContract]
@@ -44,6 +44,8 @@ namespace TreesProcessing.NET
 
             return 0;
         }
+
+        public override int GetHashCode() => Id.GetHashCode();
 
         public override string ToString()
         {

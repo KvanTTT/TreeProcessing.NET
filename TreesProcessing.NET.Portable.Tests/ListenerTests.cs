@@ -84,7 +84,7 @@ namespace TreesProcessing.NET.Tests
             ListenerUtils.CheckInvokeSequence(invokeSequence, false);
         }
 
-#if !CORE && !PORTABLE
+#if NET
         [TestCase(TestHelper.Platform)]
         public void EventListener_Dynamic(string platform)
         {
