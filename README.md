@@ -1,4 +1,4 @@
-TreesProcessing.NET
+TreeProcessing.NET
 ==========================================
 Thee structures serialzation, traversal and comparison on .NET platform.
 
@@ -17,4 +17,4 @@ Already implemented features:
 
 ## Licence
 
-TreesProcessing.NET is licensed under the Apache 2.0 License.
+TreeProcessing.NET is licensed under the Apache 2.0 License.

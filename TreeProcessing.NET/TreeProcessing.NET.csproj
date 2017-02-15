@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{38CE33CC-B5FF-4038-97C7-A2199AFC52A7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TreeProcessing.NET</RootNamespace>
+    <AssemblyName>TreeProcessing.NET</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NET</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="protobuf-net, Version=2.1.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\packages\protobuf-net.2.1.0\lib\net45\protobuf-net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\BinaryOperatorExpressionDto.cs">
+      <Link>Dto\BinaryOperatorExpressionDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\BlockStatementDto.cs">
+      <Link>Dto\BlockStatementDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\BooleanLiteralDto.cs">
+      <Link>Dto\BooleanLiteralDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\ExpressionDto.cs">
+      <Link>Dto\ExpressionDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\ExpressionStatementDto.cs">
+      <Link>Dto\ExpressionStatementDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\FloatLiteralDto.cs">
+      <Link>Dto\FloatLiteralDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\ForStatementDto.cs">
+      <Link>Dto\ForStatementDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\IdentifierDto.cs">
+      <Link>Dto\IdentifierDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\IfElseStatementDto.cs">
+      <Link>Dto\IfElseStatementDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\IntegerLiteralDto.cs">
+      <Link>Dto\IntegerLiteralDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\InvocationExpressionDto.cs">
+      <Link>Dto\InvocationExpressionDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\MemberReferenceExpressionDto.cs">
+      <Link>Dto\MemberReferenceExpressionDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\NodeDto.cs">
+      <Link>Dto\NodeDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\NullLiteralDto.cs">
+      <Link>Dto\NullLiteralDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\StatementDto.cs">
+      <Link>Dto\StatementDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\StringLiteralDto.cs">
+      <Link>Dto\StringLiteralDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\TerminalDto.cs">
+      <Link>Dto\TerminalDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Dto\UnaryOperatorExpressionDto.cs">
+      <Link>Dto\UnaryOperatorExpressionDto.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\HashUtils.cs">
+      <Link>HashUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Json\AttributeJsonConverter.cs">
+      <Link>Json\AttributeJsonConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Json\ClassNameJsonConverter.cs">
+      <Link>Json\ClassNameJsonConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Json\PropertyJsonConverter.cs">
+      <Link>Json\PropertyJsonConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Listener\DynamicListener.cs">
+      <Link>Listener\DynamicListener.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Listener\IEventListener.cs">
+      <Link>Listener\IEventListener.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Listener\IListener.cs">
+      <Link>Listener\IListener.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Listener\StaticEventListener.cs">
+      <Link>Listener\StaticEventListener.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Listener\StaticListener.cs">
+      <Link>Listener\StaticListener.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\NodeAttribute.cs">
+      <Link>NodeAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Expressions\BinaryOperatorExpression.cs">
+      <Link>Nodes\Expressions\BinaryOperatorExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Expressions\Expression.cs">
+      <Link>Nodes\Expressions\Expression.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Expressions\InvocationExpression.cs">
+      <Link>Nodes\Expressions\InvocationExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Expressions\MemberReferenceExpression.cs">
+      <Link>Nodes\Expressions\MemberReferenceExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Expressions\UnaryOperatorExpression.cs">
+      <Link>Nodes\Expressions\UnaryOperatorExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Literals\BooleanLiteral.cs">
+      <Link>Nodes\Literals\BooleanLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Literals\FloatLiteral.cs">
+      <Link>Nodes\Literals\FloatLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Literals\Identifier.cs">
+      <Link>Nodes\Literals\Identifier.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Literals\IntegerLiteral.cs">
+      <Link>Nodes\Literals\IntegerLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Literals\NullLiteral.cs">
+      <Link>Nodes\Literals\NullLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Literals\StringLiteral.cs">
+      <Link>Nodes\Literals\StringLiteral.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Node.cs">
+      <Link>Nodes\Node.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Statements\BlockStatement.cs">
+      <Link>Nodes\Statements\BlockStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Statements\ExpressionStatement.cs">
+      <Link>Nodes\Statements\ExpressionStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Statements\ForStatement.cs">
+      <Link>Nodes\Statements\ForStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Statements\IfElseStatement.cs">
+      <Link>Nodes\Statements\IfElseStatement.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Statements\Statement.cs">
+      <Link>Nodes\Statements\Statement.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Terminal.cs">
+      <Link>Nodes\Terminal.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\NodeType.cs">
+      <Link>NodeType.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\ReflectionCache.cs">
+      <Link>ReflectionCache.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\StaticHelper.cs">
+      <Link>StaticHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Visitor\DynamicVisitor.cs">
+      <Link>Visitor\DynamicVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Visitor\IVisitor.cs">
+      <Link>Visitor\IVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Visitor\StaticVisitor.cs">
+      <Link>Visitor\StaticVisitor.cs</Link>
+    </Compile>
+    <Compile Include="Listener\DynamicEventListener.cs" />
+    <Compile Include="AutoMapperHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
