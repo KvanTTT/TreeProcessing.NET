@@ -95,7 +95,7 @@ namespace TreesProcessing.NET
             return 0;
         }
 
-        public override IEnumerable<Node> Descendants
+        public override IEnumerable<Node> Children
         {
             get
             {
@@ -103,17 +103,36 @@ namespace TreesProcessing.NET
                 foreach (var initializer in Initializers)
                 {
                     result.Add(initializer);
-                    result.AddRange(initializer.Descendants);
                 }
                 result.Add(Condition);
-                result.AddRange(Condition.Descendants);
                 foreach (var iterator in Iterators)
                 {
                     result.Add(iterator);
-                    result.AddRange(iterator.Descendants);
                 }
                 result.Add(Statement);
-                result.AddRange(Statement.Descendants);
+                return result;
+            }
+        }
+
+        public override IEnumerable<Node> AllDescendants
+        {
+            get
+            {
+                var result = new List<Node>();
+                foreach (var initializer in Initializers)
+                {
+                    result.Add(initializer);
+                    result.AddRange(initializer.AllDescendants);
+                }
+                result.Add(Condition);
+                result.AddRange(Condition.AllDescendants);
+                foreach (var iterator in Iterators)
+                {
+                    result.Add(iterator);
+                    result.AddRange(iterator.AllDescendants);
+                }
+                result.Add(Statement);
+                result.AddRange(Statement.AllDescendants);
                 return result;
             }
         }

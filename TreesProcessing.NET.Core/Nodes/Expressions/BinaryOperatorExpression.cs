@@ -68,15 +68,26 @@ namespace TreesProcessing.NET
             return 0;
         }
 
-        public override IEnumerable<Node> Descendants
+        public override IEnumerable<Node> Children
         {
             get
             {
                 var result = new List<Node>();
                 result.Add(Left);
-                result.AddRange(Left.Descendants);
                 result.Add(Right);
-                result.AddRange(Right.Descendants);
+                return result;
+            }
+        }
+
+        public override IEnumerable<Node> AllDescendants
+        {
+            get
+            {
+                var result = new List<Node>();
+                result.Add(Left);
+                result.AddRange(Left.AllDescendants);
+                result.Add(Right);
+                result.AddRange(Right.AllDescendants);
                 return result;
             }
         }

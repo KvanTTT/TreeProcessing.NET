@@ -117,7 +117,36 @@ namespace TreesProcessing.NET
             return result;
         }
 
-        public static IEnumerable<Node> GetDescendants(this Node node)
+        public static IEnumerable<Node> GetChildren(this Node node)
+        {
+            var children = new List<Node>();
+            PropertyInfo[] properties = ReflectionCache.GetClassProperties(node.GetType());
+            foreach (PropertyInfo prop in properties)
+            {
+                var propValue = prop.GetValue(node);
+                if (propValue != null)
+                {
+                    var propValueType = propValue.GetType();
+                    TypeInfo typeInfo = propValueType.GetTypeInfo();
+                    if (typeInfo.IsSubclassOf(typeof(Node)) || propValueType == typeof(Node))
+                    {
+                        var child = (Node)prop.GetValue(node);
+                        children.Add(child);
+                    }
+                    else if (typeInfo.ImplementedInterfaces.Contains(typeof(IList)))
+                    {
+                        var childs = (IList)prop.GetValue(node);
+                        foreach (var child in childs)
+                        {
+                            children.Add((Node)child);
+                        }
+                    }
+                }
+            }
+            return children;
+        }
+
+        public static IEnumerable<Node> GetAllDescendants(this Node node)
         {
             var result = new List<Node>();
             node.GetDescendants(result);

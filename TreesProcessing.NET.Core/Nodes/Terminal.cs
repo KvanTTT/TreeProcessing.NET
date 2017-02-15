@@ -14,6 +14,8 @@ namespace TreesProcessing.NET
     {
         public override NodeType NodeType => NodeType.Terminal;
 
-        public override IEnumerable<Node> Descendants => Enumerable.Empty<Node>();
+        public override IEnumerable<Node> Children => Enumerable.Empty<Node>();
+
+        public override IEnumerable<Node> AllDescendants => Enumerable.Empty<Node>();
     }
 }

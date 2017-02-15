@@ -42,14 +42,16 @@ namespace TreesProcessing.NET
             return 0;
         }
 
-        public abstract IEnumerable<Node> Descendants { get; }
+        public abstract IEnumerable<Node> Children { get; }
+
+        public abstract IEnumerable<Node> AllDescendants { get; }
 
         public override int GetHashCode()
         {
             int result = 0;
-            foreach (Node descendant in Descendants)
+            foreach (Node child in Children)
             {
-                HashUtils.Combine(result, descendant.GetHashCode());
+                HashUtils.Combine(result, child.GetHashCode());
             }
             return result;
         }

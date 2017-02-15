@@ -54,7 +54,7 @@ namespace TreesProcessing.NET
             return 0;
         }
 
-        public override IEnumerable<Node> Descendants
+        public override IEnumerable<Node> Children
         {
             get
             {
@@ -62,7 +62,20 @@ namespace TreesProcessing.NET
                 foreach (var statement in Statements)
                 {
                     result.Add(statement);
-                    result.AddRange(statement.Descendants);
+                }
+                return result;
+            }
+        }
+
+        public override IEnumerable<Node> AllDescendants
+        {
+            get
+            {
+                var result = new List<Node>();
+                foreach (var statement in Statements)
+                {
+                    result.Add(statement);
+                    result.AddRange(statement.AllDescendants);
                 }
                 return result;
             }

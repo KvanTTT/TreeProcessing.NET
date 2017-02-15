@@ -48,13 +48,25 @@ namespace TreesProcessing.NET.Tests
         [TestCase(TestHelper.Platform)]
         public void Descendants_Static(string platform)
         {
-            TestDescendants(SampleTree.Init().Descendants);
+            TestDescendants(SampleTree.Init().AllDescendants);
         }
 
         [TestCase(TestHelper.Platform)]
         public void Descendants_Dynamic(string platform)
         {
-            TestDescendants(SampleTree.Init().GetDescendants());
+            TestDescendants(SampleTree.Init().GetAllDescendants());
+        }
+
+        [TestCase(TestHelper.Platform)]
+        public void Children_Static(string platform)
+        {
+            TestChildren(SampleTree.Init().Children);
+        }
+
+        [TestCase(TestHelper.Platform)]
+        public void Children_Dynamic(string platform)
+        {
+            TestChildren(SampleTree.Init().GetChildren());
         }
 
         private void TestDescendants(IEnumerable<Node> descendants)
@@ -99,6 +111,20 @@ namespace TreesProcessing.NET.Tests
             };
 
             CollectionAssert.AreEqual(expectedDescendants, actualDescendants);
+        }
+
+        private void TestChildren(IEnumerable<Node> children)
+        {
+            var actualChildren = children.Select(node => node.GetType().Name);
+
+            var expectedChildren = new List<string>()
+            {
+                nameof(ExpressionStatement),
+                nameof(ExpressionStatement),
+                nameof(ForStatement),
+            };
+
+            CollectionAssert.AreEqual(expectedChildren, actualChildren);
         }
     }
 }
