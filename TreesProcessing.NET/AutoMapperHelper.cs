@@ -54,6 +54,8 @@ namespace TreesProcessing.NET
                 cfg.CreateMap<NullLiteral, NullLiteralDto>().ReverseMap();
                 cfg.CreateMap<StringLiteral, StringLiteralDto>().ReverseMap();
             });
+
+            Mapper.AssertConfigurationIsValid();
         }
     }
 }
