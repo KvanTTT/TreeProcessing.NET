@@ -51,7 +51,7 @@ namespace TreesProcessing.NET
             int result = 0;
             foreach (Node child in Children)
             {
-                HashUtils.Combine(result, child.GetHashCode());
+                result = HashUtils.Combine(result, child.GetHashCode());
             }
             return result;
         }
