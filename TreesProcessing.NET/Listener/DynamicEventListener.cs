@@ -139,10 +139,7 @@ namespace TreesProcessing.NET
         {
             var t = obj.GetType();
             Delegate eventDelegate = enterEvents[obj.GetType()];
-            if (eventDelegate != null)
-            {
-                eventDelegate.DynamicInvoke(new object[] { this, obj });
-            }
+            eventDelegate?.DynamicInvoke(new object[] { this, obj });
         }
 
         private void InvokeExitEvent(object obj)
