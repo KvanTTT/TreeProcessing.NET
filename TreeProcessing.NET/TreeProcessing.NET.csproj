@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\TreeProcessing.NET.Core\ComparisonHelper.cs">
+      <Link>ComparisonHelper.cs</Link>
+    </Compile>
     <Compile Include="..\TreeProcessing.NET.Core\Dto\BinaryOperatorExpressionDto.cs">
       <Link>Dto\BinaryOperatorExpressionDto.cs</Link>
     </Compile>
@@ -200,9 +203,6 @@
     </Compile>
     <Compile Include="..\TreeProcessing.NET.Core\ReflectionCache.cs">
       <Link>ReflectionCache.cs</Link>
-    </Compile>
-    <Compile Include="..\TreeProcessing.NET.Core\StaticHelper.cs">
-      <Link>StaticHelper.cs</Link>
     </Compile>
     <Compile Include="..\TreeProcessing.NET.Core\Visitor\DynamicVisitor.cs">
       <Link>Visitor\DynamicVisitor.cs</Link>

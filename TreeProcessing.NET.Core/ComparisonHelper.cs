@@ -119,41 +119,40 @@ namespace TreeProcessing.NET
 
         public static IEnumerable<Node> GetChildren(this Node node)
         {
-            var children = new List<Node>();
+            var result = new List<Node>();
             PropertyInfo[] properties = ReflectionCache.GetClassProperties(node.GetType());
             foreach (PropertyInfo prop in properties)
             {
-                var propValue = prop.GetValue(node);
+                object propValue = prop.GetValue(node);
                 if (propValue != null)
                 {
                     var propValueType = propValue.GetType();
                     TypeInfo typeInfo = propValueType.GetTypeInfo();
                     if (typeInfo.IsSubclassOf(typeof(Node)) || propValueType == typeof(Node))
                     {
-                        var child = (Node)prop.GetValue(node);
-                        children.Add(child);
+                        result.Add((Node)propValue);
                     }
                     else if (typeInfo.ImplementedInterfaces.Contains(typeof(IList)))
                     {
-                        var childs = (IList)prop.GetValue(node);
-                        foreach (var child in childs)
+                        var children = (IList)propValue;
+                        foreach (var child in children)
                         {
-                            children.Add((Node)child);
+                            result.Add((Node)child);
                         }
                     }
                 }
             }
-            return children;
+            return result;
         }
 
         public static IEnumerable<Node> GetAllDescendants(this Node node)
         {
             var result = new List<Node>();
-            node.GetDescendants(result);
+            node.GetAllDescendants(result);
             return result;
         }
 
-        private static void GetDescendants(this Node node, List<Node> descendants)
+        private static void GetAllDescendants(this Node node, List<Node> descendants)
         {
             PropertyInfo[] properties = ReflectionCache.GetClassProperties(node.GetType());
             foreach (PropertyInfo prop in properties)
@@ -165,17 +164,17 @@ namespace TreeProcessing.NET
                     TypeInfo typeInfo = propValueType.GetTypeInfo();
                     if (typeInfo.IsSubclassOf(typeof(Node)) || propValueType == typeof(Node))
                     {
-                        var child = (Node)prop.GetValue(node);
+                        var child = (Node)propValue;
                         descendants.Add(child);
-                        child.GetDescendants(descendants);
+                        child.GetAllDescendants(descendants);
                     }
                     else if (typeInfo.ImplementedInterfaces.Contains(typeof(IList)))
                     {
-                        var childs = (IList)prop.GetValue(node);
-                        foreach (var child in childs)
+                        var children = (IList)propValue;
+                        foreach (var child in children)
                         {
                             descendants.Add((Node)child);
-                            ((Node)child).GetDescendants(descendants);
+                            ((Node)child).GetAllDescendants(descendants);
                         }
                     }
                 }
