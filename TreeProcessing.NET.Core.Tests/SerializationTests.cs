@@ -176,23 +176,6 @@ namespace TreeProcessing.NET.Tests
             Assert.AreEqual(0, tree.CompareTo(actualTree));
         }
 
-#if PORTABLE || NET
-        [TestCase(TestHelper.Platform)]
-        [Ignore("MessagePack is not supported")]
-        public void MessagePack_Serialization(string platform)
-        {
-            Statement tree = SampleTree.Init();
-
-            Node actualTree;
-            var serializer = MsgPack.Serialization.SerializationContext.Default.GetSerializer<Statement>();
-            using (var memoryStream = new System.IO.MemoryStream())
-            {
-                serializer.Pack(memoryStream, tree);
-                memoryStream.Position = 0;
-                actualTree = serializer.Unpack(memoryStream);
-            }
-        }
-
         [TestCase(TestHelper.Platform)]
         public void ServiceStackJson_Serialization(string platform)
         {
@@ -214,6 +197,5 @@ namespace TreeProcessing.NET.Tests
 
             Assert.AreEqual(expectedJson, actualJson);
         }
-#endif
     }
 }

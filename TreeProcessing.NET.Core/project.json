@@ -5,7 +5,8 @@
         "Newtonsoft.Json": "9.0.1",
         "protobuf-net": "2.1.0",
         "System.Xml.XmlSerializer": "4.3.0",
-        "System.Runtime.Serialization.Primitives": "4.3.0"
+        "System.Runtime.Serialization.Primitives": "4.3.0",
+        "ServiceStack.Text.Core": "1.0.35"
     },
     "frameworks": {
         "netstandard1.6": {
