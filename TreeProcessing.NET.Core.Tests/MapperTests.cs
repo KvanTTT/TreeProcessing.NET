@@ -13,5 +13,19 @@ namespace TreeProcessing.NET.Tests
 
             Assert.AreEqual(sampleTree, mappedBack);
         }
+
+#if NET
+        [TestCase(TestHelper.Platform)]
+        public void AutoMapper_ModelToDtoAndBack(string platform)
+        {
+            AutoMapperHelper.Initialize();
+
+            Statement sampleTree = SampleTree.Init();
+            NodeDto sampleTreeDto = AutoMapper.Mapper.Map<NodeDto>(sampleTree);
+            var mappedBack = AutoMapper.Mapper.Map<Node>(sampleTreeDto);
+
+            Assert.AreEqual(sampleTree, mappedBack);
+        }
+#endif
     }
 }

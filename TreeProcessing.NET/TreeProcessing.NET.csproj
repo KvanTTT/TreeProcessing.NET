@@ -135,6 +135,9 @@
     <Compile Include="..\TreeProcessing.NET.Core\Listener\StaticListener.cs">
       <Link>Listener\StaticListener.cs</Link>
     </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\MapperHelper.cs">
+      <Link>MapperHelper.cs</Link>
+    </Compile>
     <Compile Include="..\TreeProcessing.NET.Core\NodeAttribute.cs">
       <Link>NodeAttribute.cs</Link>
     </Compile>

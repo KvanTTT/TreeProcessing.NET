@@ -79,6 +79,9 @@
     <Compile Include="..\TreeProcessing.NET.Core.Tests\HashTests.cs">
       <Link>HashTests.cs</Link>
     </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core.Tests\MapperTests.cs">
+      <Link>MapperTests.cs</Link>
+    </Compile>
     <Compile Include="..\TreeProcessing.NET.Core.Tests\SampleTree.cs">
       <Link>SampleTree.cs</Link>
     </Compile>
@@ -97,7 +100,6 @@
     <Compile Include="..\TreeProcessing.NET.Portable.Tests\ListenerUtils.cs">
       <Link>ListenerUtils.cs</Link>
     </Compile>
-    <Compile Include="MapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
