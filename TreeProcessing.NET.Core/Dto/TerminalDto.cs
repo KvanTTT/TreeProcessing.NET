@@ -2,6 +2,6 @@
 {
     public abstract class TerminalDto : ExpressionDto
     {
-        public override NodeType NodeType => NodeType.Terminal;
+        public override NodeType NodeType => NodeType.Token;
     }
 }

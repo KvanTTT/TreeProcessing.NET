@@ -8,7 +8,7 @@ namespace TreeProcessing.NET
 {
     public class StaticVisitor : IVisitor<Node>
     {
-        public virtual Node Visit(Terminal terminal)
+        public virtual Node Visit(Token terminal)
         {
             switch (terminal.NodeType)
             {
@@ -64,9 +64,9 @@ namespace TreeProcessing.NET
                 case NodeType.UnaryOperatorExpression:
                     return Visit((UnaryOperatorExpression)expression);
             }
-            if (expression is Terminal)
+            if (expression is Token)
             {
-                return Visit((Terminal)expression);
+                return Visit((Token)expression);
             }
 
             throw new InvalidOperationException();
@@ -78,9 +78,9 @@ namespace TreeProcessing.NET
             {
                 return Visit((Expression)node);
             }
-            else if (node is Terminal)
+            else if (node is Token)
             {
-                return Visit((Terminal)node);
+                return Visit((Token)node);
             }
             else if (node is Statement)
             {

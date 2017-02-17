@@ -35,6 +35,10 @@
       <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Graphviz, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Graphviz.2.38.0.2\lib\Graphviz.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -195,8 +199,8 @@
     <Compile Include="..\TreeProcessing.NET.Core\Nodes\Statements\Statement.cs">
       <Link>Nodes\Statements\Statement.cs</Link>
     </Compile>
-    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Terminal.cs">
-      <Link>Nodes\Terminal.cs</Link>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Token.cs">
+      <Link>Nodes\Token.cs</Link>
     </Compile>
     <Compile Include="..\TreeProcessing.NET.Core\NodeType.cs">
       <Link>NodeType.cs</Link>
@@ -215,10 +219,14 @@
     </Compile>
     <Compile Include="Listener\DynamicEventListener.cs" />
     <Compile Include="AutoMapperHelper.cs" />
+    <Compile Include="NodeDotRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

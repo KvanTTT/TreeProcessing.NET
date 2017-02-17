@@ -15,18 +15,18 @@ namespace TreeProcessing.NET.Tests
             Enter + nameof(Node), Enter + nameof(Statement), Enter + nameof(BlockStatement),
                 Enter + nameof(Statement), Enter + nameof(ExpressionStatement),
                     Enter + nameof(Expression), Enter + nameof(BinaryOperatorExpression),
-                        Enter + nameof(Expression), Enter + nameof(Terminal), Enter + nameof(Identifier),
-                        Exit + nameof(Identifier), Exit + nameof(Terminal), Exit + nameof(Expression),
-                        Enter + nameof(Expression), Enter + nameof(Terminal), Enter + nameof(IntegerLiteral),
-                        Exit + nameof(IntegerLiteral), Exit + nameof(Terminal), Exit + nameof(Expression),
+                        Enter + nameof(Expression), Enter + nameof(Token), Enter + nameof(Identifier),
+                        Exit + nameof(Identifier), Exit + nameof(Token), Exit + nameof(Expression),
+                        Enter + nameof(Expression), Enter + nameof(Token), Enter + nameof(IntegerLiteral),
+                        Exit + nameof(IntegerLiteral), Exit + nameof(Token), Exit + nameof(Expression),
                     Exit + nameof(BinaryOperatorExpression), Exit + nameof(Expression),
                 Exit + nameof(ExpressionStatement), Exit + nameof(Statement)
         };
 
         private static string[] EndExpectedSequence = new string[]
         {
-                                    Enter + nameof(Expression), Enter + nameof(Terminal), Enter + nameof(Identifier),
-                                Exit + nameof(Identifier), Exit + nameof(Terminal), Exit + nameof(Expression),
+                                    Enter + nameof(Expression), Enter + nameof(Token), Enter + nameof(Identifier),
+                                Exit + nameof(Identifier), Exit + nameof(Token), Exit + nameof(Expression),
                             Exit + nameof(InvocationExpression), Exit + nameof(Expression),
                         Exit + nameof(ExpressionStatement), Exit + nameof(Statement),
                     Exit + nameof(IfElseStatement), Exit + nameof(Statement),
@@ -40,7 +40,7 @@ namespace TreeProcessing.NET.Tests
 
             listener.EnterNode += (s, e) => invokeSequence.Add(Enter + nameof(Node));
             listener.EnterExpression += (s, e) => invokeSequence.Add(Enter + nameof(Expression));
-            listener.EnterTerminal += (s, e) => invokeSequence.Add(Enter + nameof(Terminal));
+            listener.EnterToken += (s, e) => invokeSequence.Add(Enter + nameof(Token));
             listener.EnterStatement += (s, e) => invokeSequence.Add(Enter + nameof(Statement));
             listener.EnterBinaryOperatorExpression += (s, e) => invokeSequence.Add(Enter + nameof(BinaryOperatorExpression));
             listener.EnterInvocationExpression += (s, e) => invokeSequence.Add(Enter + nameof(InvocationExpression));
@@ -59,7 +59,7 @@ namespace TreeProcessing.NET.Tests
 
             listener.ExitNode += (s, e) => invokeSequence.Add(Exit + nameof(Node));
             listener.ExitExpression += (s, e) => invokeSequence.Add(Exit + nameof(Expression));
-            listener.ExitTerminal += (s, e) => invokeSequence.Add(Exit + nameof(Terminal));
+            listener.ExitToken += (s, e) => invokeSequence.Add(Exit + nameof(Token));
             listener.ExitStatement += (s, e) => invokeSequence.Add(Exit + nameof(Statement));
             listener.ExitBinaryOperatorExpression += (s, e) => invokeSequence.Add(Exit + nameof(BinaryOperatorExpression));
             listener.ExitInvocationExpression += (s, e) => invokeSequence.Add(Exit + nameof(InvocationExpression));

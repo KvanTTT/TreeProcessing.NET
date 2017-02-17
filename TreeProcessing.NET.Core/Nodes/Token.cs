@@ -5,14 +5,14 @@ using System.Linq;
 
 namespace TreeProcessing.NET
 {
-    [NodeAttr(NodeType.Terminal)]
+    [NodeAttr(NodeType.Token)]
     [ProtoContract]
 #if PORTABLE || NET
     [Serializable]
 #endif
-    public abstract class Terminal : Expression
+    public abstract class Token: Expression
     {
-        public override NodeType NodeType => NodeType.Terminal;
+        public override NodeType NodeType => NodeType.Token;
 
         public override IEnumerable<Node> Children => Enumerable.Empty<Node>();
 

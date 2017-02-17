@@ -20,7 +20,7 @@ namespace TreeProcessing.NET
         public event EventHandler<NullLiteral> EnterNullLiteral;
         public event EventHandler<Statement> EnterStatement;
         public event EventHandler<StringLiteral> EnterStringLiteral;
-        public event EventHandler<Terminal> EnterTerminal;
+        public event EventHandler<Token> EnterToken;
         public event EventHandler<UnaryOperatorExpression> EnterUnaryOperatorExpression;
         public event EventHandler<BinaryOperatorExpression> ExitBinaryOperatorExpression;
         public event EventHandler<BlockStatement> ExitBlockStatement;
@@ -38,7 +38,7 @@ namespace TreeProcessing.NET
         public event EventHandler<NullLiteral> ExitNullLiteral;
         public event EventHandler<Statement> ExitStatement;
         public event EventHandler<StringLiteral> ExitStringLiteral;
-        public event EventHandler<Terminal> ExitTerminal;
+        public event EventHandler<Token> ExitToken;
         public event EventHandler<UnaryOperatorExpression> ExitUnaryOperatorExpression;
 
         public StaticEventListener()
@@ -55,7 +55,7 @@ namespace TreeProcessing.NET
         private void Visit(Node node)
         {
             Expression expression;
-            Terminal terminal;
+            Token terminal;
             Statement statement;
             if ((expression = node as Expression) != null)
             {
@@ -63,11 +63,11 @@ namespace TreeProcessing.NET
                 Visit(expression);
                 ExitExpression?.Invoke(this, expression);
             }
-            else if ((terminal = node as Terminal) != null)
+            else if ((terminal = node as Token) != null)
             {
-                EnterTerminal?.Invoke(this, terminal);
+                EnterToken?.Invoke(this, terminal);
                 Visit(terminal);
-                ExitTerminal?.Invoke(this, terminal);
+                ExitToken?.Invoke(this, terminal);
             }
             else if ((statement = node as Statement) != null)
             {
@@ -110,16 +110,16 @@ namespace TreeProcessing.NET
                     ExitUnaryOperatorExpression?.Invoke(this, unaryOperatorExpression);
                     break;
             }
-            Terminal terminal;
-            if ((terminal = expression as Terminal) != null)
+            Token terminal;
+            if ((terminal = expression as Token) != null)
             {
-                EnterTerminal?.Invoke(this, terminal);
+                EnterToken?.Invoke(this, terminal);
                 Visit(terminal);
-                ExitTerminal?.Invoke(this, terminal);
+                ExitToken?.Invoke(this, terminal);
             }
         }
 
-        private void Visit(Terminal terminal)
+        private void Visit(Token terminal)
         {
             switch (terminal.NodeType)
             {

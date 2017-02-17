@@ -175,8 +175,8 @@
     <Compile Include="..\TreeProcessing.NET.Core\Nodes\Statements\Statement.cs">
       <Link>Nodes\Statements\Statement.cs</Link>
     </Compile>
-    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Terminal.cs">
-      <Link>Nodes\Terminal.cs</Link>
+    <Compile Include="..\TreeProcessing.NET.Core\Nodes\Token.cs">
+      <Link>Nodes\Token.cs</Link>
     </Compile>
     <Compile Include="..\TreeProcessing.NET.Core\NodeType.cs">
       <Link>NodeType.cs</Link>

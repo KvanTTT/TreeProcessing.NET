@@ -10,7 +10,7 @@ namespace TreeProcessing.NET
 #endif
     [DataContract]
     [ProtoContract]
-    public class Identifier : Terminal
+    public class Identifier : Token
     {
         public override NodeType NodeType => NodeType.Identifier;
 

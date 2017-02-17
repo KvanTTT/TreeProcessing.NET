@@ -14,7 +14,7 @@ namespace TreeProcessing.NET
 #endif
     [DataContract]
     [ProtoContract]
-    public class FloatLiteral : Terminal
+    public class FloatLiteral : Token
     {
         public override NodeType NodeType => NodeType.FloatLiteral;
 

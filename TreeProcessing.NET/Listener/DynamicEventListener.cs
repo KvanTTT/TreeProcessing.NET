@@ -29,7 +29,7 @@ namespace TreeProcessing.NET
         public event EventHandler<NullLiteral> EnterNullLiteral;
         public event EventHandler<Statement> EnterStatement;
         public event EventHandler<StringLiteral> EnterStringLiteral;
-        public event EventHandler<Terminal> EnterTerminal;
+        public event EventHandler<Token> EnterToken;
         public event EventHandler<UnaryOperatorExpression> EnterUnaryOperatorExpression;
         public event EventHandler<BinaryOperatorExpression> ExitBinaryOperatorExpression;
         public event EventHandler<BlockStatement> ExitBlockStatement;
@@ -47,7 +47,7 @@ namespace TreeProcessing.NET
         public event EventHandler<NullLiteral> ExitNullLiteral;
         public event EventHandler<Statement> ExitStatement;
         public event EventHandler<StringLiteral> ExitStringLiteral;
-        public event EventHandler<Terminal> ExitTerminal;
+        public event EventHandler<Token> ExitToken;
         public event EventHandler<UnaryOperatorExpression> ExitUnaryOperatorExpression;
 
         public DynamicEventListener()

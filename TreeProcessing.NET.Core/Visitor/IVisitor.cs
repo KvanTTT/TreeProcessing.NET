@@ -8,7 +8,7 @@
 
         T Visit(Expression expression);
 
-        T Visit(Terminal terminal);
+        T Visit(Token terminal);
 
         T Visit(Statement statement);
 

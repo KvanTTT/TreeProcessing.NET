@@ -104,7 +104,7 @@ namespace TreeProcessing.NET.Tests
 
             mock.Setup(listener => listener.Enter(It.IsAny<Node>())).Callback((Node s) => invokeSequence.Add(Enter + nameof(Node)));
             mock.Setup(listener => listener.Enter(It.IsAny<Expression>())).Callback((Expression s) => invokeSequence.Add(Enter + nameof(Expression)));
-            mock.Setup(listener => listener.Enter(It.IsAny<Terminal>())).Callback((Terminal s) => invokeSequence.Add(Enter + nameof(Terminal)));
+            mock.Setup(listener => listener.Enter(It.IsAny<Token>())).Callback((Token s) => invokeSequence.Add(Enter + nameof(Token)));
             mock.Setup(listener => listener.Enter(It.IsAny<Statement>())).Callback((Statement s) => invokeSequence.Add(Enter + nameof(Statement)));
             mock.Setup(listener => listener.Enter(It.IsAny<BinaryOperatorExpression>())).Callback((BinaryOperatorExpression s) => invokeSequence.Add(Enter + nameof(BinaryOperatorExpression)));
             mock.Setup(listener => listener.Enter(It.IsAny<InvocationExpression>())).Callback((InvocationExpression s) => invokeSequence.Add(Enter + nameof(InvocationExpression)));
@@ -123,7 +123,7 @@ namespace TreeProcessing.NET.Tests
 
             mock.Setup(listener => listener.Exit(It.IsAny<Node>())).Callback((Node s) => invokeSequence.Add(Exit + nameof(Node)));
             mock.Setup(listener => listener.Exit(It.IsAny<Expression>())).Callback((Expression s) => invokeSequence.Add(Exit + nameof(Expression)));
-            mock.Setup(listener => listener.Exit(It.IsAny<Terminal>())).Callback((Terminal s) => invokeSequence.Add(Exit + nameof(Terminal)));
+            mock.Setup(listener => listener.Exit(It.IsAny<Token>())).Callback((Token s) => invokeSequence.Add(Exit + nameof(Token)));
             mock.Setup(listener => listener.Exit(It.IsAny<Statement>())).Callback((Statement s) => invokeSequence.Add(Exit + nameof(Statement)));
             mock.Setup(listener => listener.Exit(It.IsAny<BinaryOperatorExpression>())).Callback((BinaryOperatorExpression s) => invokeSequence.Add(Exit + nameof(BinaryOperatorExpression)));
             mock.Setup(listener => listener.Exit(It.IsAny<InvocationExpression>())).Callback((InvocationExpression s) => invokeSequence.Add(Exit + nameof(InvocationExpression)));
@@ -152,7 +152,7 @@ namespace TreeProcessing.NET.Tests
             var mock = new Mock<DynamicListener>();
             
             mock.Setup(listener => listener.Enter(It.IsAny<Expression>())).Callback((Expression s) => invokeSequence.Add(Enter + nameof(Expression)));
-            mock.Setup(listener => listener.Enter(It.IsAny<Terminal>())).Callback((Terminal s) => invokeSequence.Add(Enter + nameof(Terminal)));
+            mock.Setup(listener => listener.Enter(It.IsAny<Token>())).Callback((Token s) => invokeSequence.Add(Enter + nameof(Token)));
             mock.Setup(listener => listener.Enter(It.IsAny<Statement>())).Callback((Statement s) => invokeSequence.Add(Enter + nameof(Statement)));
             mock.Setup(listener => listener.Enter(It.IsAny<BinaryOperatorExpression>())).Callback((BinaryOperatorExpression s) => invokeSequence.Add(Enter + nameof(BinaryOperatorExpression)));
             mock.Setup(listener => listener.Enter(It.IsAny<InvocationExpression>())).Callback((InvocationExpression s) => invokeSequence.Add(Enter + nameof(InvocationExpression)));
@@ -170,7 +170,7 @@ namespace TreeProcessing.NET.Tests
             mock.Setup(listener => listener.Enter(It.IsAny<IfElseStatement>())).Callback((IfElseStatement s) => invokeSequence.Add(Enter + nameof(IfElseStatement)));
             
             mock.Setup(listener => listener.Exit(It.IsAny<Expression>())).Callback((Expression s) => invokeSequence.Add(Exit + nameof(Expression)));
-            mock.Setup(listener => listener.Exit(It.IsAny<Terminal>())).Callback((Terminal s) => invokeSequence.Add(Exit + nameof(Terminal)));
+            mock.Setup(listener => listener.Exit(It.IsAny<Token>())).Callback((Token s) => invokeSequence.Add(Exit + nameof(Token)));
             mock.Setup(listener => listener.Exit(It.IsAny<Statement>())).Callback((Statement s) => invokeSequence.Add(Exit + nameof(Statement)));
             mock.Setup(listener => listener.Exit(It.IsAny<BinaryOperatorExpression>())).Callback((BinaryOperatorExpression s) => invokeSequence.Add(Exit + nameof(BinaryOperatorExpression)));
             mock.Setup(listener => listener.Exit(It.IsAny<InvocationExpression>())).Callback((InvocationExpression s) => invokeSequence.Add(Exit + nameof(InvocationExpression)));

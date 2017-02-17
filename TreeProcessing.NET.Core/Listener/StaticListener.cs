@@ -15,7 +15,7 @@ namespace TreeProcessing.NET
             Exit(node);
         }
 
-        public virtual void Enter(Terminal terminal)
+        public virtual void Enter(Token terminal)
         {
         }
 
@@ -127,7 +127,7 @@ namespace TreeProcessing.NET
         {
         }
 
-        public virtual void Exit(Terminal terminal)
+        public virtual void Exit(Token terminal)
         {
         }
 
@@ -162,7 +162,7 @@ namespace TreeProcessing.NET
         private void Visit(Node node)
         {
             Expression expression;
-            Terminal terminal;
+            Token terminal;
             Statement statement;
             if ((expression = node as Expression) != null)
             {
@@ -170,7 +170,7 @@ namespace TreeProcessing.NET
                 Visit(expression);
                 Exit(expression);
             }
-            else if ((terminal = node as Terminal) != null)
+            else if ((terminal = node as Token) != null)
             {
                 Enter(terminal);
                 Visit(terminal);
@@ -217,8 +217,8 @@ namespace TreeProcessing.NET
                     Exit(unaryOperatorExpression);
                     break;
             }
-            Terminal terminal;
-            if ((terminal = expression as Terminal) != null)
+            Token terminal;
+            if ((terminal = expression as Token) != null)
             {
                 Enter(terminal);
                 Visit(terminal);
@@ -226,7 +226,7 @@ namespace TreeProcessing.NET
             }
         }
 
-        private void Visit(Terminal terminal)
+        private void Visit(Token terminal)
         {
             switch (terminal.NodeType)
             {

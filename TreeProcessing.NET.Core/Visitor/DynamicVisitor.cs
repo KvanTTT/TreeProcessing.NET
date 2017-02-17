@@ -8,7 +8,7 @@ namespace TreeProcessing.NET
 {
     public class DynamicVisitor : IVisitor<Node>
     {
-        public virtual Node Visit(Terminal terminal)
+        public virtual Node Visit(Token terminal)
         {
             return VisitChildren(terminal);
         }

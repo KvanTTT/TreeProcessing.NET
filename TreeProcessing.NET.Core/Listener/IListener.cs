@@ -16,13 +16,13 @@ namespace TreeProcessing.NET
 
         void Enter(Expression expression);
 
-        void Enter(Terminal terminal);
+        void Enter(Token terminal);
 
         void Enter(Statement statement);
 
         void Exit(Expression expression);
 
-        void Exit(Terminal terminal);
+        void Exit(Token terminal);
 
         void Exit(Node node);
 

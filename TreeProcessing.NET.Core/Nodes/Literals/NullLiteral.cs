@@ -14,7 +14,7 @@ namespace TreeProcessing.NET
 #endif
     [DataContract]
     [ProtoContract]
-    public class NullLiteral : Terminal
+    public class NullLiteral : Token
     {
         public override NodeType NodeType => NodeType.NullLiteral;
 

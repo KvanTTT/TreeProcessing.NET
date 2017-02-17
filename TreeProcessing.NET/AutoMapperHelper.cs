@@ -10,7 +10,7 @@ namespace TreeProcessing.NET
                 cfg.CreateMap<Node, NodeDto>()
                     .Include<Statement, StatementDto>()
                     .Include<Expression, ExpressionDto>()
-                    .Include<Terminal, TerminalDto>()
+                    .Include<Token, TerminalDto>()
                     .ReverseMap();
 
                 cfg.CreateMap<Statement, StatementDto>()
@@ -25,10 +25,10 @@ namespace TreeProcessing.NET
                     .Include<InvocationExpression, InvocationExpressionDto>()
                     .Include<MemberReferenceExpression, MemberReferenceExpressionDto>()
                     .Include<UnaryOperatorExpression, UnaryOperatorExpressionDto>()
-                    .Include<Terminal, TerminalDto>()
+                    .Include<Token, TerminalDto>()
                     .ReverseMap();
 
-                cfg.CreateMap<Terminal, TerminalDto>()
+                cfg.CreateMap<Token, TerminalDto>()
                     .Include<BooleanLiteral, BooleanLiteralDto>()
                     .Include<FloatLiteral, FloatLiteralDto>()
                     .Include<Identifier, IdentifierDto>()

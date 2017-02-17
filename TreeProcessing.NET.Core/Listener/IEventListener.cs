@@ -16,9 +16,9 @@ namespace TreeProcessing.NET
 
         event EventHandler<Expression> ExitExpression;
 
-        event EventHandler<Terminal> EnterTerminal;
+        event EventHandler<Token> EnterToken;
 
-        event EventHandler<Terminal> ExitTerminal;
+        event EventHandler<Token> ExitToken;
 
         event EventHandler<Statement> EnterStatement;
 
@@ -46,7 +46,7 @@ namespace TreeProcessing.NET
 
         #endregion
 
-        #region Literals
+        #region Tokens
 
         event EventHandler<BooleanLiteral> EnterBooleanLiteral;
 

@@ -19,7 +19,7 @@ namespace TreeProcessing.NET
             Exit(dynamicNode);
         }
 
-        public virtual void Enter(Terminal terminal)
+        public virtual void Enter(Token terminal)
         {
         }
 
@@ -131,7 +131,7 @@ namespace TreeProcessing.NET
         {
         }
 
-        public virtual void Exit(Terminal terminal)
+        public virtual void Exit(Token terminal)
         {
         }
 

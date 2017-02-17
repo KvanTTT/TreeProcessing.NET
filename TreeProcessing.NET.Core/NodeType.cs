@@ -5,7 +5,7 @@
         Node,
         Expression,
         Statement,
-        Terminal,
+        Token,
 
         BinaryOperatorExpression,
         InvocationExpression,

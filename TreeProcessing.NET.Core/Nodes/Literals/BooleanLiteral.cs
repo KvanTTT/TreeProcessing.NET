@@ -10,7 +10,7 @@ namespace TreeProcessing.NET
 #endif
     [DataContract]
     [ProtoContract]
-    public class BooleanLiteral : Terminal
+    public class BooleanLiteral : Token
     {
         public override NodeType NodeType => NodeType.BooleanLiteral;
 
