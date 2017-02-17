@@ -217,6 +217,7 @@
     <Compile Include="..\TreeProcessing.NET.Core\Visitor\StaticVisitor.cs">
       <Link>Visitor\StaticVisitor.cs</Link>
     </Compile>
+    <Compile Include="GraphvizRenderer.cs" />
     <Compile Include="Listener\DynamicEventListener.cs" />
     <Compile Include="AutoMapperHelper.cs" />
     <Compile Include="NodeDotRenderer.cs" />

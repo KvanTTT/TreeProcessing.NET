@@ -101,6 +101,7 @@
       <Link>ListenerUtils.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TreeProcessing.NET\TreeProcessing.NET.csproj">
