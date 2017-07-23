@@ -1,20 +1,20 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace TreeProcessing.NET.Tests
 {
-    [TestFixture]
     public class VisitorTests
     {
 #if PORTABLE || NET
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void CheckAllVisitorMethodsExists(string platform)
         {
             MethodInfo[] visitorMethods = typeof(IVisitor<>).GetMethods();
@@ -22,7 +22,7 @@ namespace TreeProcessing.NET.Tests
                 .Where(t => t == typeof(Node) || t.IsSubclassOf(typeof(Node)));
             foreach (Type type in nodeTypes)
             {
-                Assert.IsTrue(visitorMethods
+                Assert.True(visitorMethods
                     .FirstOrDefault(methodInfo =>
                     {
                         var parameters = methodInfo.GetParameters();
@@ -33,13 +33,15 @@ namespace TreeProcessing.NET.Tests
         }
 #endif
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void Visitor_Static(string platform)
         {
             TestVisitor(new StaticVisitor());
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void Visitor_Dynamic(string platform)
         {
             TestVisitor(new DynamicVisitor());
@@ -59,7 +61,7 @@ namespace TreeProcessing.NET.Tests
             var processedTree = visitor.Visit(tree);
             string actualJson = JsonConvert.SerializeObject(processedTree, serializeSettings);
 
-            Assert.AreEqual(expectedJson, actualJson);
+            Assert.Equal(expectedJson, actualJson);
         }
     }
 }

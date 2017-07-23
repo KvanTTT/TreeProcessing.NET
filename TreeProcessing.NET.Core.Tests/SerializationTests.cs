@@ -1,18 +1,18 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using NUnit.Framework;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Serialization;
+using Xunit;
 
 namespace TreeProcessing.NET.Tests
 {
-    [TestFixture]
     public class SerializationTests
     {
 #if PORTABLE || NET
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void Binary_Serialization(string platform)
         {
             Statement tree = SampleTree.Init();
@@ -32,11 +32,12 @@ namespace TreeProcessing.NET.Tests
                 actualTree = (Statement)binaryFormatter.Deserialize(memoryStream);
             }
 
-            Assert.AreEqual(0, tree.CompareTo(actualTree));
+            Assert.Equal(0, tree.CompareTo(actualTree));
         }
 #endif
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void DataContract_Serialization(string platform)
         {
             Statement tree = SampleTree.Init();
@@ -59,10 +60,11 @@ namespace TreeProcessing.NET.Tests
                 }
             }
 
-            Assert.AreEqual(0, tree.CompareTo(actualTree));
+            Assert.Equal(0, tree.CompareTo(actualTree));
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void Xml_Serialization(string platform)
         {
             Statement tree = SampleTree.Init();
@@ -82,10 +84,11 @@ namespace TreeProcessing.NET.Tests
                 actualTree = (Statement)serializer.Deserialize(memoryStream);
             }
 
-            Assert.AreEqual(0, tree.CompareTo(actualTree));
+            Assert.Equal(0, tree.CompareTo(actualTree));
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void JsonNET_FullTypeNameSerialization(string platform)
         {
             Node tree = SampleTree.Init();
@@ -100,10 +103,11 @@ namespace TreeProcessing.NET.Tests
             Node deserialized = JsonConvert.DeserializeObject<Node>(expectedJson, settings);
             string actualJson = JsonConvert.SerializeObject(deserialized, settings);
 
-            Assert.AreEqual(expectedJson, actualJson);
+            Assert.Equal(expectedJson, actualJson);
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void JsonNET_PropertySerialization(string platform)
         {
             Node tree = SampleTree.Init();
@@ -122,10 +126,11 @@ namespace TreeProcessing.NET.Tests
             Node deserialized = JsonConvert.DeserializeObject<Node>(expectedJson, deserializeSettings);
             string actualJson = JsonConvert.SerializeObject(deserialized, serializeSettings);
 
-            Assert.AreEqual(expectedJson, actualJson);
+            Assert.Equal(expectedJson, actualJson);
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void JsonNET_ClassNameSerialization(string platform)
         {
             Node tree = SampleTree.Init();
@@ -139,10 +144,11 @@ namespace TreeProcessing.NET.Tests
             Node deserialized = JsonConvert.DeserializeObject<Node>(expectedJson, settings);
             string actualJson = JsonConvert.SerializeObject(deserialized, settings);
 
-            Assert.AreEqual(expectedJson, actualJson);
+            Assert.Equal(expectedJson, actualJson);
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void JsonNET_AttributeSerialization(string platform)
         {
             Node tree = SampleTree.Init();
@@ -156,10 +162,11 @@ namespace TreeProcessing.NET.Tests
             Node deserialized = JsonConvert.DeserializeObject<Node>(expectedJson, settings);
             string actualJson = JsonConvert.SerializeObject(deserialized, settings);
 
-            Assert.AreEqual(expectedJson, actualJson);
+            Assert.Equal(expectedJson, actualJson);
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void Protobuf_Seialization(string platform)
         {
             Statement tree = SampleTree.Init();
@@ -173,10 +180,11 @@ namespace TreeProcessing.NET.Tests
                 actualTree = ProtoBuf.Serializer.Deserialize<Statement>(memoryStream);
             }
 
-            Assert.AreEqual(0, tree.CompareTo(actualTree));
+            Assert.Equal(0, tree.CompareTo(actualTree));
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void ServiceStackJson_Serialization(string platform)
         {
             Statement tree = SampleTree.Init();
@@ -184,10 +192,11 @@ namespace TreeProcessing.NET.Tests
             Statement deserialized = ServiceStack.Text.JsonSerializer.DeserializeFromString<Statement>(expectedJson);
             string actualJson = ServiceStack.Text.JsonSerializer.SerializeToString<Statement>(deserialized);
 
-            Assert.AreEqual(expectedJson, actualJson);
+            Assert.Equal(expectedJson, actualJson);
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void ServiceStackType_Serialization(string platform)
         {
             Statement tree = SampleTree.Init();
@@ -195,7 +204,7 @@ namespace TreeProcessing.NET.Tests
             Statement deserialized = ServiceStack.Text.TypeSerializer.DeserializeFromString<Statement>(expectedJson);
             string actualJson = ServiceStack.Text.TypeSerializer.SerializeToString<Statement>(deserialized);
 
-            Assert.AreEqual(expectedJson, actualJson);
+            Assert.Equal(expectedJson, actualJson);
         }
     }
 }

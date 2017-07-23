@@ -1,12 +1,11 @@
-﻿using NUnit.Framework;
-using System.IO;
+﻿using System.IO;
+using Xunit;
 
 namespace TreeProcessing.NET.Tests
 {
-    [TestFixture]
     public class RenderTests
     {
-        [Test]
+        [Fact]
         public void Render_DotFromNodes_PngGraphFile()
         {
             var sampleTree = SampleTree.Init();

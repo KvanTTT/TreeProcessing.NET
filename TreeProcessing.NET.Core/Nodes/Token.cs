@@ -2,14 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace TreeProcessing.NET
 {
     [NodeAttr(NodeType.Token)]
-    [ProtoContract]
 #if PORTABLE || NET
     [Serializable]
 #endif
+    [DataContract]
+    [ProtoContract]
     public abstract class Token: Expression
     {
         public override NodeType NodeType => NodeType.Token;

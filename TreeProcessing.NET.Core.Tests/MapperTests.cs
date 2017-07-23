@@ -1,33 +1,35 @@
-﻿using NUnit.Framework;
-using ServiceStack;
+﻿using ServiceStack;
+using Xunit;
 
 namespace TreeProcessing.NET.Tests
 {
-    [TestFixture]
     public class MapperTests
     {
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void StaticMapper_ModelToDtoAndBack(string platform)
         {
             Statement sampleTree = SampleTree.Init();
             NodeDto sampleTreeDto = MapperHelper.ModelToDto(sampleTree);
             Node mappedBack = MapperHelper.DtoToModel(sampleTreeDto);
 
-            Assert.AreEqual(sampleTree, mappedBack);
+            Assert.Equal(sampleTree, mappedBack);
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void DynamicMapper_ModelToDtoAndBack(string platform)
         {
             Statement sampleTree = SampleTree.Init();
             NodeDto sampleTreeDto = MapperHelper.ModelToDtoDynamicViaReflection(sampleTree);
             Node mappedBack = MapperHelper.DtoToModelViaReflection(sampleTreeDto);
 
-            Assert.AreEqual(sampleTree, mappedBack);
+            Assert.Equal(sampleTree, mappedBack);
         }
 
 #if NET
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void AutoMapper_ModelToDtoAndBack(string platform)
         {
             AutoMapperHelper.Initialize();
@@ -36,7 +38,7 @@ namespace TreeProcessing.NET.Tests
             NodeDto sampleTreeDto = AutoMapper.Mapper.Map<NodeDto>(sampleTree);
             var mappedBack = AutoMapper.Mapper.Map<Node>(sampleTreeDto);
 
-            Assert.AreEqual(sampleTree, mappedBack);
+            Assert.Equal(sampleTree, mappedBack);
         }
 #endif
     }

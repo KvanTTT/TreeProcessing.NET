@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Xunit;
 
 namespace TreeProcessing.NET.Tests
 {
@@ -104,10 +104,10 @@ namespace TreeProcessing.NET.Tests
             }
 
             var actualSequence = invokeSequence.Take(beginExpectedSequence.Length);
-            CollectionAssert.AreEqual(beginExpectedSequence, actualSequence);
+            Assert.Equal(beginExpectedSequence, actualSequence);
 
             actualSequence = invokeSequence.Skip(invokeSequence.Count() - endExpectedSequence.Length);
-            CollectionAssert.AreEqual(endExpectedSequence, actualSequence);
+            Assert.Equal(endExpectedSequence, actualSequence);
         }
     }
 }

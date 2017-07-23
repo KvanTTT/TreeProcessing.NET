@@ -1,9 +1,9 @@
 ﻿using Moq;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Xunit;
 
 namespace TreeProcessing.NET.Tests
 {
@@ -12,7 +12,8 @@ namespace TreeProcessing.NET.Tests
         private const string Enter = "Enter";
         private const string Exit = "Exit";
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void CheckAllListenerMethodsExists(string platform)
         {
             MethodInfo[] listenerMethods = typeof(IListener).GetMethods();
@@ -20,7 +21,7 @@ namespace TreeProcessing.NET.Tests
                 .Where(t => t == typeof(Node) || t.IsSubclassOf(typeof(Node)));
             foreach (Type type in nodeTypes)
             {
-                Assert.IsTrue(listenerMethods
+                Assert.True(listenerMethods
                     .FirstOrDefault(methodInfo =>
                     {
                         var parameters = methodInfo.GetParameters();
@@ -28,7 +29,7 @@ namespace TreeProcessing.NET.Tests
                     }) != null,
                     $"Enter method for Type {type} is not exists");
 
-                Assert.IsTrue(listenerMethods
+                Assert.True(listenerMethods
                     .FirstOrDefault(methodInfo =>
                     {
                         var parameters = methodInfo.GetParameters();
@@ -38,7 +39,8 @@ namespace TreeProcessing.NET.Tests
             }
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void CheckAllEventListenerMethodsExists(string platform)
         {
             EventInfo[] listenerEvents = typeof(IEventListener).GetEvents();
@@ -48,34 +50,37 @@ namespace TreeProcessing.NET.Tests
             {
                 var enterEventName = "Enter" + type.Name;
                 var exitEventName = "Exit" + type.Name;
-                Assert.IsTrue(listenerEvents
+                Assert.True(listenerEvents
                     .FirstOrDefault(listenerEvent =>
                     {
                         return listenerEvent.Name == enterEventName;
                     }) != null,
                     $"Enter method for Type {type} is not exists");
 
-                Assert.IsTrue(listenerEvents
+                Assert.True(listenerEvents
                     .FirstOrDefault(listenerEvent => listenerEvent.Name == exitEventName) != null,
                     $"Visitor for Type {type} is not exists");
             }
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void Listener_Static(string platform)
         {
             var invokeSequence = GetInvokeSequenceFromStaticListener();
             ListenerUtils.CheckInvokeSequence(invokeSequence, false);
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void Listener_Dynamic(string platform)
         {
             var invokeSequence = GetInvokeSequenceFromDynamicListener();
             ListenerUtils.CheckInvokeSequence(invokeSequence, true);
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void EventListener_Static(string platform)
         {
             IEventListener listener = new StaticEventListener();
@@ -85,7 +90,8 @@ namespace TreeProcessing.NET.Tests
         }
 
 #if NET
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void EventListener_Dynamic(string platform)
         {
             var listener = new DynamicEventListener();

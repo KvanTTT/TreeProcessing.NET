@@ -1,23 +1,23 @@
-﻿using NUnit.Framework;
-using System.Collections.Generic;
-using TreeProcessing.NET;
+﻿using System.Collections.Generic;
 using TreeProcessing.NET.Tests;
+using Xunit;
 
 namespace TreeProcessing.NET.Core.Tests
 {
-    [TestFixture]
     public class HashTests
     {
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void Hash_EqualNodes(string platform)
         {
             Node tree1 = SampleTree.Init();
             Node tree2 = SampleTree.Init();
 
-            Assert.AreEqual(tree1.GetHashCode(), tree2.GetHashCode());
+            Assert.Equal(tree1.GetHashCode(), tree2.GetHashCode());
         }
 
-        [TestCase(TestHelper.Platform)]
+        [Theory]
+        [InlineData(TestHelper.Platform)]
         public void Hash_MerkelizedAst(string platform)
         {
             Node tree = SampleTree.Init();
@@ -35,9 +35,9 @@ namespace TreeProcessing.NET.Core.Tests
             int expressionStatementHashAfter = expressionStatement.GetHashCode();
             int forStatementHashAfter = forStatement.GetHashCode();
 
-            Assert.AreNotEqual(treeHashBefore, treeHashAfter);
-            Assert.AreNotEqual(expressionStatementHashBefore, expressionStatementHashAfter);
-            Assert.AreEqual(forStatementHashBefore, forStatementHashAfter);
+            Assert.NotEqual(treeHashBefore, treeHashAfter);
+            Assert.NotEqual(expressionStatementHashBefore, expressionStatementHashAfter);
+            Assert.Equal(forStatementHashBefore, forStatementHashAfter);
         }
     }
 }
