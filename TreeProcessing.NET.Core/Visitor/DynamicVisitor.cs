@@ -112,27 +112,30 @@ namespace TreeProcessing.NET
             {
                 Type propType = prop.PropertyType;
                 TypeInfo typeInfo = propType.GetTypeInfo();
-                if (typeInfo.IsSubclassOf(typeof(Node)) || propType == typeof(Node))
+                if (!typeInfo.IsValueType && propType != typeof(string))
                 {
-                    Node getValue = (Node)prop.GetValue(node);
-                    if (getValue != null)
+                    if (typeInfo.IsSubclassOf(typeof(Node)) || propType == typeof(Node))
                     {
-                        Visit((dynamic)getValue);
-                    }
-                }
-                else if (typeInfo.ImplementedInterfaces.Contains(typeof(IEnumerable)))
-                {
-                    Type itemType = typeInfo.GenericTypeArguments[0];
-                    var sourceCollection = (IEnumerable<object>)prop.GetValue(node);
-
-                    if (sourceCollection != null)
-                    {
-                        foreach (var item in sourceCollection)
+                        Node getValue = (Node)prop.GetValue(node);
+                        if (getValue != null)
                         {
-                            var nodeItem = item as Node;
-                            if (nodeItem != null)
+                            Visit((dynamic)getValue);
+                        }
+                    }
+                    else if (typeInfo.ImplementedInterfaces.Contains(typeof(IEnumerable)))
+                    {
+                        Type itemType = typeInfo.GenericTypeArguments[0];
+                        var sourceCollection = (IEnumerable<object>)prop.GetValue(node);
+
+                        if (sourceCollection != null)
+                        {
+                            foreach (var item in sourceCollection)
                             {
-                                Visit((dynamic)nodeItem);
+                                var nodeItem = item as Node;
+                                if (nodeItem != null)
+                                {
+                                    Visit((dynamic)nodeItem);
+                                }
                             }
                         }
                     }
