@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace TreeProcessing.NET.Tests
@@ -37,14 +35,14 @@ namespace TreeProcessing.NET.Tests
         [InlineData(TestHelper.Platform)]
         public void Visitor_Static(string platform)
         {
-            TestVisitor(new StaticVisitor());
+            TestVisitor(new StaticCloner());
         }
 
         [Theory]
         [InlineData(TestHelper.Platform)]
         public void Visitor_Dynamic(string platform)
         {
-            TestVisitor(new DynamicVisitor());
+            TestVisitor(new DynamicCloner());
         }
 
         private static void TestVisitor(IVisitor<Node> visitor)

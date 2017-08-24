@@ -184,11 +184,17 @@
     <Compile Include="..\TreeProcessing.NET.Core\ReflectionCache.cs">
       <Link>ReflectionCache.cs</Link>
     </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Visitor\DynamicCloner.cs">
+      <Link>Visitor\DynamicCloner.cs</Link>
+    </Compile>
     <Compile Include="..\TreeProcessing.NET.Core\Visitor\DynamicVisitor.cs">
       <Link>Visitor\DynamicVisitor.cs</Link>
     </Compile>
     <Compile Include="..\TreeProcessing.NET.Core\Visitor\IVisitor.cs">
       <Link>Visitor\IVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\TreeProcessing.NET.Core\Visitor\StaticCloner.cs">
+      <Link>Visitor\StaticCloner.cs</Link>
     </Compile>
     <Compile Include="..\TreeProcessing.NET.Core\Visitor\StaticVisitor.cs">
       <Link>Visitor\StaticVisitor.cs</Link>

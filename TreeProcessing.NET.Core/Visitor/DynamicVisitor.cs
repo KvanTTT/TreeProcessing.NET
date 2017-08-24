@@ -6,103 +6,103 @@ using System.Reflection;
 
 namespace TreeProcessing.NET
 {
-    public class DynamicVisitor : IVisitor<Node>
+    public class DynamicVisitor<T> : IVisitor<T>
     {
-        public virtual Node Visit(Token terminal)
+        public virtual T Visit(Token terminal)
         {
             return VisitChildren(terminal);
         }
 
-        public virtual Node Visit(Statement statement)
+        public virtual T Visit(Statement statement)
         {
             return VisitChildren(statement);
         }
 
-        public virtual Node Visit(Identifier identifier)
+        public virtual T Visit(Identifier identifier)
         {
             return VisitChildren(identifier);
         }
 
-        public virtual Node Visit(Expression expression)
+        public virtual T Visit(Expression expression)
         {
             return VisitChildren(expression);
         }
 
-        public virtual Node Visit(Node node)
+        public virtual T Visit(Node node)
         {
             return VisitChildren(node);
         }
 
-        public virtual Node Visit(BinaryOperatorExpression binaryOperatorExpression)
+        public virtual T Visit(BinaryOperatorExpression binaryOperatorExpression)
         {
             return VisitChildren(binaryOperatorExpression);
         }
 
-        public virtual Node Visit(BlockStatement blockStatement)
+        public virtual T Visit(BlockStatement blockStatement)
         {
             return VisitChildren(blockStatement);
         }
 
-        public virtual Node Visit(BooleanLiteral unaryOperatorExpression)
+        public virtual T Visit(BooleanLiteral unaryOperatorExpression)
         {
             return VisitChildren(unaryOperatorExpression);
         }
 
-        public virtual Node Visit(ExpressionStatement expressionStatement)
+        public virtual T Visit(ExpressionStatement expressionStatement)
         {
             return VisitChildren(expressionStatement);
         }
 
-        public virtual Node Visit(FloatLiteral floatLiteral)
+        public virtual T Visit(FloatLiteral floatLiteral)
         {
             return VisitChildren(floatLiteral);
         }
 
-        public virtual Node Visit(ForStatement forStatement)
+        public virtual T Visit(ForStatement forStatement)
         {
             return VisitChildren(forStatement);
         }
 
-        public virtual Node Visit(IfElseStatement ifElseStatement)
+        public virtual T Visit(IfElseStatement ifElseStatement)
         {
             return VisitChildren(ifElseStatement);
         }
 
-        public virtual Node Visit(IntegerLiteral integerLiteral)
+        public virtual T Visit(IntegerLiteral integerLiteral)
         {
             return VisitChildren(integerLiteral);
         }
 
-        public virtual Node Visit(InvocationExpression invocationExpression)
+        public virtual T Visit(InvocationExpression invocationExpression)
         {
             return VisitChildren(invocationExpression);
         }
 
-        public virtual Node Visit(MemberReferenceExpression memberReferenceExpression)
+        public virtual T Visit(MemberReferenceExpression memberReferenceExpression)
         {
             return VisitChildren(memberReferenceExpression);
         }
 
-        public virtual Node Visit(NullLiteral nullLiteral)
+        public virtual T Visit(NullLiteral nullLiteral)
         {
             return VisitChildren(nullLiteral);
         }
 
-        public virtual Node Visit(StringLiteral stringLiteral)
+        public virtual T Visit(StringLiteral stringLiteral)
         {
             return VisitChildren(stringLiteral);
         }
 
-        public virtual Node Visit(UnaryOperatorExpression unaryOperatorExpression)
+        public virtual T Visit(UnaryOperatorExpression unaryOperatorExpression)
         {
             return VisitChildren(unaryOperatorExpression);
         }
 
-        protected Node VisitChildren(Node node)
+        public virtual T VisitChildren(Node node)
         {
             if (node == null)
             {
-                return null;
+                return DefaultResult;
             }
 
             Type type = node.GetType();
@@ -112,51 +112,36 @@ namespace TreeProcessing.NET
             {
                 Type propType = prop.PropertyType;
                 TypeInfo typeInfo = propType.GetTypeInfo();
-                if (typeInfo.IsValueType)
-                {
-                    prop.SetValue(result, prop.GetValue(node));
-                }
-                else if (propType == typeof(string))
-                {
-                    string stringValue = (string)prop.GetValue(node);
-                    prop.SetValue(result, stringValue != null ? (string)prop.GetValue(node) : null);
-                }
-                else if (typeInfo.IsSubclassOf(typeof(Node)) || propType == typeof(Node))
+                if (typeInfo.IsSubclassOf(typeof(Node)) || propType == typeof(Node))
                 {
                     Node getValue = (Node)prop.GetValue(node);
-                    Node setValue = getValue != null ? Visit(getValue) : null;
-                    prop.SetValue(result, setValue);
+                    if (getValue != null)
+                    {
+                        Visit((dynamic)getValue);
+                    }
                 }
                 else if (typeInfo.ImplementedInterfaces.Contains(typeof(IEnumerable)))
                 {
                     Type itemType = typeInfo.GenericTypeArguments[0];
                     var sourceCollection = (IEnumerable<object>)prop.GetValue(node);
-                    IList destCollection = null;
+
                     if (sourceCollection != null)
                     {
-                        destCollection = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(itemType));
                         foreach (var item in sourceCollection)
                         {
                             var nodeItem = item as Node;
                             if (nodeItem != null)
                             {
-                                destCollection.Add(Visit(nodeItem));
-                            }
-                            else
-                            {
-                                destCollection.Add(item);
+                                Visit((dynamic)nodeItem);
                             }
                         }
                     }
-                    prop.SetValue(result, destCollection);
-                }
-                else
-                {
-                    throw new NotImplementedException($"Property \"{prop}\" processing is not implemented via reflection");
                 }
             }
 
-            return result;
+            return DefaultResult;
         }
+
+        public virtual T DefaultResult => default(T);
     }
 }

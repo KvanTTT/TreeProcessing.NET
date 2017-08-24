@@ -32,7 +32,7 @@ namespace TreeProcessing.NET.Tests
         {
             var tree1 = SampleTree.Init();
             var tree2 = SampleTree.Init();
-            var visitor = new StaticVisitor();
+            var visitor = new StaticCloner();
 
             dynamic treeWithChangedInt = visitor.Visit(tree2);
             treeWithChangedInt.Statements[0].Expression.Right.Value = 0;

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TreeProcessing.NET
 {
-    public class StaticVisitor : IVisitor<Node>
+    public class StaticVisitor<T> : IVisitor<T>
     {
-        public virtual Node Visit(Token terminal)
+        public virtual T Visit(Token terminal)
         {
             switch (terminal.NodeType)
             {
@@ -29,7 +25,7 @@ namespace TreeProcessing.NET
             }
         }
 
-        public virtual Node Visit(Statement statement)
+        public virtual T Visit(Statement statement)
         {
             switch (statement.NodeType)
             {
@@ -46,12 +42,12 @@ namespace TreeProcessing.NET
             }
         }
 
-        public virtual Node Visit(Identifier identifier)
+        public virtual T Visit(Identifier identifier)
         {
-            return new Identifier(identifier.Id);
+            return DefaultResult;
         }
 
-        public virtual Node Visit(Expression expression)
+        public virtual T Visit(Expression expression)
         {
             switch (expression.NodeType)
             {
@@ -72,7 +68,7 @@ namespace TreeProcessing.NET
             throw new InvalidOperationException();
         }
 
-        public virtual Node Visit(Node node)
+        public virtual T Visit(Node node)
         {
             if (node is Expression)
             {
@@ -92,81 +88,108 @@ namespace TreeProcessing.NET
             }
         }
 
-        public virtual Node Visit(BinaryOperatorExpression expression)
+        public virtual T Visit(BinaryOperatorExpression expression)
         {
-            return new BinaryOperatorExpression(
-                (Expression)Visit(expression.Left), expression.Operator, (Expression)Visit(expression.Right));
+            Visit(expression.Left);
+            Visit(expression.Right);
+
+            return DefaultResult;
         }
 
-        public virtual Node Visit(BlockStatement blockStatement)
+        public virtual T Visit(BlockStatement blockStatement)
         {
-            List<Statement> statements = blockStatement.Statements.Select(s => (Statement)Visit(s)).ToList();
-            return new BlockStatement(statements);
+            foreach (Statement statement in blockStatement.Statements)
+            {
+                Visit(statement);
+            }
+            return DefaultResult;
         }
 
-        public virtual Node Visit(BooleanLiteral unaryOperatorExpression)
+        public virtual T Visit(BooleanLiteral unaryOperatorExpression)
         {
-            return new BooleanLiteral(unaryOperatorExpression.Value);
+            return DefaultResult;
         }
 
-        public virtual Node Visit(ExpressionStatement expressionStatement)
+        public virtual T Visit(ExpressionStatement expressionStatement)
         {
-            return new ExpressionStatement((Expression)Visit(expressionStatement.Expression));
+            Visit(expressionStatement.Expression);
+
+            return DefaultResult;
         }
 
-        public virtual Node Visit(FloatLiteral floatLiteral)
+        public virtual T Visit(FloatLiteral floatLiteral)
         {
-            return new FloatLiteral(floatLiteral.Value);
+            return DefaultResult;
         }
 
-        public virtual Node Visit(ForStatement forStatement)
+        public virtual T Visit(ForStatement forStatement)
         {
-            List<Statement> initializers = forStatement.Initializers.Select(init => (Statement)Visit(init)).ToList();
-            Expression condition = (Expression)Visit(forStatement.Condition);
-            List<Expression> iterators = forStatement.Iterators.Select(iter => (Expression)Visit(iter)).ToList();
-            Statement statement = (Statement)Visit(forStatement.Statement);
-            return new ForStatement(initializers, condition, iterators, statement);
+            foreach (Statement initializer in forStatement.Initializers)
+            {
+                Visit(initializer);
+            }
+            Visit(forStatement.Condition);
+            foreach (Expression iterator in forStatement.Iterators)
+            {
+                Visit(iterator);
+            }
+            Visit(forStatement.Statement);
+
+            return DefaultResult;
         }
 
-        public virtual Node Visit(IfElseStatement ifElseStatement)
+        public virtual T Visit(IfElseStatement ifElseStatement)
         {
-            return new IfElseStatement((Expression)Visit(ifElseStatement.Condition),
-                (Statement)Visit(ifElseStatement.TrueStatement),
-                ifElseStatement.FalseStatement != null ? (Statement)Visit(ifElseStatement.FalseStatement) : null);
+            Visit(ifElseStatement.Condition);
+            Visit(ifElseStatement.TrueStatement);
+            if (ifElseStatement.FalseStatement != null)
+            {
+                Visit(ifElseStatement.FalseStatement);
+            }
+
+            return DefaultResult;
         }
 
-        public virtual Node Visit(IntegerLiteral integerLiteral)
+        public virtual T Visit(IntegerLiteral integerLiteral)
         {
-            return new IntegerLiteral(integerLiteral.Value);
+            return DefaultResult;
         }
 
-        public virtual Node Visit(InvocationExpression invocationExpression)
+        public virtual T Visit(InvocationExpression invocationExpression)
         {
-            List<Expression> args = invocationExpression.Args.Select(arg => (Expression)Visit(arg)).ToList();
-            return new InvocationExpression((Expression)Visit(invocationExpression.Target), args);
+            foreach (Expression arg in invocationExpression.Args)
+            {
+                Visit(arg);
+            }
+            Visit(invocationExpression.Target);
+
+            return DefaultResult;
         }
 
-        public virtual Node Visit(MemberReferenceExpression memberReferenceExpression)
+        public virtual T Visit(MemberReferenceExpression memberReferenceExpression)
         {
-            return new MemberReferenceExpression(
-                (Expression)Visit(memberReferenceExpression.Target),
-                (Identifier)Visit(memberReferenceExpression.Name));
+            Visit(memberReferenceExpression.Target);
+            Visit(memberReferenceExpression.Name);
+
+            return DefaultResult;
         }
 
-        public virtual Node Visit(NullLiteral nullLiteral)
+        public virtual T Visit(NullLiteral nullLiteral)
         {
-            return new NullLiteral();
+            return DefaultResult;
         }
 
-        public virtual Node Visit(StringLiteral stringLiteral)
+        public virtual T Visit(StringLiteral stringLiteral)
         {
-            return new StringLiteral(stringLiteral.Value);
+            return DefaultResult;
         }
 
-        public virtual Node Visit(UnaryOperatorExpression unaryOperatorExpression)
+        public virtual T Visit(UnaryOperatorExpression unaryOperatorExpression)
         {
-            return new UnaryOperatorExpression(unaryOperatorExpression.Operator,
-                (Expression)Visit(unaryOperatorExpression.Expression));
+            Visit(unaryOperatorExpression.Expression);
+            return DefaultResult;
         }
+
+        public virtual T DefaultResult => default(T);
     }
 }
