@@ -7,8 +7,6 @@ namespace TreeProcessing.NET
 {
     public class GraphvizRenderer
     {
-        private static string _graphvizExePath;
-
         public static string SolutionDirectory { get; private set; }
 
         static GraphvizRenderer()
@@ -22,7 +20,7 @@ namespace TreeProcessing.NET
             File.WriteAllText(tempDotFileName, dotString);
             var process = Process.Start(new ProcessStartInfo
             {
-                FileName = _graphvizExePath,
+                FileName = "dot",
                 Arguments = "\"" + tempDotFileName + "\" -Tpng -o \"" + filePath + "\" ",
                 UseShellExecute = false,
                 CreateNoWindow = true,
@@ -45,7 +43,6 @@ namespace TreeProcessing.NET
         private static void GetSolutionDirectory([CallerFilePath] string thisFilePath = null)
         {
             SolutionDirectory = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(thisFilePath), ".."));
-            _graphvizExePath = Path.Combine(SolutionDirectory, @"packages\Graphviz.2.38.0.2\dot.exe");
         }
     }
 }
