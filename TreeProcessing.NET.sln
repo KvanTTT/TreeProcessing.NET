@@ -3,17 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeProcessing.NET.Portable", "TreeProcessing.NET.Portable\TreeProcessing.NET.Portable.csproj", "{E8A27B4E-E28F-4DA8-97FC-554A0FF45D89}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeProcessing.NET", "TreeProcessing.NET\TreeProcessing.NET.csproj", "{38CE33CC-B5FF-4038-97C7-A2199AFC52A7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeProcessing.NET.Portable.Tests", "TreeProcessing.NET.Portable.Tests\TreeProcessing.NET.Portable.Tests.csproj", "{3E3CEC1D-56AB-426E-8446-18C4630FD3E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeProcessing.NET.Tests", "TreeProcessing.NET.Tests\TreeProcessing.NET.Tests.csproj", "{122BFA5D-FB68-4A84-8DB5-CF8EE163FC1A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreeProcessing.NET.Core", "TreeProcessing.NET.Core\TreeProcessing.NET.Core.csproj", "{9EE08BA8-5A82-44D2-BA7F-B8C863AA5EA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeProcessing.NET.Core.Tests", "TreeProcessing.NET.Core.Tests\TreeProcessing.NET.Core.Tests.csproj", "{B89A6B85-8689-4B85-8F0C-106134B3C41E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreeProcessing.NET.Core.Tests", "TreeProcessing.NET.Core.Tests\TreeProcessing.NET.Core.Tests.csproj", "{B89A6B85-8689-4B85-8F0C-106134B3C41E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +17,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E8A27B4E-E28F-4DA8-97FC-554A0FF45D89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8A27B4E-E28F-4DA8-97FC-554A0FF45D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8A27B4E-E28F-4DA8-97FC-554A0FF45D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8A27B4E-E28F-4DA8-97FC-554A0FF45D89}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38CE33CC-B5FF-4038-97C7-A2199AFC52A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38CE33CC-B5FF-4038-97C7-A2199AFC52A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38CE33CC-B5FF-4038-97C7-A2199AFC52A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38CE33CC-B5FF-4038-97C7-A2199AFC52A7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E3CEC1D-56AB-426E-8446-18C4630FD3E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E3CEC1D-56AB-426E-8446-18C4630FD3E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E3CEC1D-56AB-426E-8446-18C4630FD3E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E3CEC1D-56AB-426E-8446-18C4630FD3E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{122BFA5D-FB68-4A84-8DB5-CF8EE163FC1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{122BFA5D-FB68-4A84-8DB5-CF8EE163FC1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{122BFA5D-FB68-4A84-8DB5-CF8EE163FC1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -48,5 +36,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA282B9C-876C-4206-BBCF-66F32B0CC45B}
 	EndGlobalSection
 EndGlobal
