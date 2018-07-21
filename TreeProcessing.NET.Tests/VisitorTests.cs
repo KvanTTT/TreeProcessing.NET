@@ -11,9 +11,8 @@ namespace TreeProcessing.NET.Tests
     public class VisitorTests
     {
 #if PORTABLE || NET
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void CheckAllVisitorMethodsExists(string platform)
+        [Fact]
+        public void CheckAllVisitorMethodsExists()
         {
             MethodInfo[] visitorMethods = typeof(IVisitor<>).GetMethods();
             IEnumerable<Type> nodeTypes = Assembly.GetAssembly(typeof(Node)).GetTypes()
@@ -31,16 +30,14 @@ namespace TreeProcessing.NET.Tests
         }
 #endif
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void Visitor_Static(string platform)
+        [Fact]
+        public void Visitor_Static()
         {
             TestVisitor(new StaticCloner());
         }
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void Visitor_Dynamic(string platform)
+        [Fact]
+        public void Visitor_Dynamic()
         {
             TestVisitor(new DynamicCloner());
         }

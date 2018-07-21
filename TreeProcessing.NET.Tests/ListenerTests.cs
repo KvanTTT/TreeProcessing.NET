@@ -12,9 +12,8 @@ namespace TreeProcessing.NET.Tests
         private const string Enter = "Enter";
         private const string Exit = "Exit";
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void CheckAllListenerMethodsExists(string platform)
+        [Fact]
+        public void CheckAllListenerMethodsExists()
         {
             MethodInfo[] listenerMethods = typeof(IListener).GetMethods();
             IEnumerable<Type> nodeTypes = Assembly.GetAssembly(typeof(Node)).GetTypes()
@@ -39,9 +38,8 @@ namespace TreeProcessing.NET.Tests
             }
         }
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void CheckAllEventListenerMethodsExists(string platform)
+        [Fact]
+        public void CheckAllEventListenerMethodsExists()
         {
             EventInfo[] listenerEvents = typeof(IEventListener).GetEvents();
             IEnumerable<Type> nodeTypes = Assembly.GetAssembly(typeof(Node)).GetTypes()
@@ -63,25 +61,22 @@ namespace TreeProcessing.NET.Tests
             }
         }
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void Listener_Static(string platform)
+        [Fact]
+        public void Listener_Static()
         {
             var invokeSequence = GetInvokeSequenceFromStaticListener();
             ListenerUtils.CheckInvokeSequence(invokeSequence, false);
         }
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void Listener_Dynamic(string platform)
+        [Fact]
+        public void Listener_Dynamic()
         {
             var invokeSequence = GetInvokeSequenceFromDynamicListener();
             ListenerUtils.CheckInvokeSequence(invokeSequence, true);
         }
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void EventListener_Static(string platform)
+        [Fact]
+        public void EventListener_Static()
         {
             IEventListener listener = new StaticEventListener();
             List<string> invokeSequence = ListenerUtils.AppendEvents(listener);
@@ -90,9 +85,8 @@ namespace TreeProcessing.NET.Tests
         }
 
 #if NET
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void EventListener_Dynamic(string platform)
+        [Fact]
+        public void EventListener_Dynamic()
         {
             var listener = new DynamicEventListener();
             List<string> invokeSequence = ListenerUtils.AppendEvents(listener);

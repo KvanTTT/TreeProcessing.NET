@@ -6,9 +6,8 @@ namespace TreeProcessing.NET.Core.Tests
 {
     public class HashTests
     {
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void Hash_EqualNodes(string platform)
+        [Fact]
+        public void Hash_EqualNodes()
         {
             Node tree1 = SampleTree.Init();
             Node tree2 = SampleTree.Init();
@@ -16,9 +15,8 @@ namespace TreeProcessing.NET.Core.Tests
             Assert.Equal(tree1.GetHashCode(), tree2.GetHashCode());
         }
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void Hash_MerkelizedAst(string platform)
+        [Fact]
+        public void Hash_MerkelizedAst()
         {
             Node tree = SampleTree.Init();
             List<Statement> statements = ((BlockStatement)tree).Statements;

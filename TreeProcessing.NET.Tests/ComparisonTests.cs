@@ -6,9 +6,8 @@ namespace TreeProcessing.NET.Tests
 {
     public class ComparisonTests
     {
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void Comparison_Static_Equals(string platform)
+        [Fact]
+        public void Comparison_Static_Equals()
         {
             var tree1 = SampleTree.Init();
             var tree2 = SampleTree.Init();
@@ -16,9 +15,8 @@ namespace TreeProcessing.NET.Tests
             Assert.Equal(0, tree1.CompareTo(tree2));
         }
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void Comparison_Dynamic_Equals(string platform)
+        [Fact]
+        public void Comparison_Dynamic_Equals()
         {
             var tree1 = SampleTree.Init();
             var tree2 = SampleTree.Init();
@@ -26,9 +24,8 @@ namespace TreeProcessing.NET.Tests
             Assert.Equal(0, tree1.Compare(tree2));
         }
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void Comparison_NotEquals(string platform)
+        [Fact]
+        public void Comparison_NotEquals()
         {
             var tree1 = SampleTree.Init();
             var tree2 = SampleTree.Init();
@@ -47,30 +44,26 @@ namespace TreeProcessing.NET.Tests
             Assert.Equal(2, tree1.Compare((Node)treeWithChangedListCount));
         }
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void Descendants_Static(string platform)
+        [Fact]
+        public void Descendants_Static()
         {
             TestDescendants(SampleTree.Init().AllDescendants);
         }
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void Descendants_Dynamic(string platform)
+        [Fact]
+        public void Descendants_Dynamic()
         {
             TestDescendants(SampleTree.Init().GetAllDescendants());
         }
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void Children_Static(string platform)
+        [Fact]
+        public void Children_Static()
         {
             TestChildren(SampleTree.Init().Children);
         }
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void Children_Dynamic(string platform)
+        [Fact]
+        public void Children_Dynamic()
         {
             TestChildren(SampleTree.Init().GetChildren());
         }

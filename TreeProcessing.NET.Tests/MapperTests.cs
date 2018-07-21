@@ -4,9 +4,8 @@ namespace TreeProcessing.NET.Tests
 {
     public class MapperTests
     {
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void StaticMapper_ModelToDtoAndBack(string platform)
+        [Fact]
+        public void StaticMapper_ModelToDtoAndBack()
         {
             Statement sampleTree = SampleTree.Init();
             NodeDto sampleTreeDto = MapperHelper.ModelToDto(sampleTree);
@@ -15,9 +14,8 @@ namespace TreeProcessing.NET.Tests
             Assert.Equal(sampleTree, mappedBack);
         }
 
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void DynamicMapper_ModelToDtoAndBack(string platform)
+        [Fact]
+        public void DynamicMapper_ModelToDtoAndBack()
         {
             Statement sampleTree = SampleTree.Init();
             NodeDto sampleTreeDto = MapperHelper.ModelToDtoDynamicViaReflection(sampleTree);
@@ -27,9 +25,8 @@ namespace TreeProcessing.NET.Tests
         }
 
 #if NET
-        [Theory]
-        [InlineData(TestHelper.Platform)]
-        public void AutoMapper_ModelToDtoAndBack(string platform)
+        [Fact]
+        public void AutoMapper_ModelToDtoAndBack()
         {
             AutoMapperHelper.Initialize();
 
