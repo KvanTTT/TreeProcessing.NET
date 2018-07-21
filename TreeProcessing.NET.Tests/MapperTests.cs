@@ -1,5 +1,4 @@
-﻿using ServiceStack;
-using Xunit;
+﻿using Xunit;
 
 namespace TreeProcessing.NET.Tests
 {
