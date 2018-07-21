@@ -7,9 +7,7 @@ using System.Runtime.Serialization;
 namespace TreeProcessing.NET
 {
     [NodeAttr(NodeType.Node)]
-#if NET || PORTABLE
     [Serializable]
-#endif
     [DataContract]
     [ProtoContract]
     public abstract class Node : IComparable, IComparable<Node>, IEquatable<Node>

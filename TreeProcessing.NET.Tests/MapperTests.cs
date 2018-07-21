@@ -24,7 +24,6 @@ namespace TreeProcessing.NET.Tests
             Assert.Equal(sampleTree, mappedBack);
         }
 
-#if NET
         [Fact]
         public void AutoMapper_ModelToDtoAndBack()
         {
@@ -36,6 +35,5 @@ namespace TreeProcessing.NET.Tests
 
             Assert.Equal(sampleTree, mappedBack);
         }
-#endif
     }
 }

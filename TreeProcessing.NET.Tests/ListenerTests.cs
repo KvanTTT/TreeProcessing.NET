@@ -84,7 +84,6 @@ namespace TreeProcessing.NET.Tests
             ListenerUtils.CheckInvokeSequence(invokeSequence, false);
         }
 
-#if NET
         [Fact]
         public void EventListener_Dynamic()
         {
@@ -94,7 +93,6 @@ namespace TreeProcessing.NET.Tests
             listener.Walk(SampleTree.Init());
             ListenerUtils.CheckInvokeSequence(invokeSequence, true);
         }
-#endif
 
         private static List<string> GetInvokeSequenceFromStaticListener()
         {

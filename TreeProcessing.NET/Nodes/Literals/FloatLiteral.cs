@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 namespace TreeProcessing.NET
 {
     [NodeAttr(NodeType.FloatLiteral)]
-#if PORTABLE || NET
     [Serializable]
-#endif
     [DataContract]
     [ProtoContract]
     public class FloatLiteral : Token

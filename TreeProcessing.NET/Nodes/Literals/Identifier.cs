@@ -5,9 +5,7 @@ using System.Runtime.Serialization;
 namespace TreeProcessing.NET
 {
     [NodeAttr(NodeType.Identifier)]
-#if PORTABLE || NET
     [Serializable]
-#endif
     [DataContract]
     [ProtoContract]
     public class Identifier : Token

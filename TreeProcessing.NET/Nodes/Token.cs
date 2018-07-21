@@ -7,9 +7,7 @@ using System.Runtime.Serialization;
 namespace TreeProcessing.NET
 {
     [NodeAttr(NodeType.Token)]
-#if PORTABLE || NET
     [Serializable]
-#endif
     [DataContract]
     [ProtoContract]
     public abstract class Token: Expression

@@ -10,7 +10,6 @@ namespace TreeProcessing.NET.Tests
 {
     public class SerializationTests
     {
-#if PORTABLE || NET
         [Fact]
         public void Binary_Serialization()
         {
@@ -33,7 +32,6 @@ namespace TreeProcessing.NET.Tests
 
             Assert.Equal(0, tree.CompareTo(actualTree));
         }
-#endif
 
         [Fact]
         public void DataContract_Serialization()

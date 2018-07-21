@@ -6,9 +6,7 @@ using System.Runtime.Serialization;
 namespace TreeProcessing.NET
 {
     [NodeAttr(NodeType.InvocationExpression)]
-#if PORTABLE || NET
     [Serializable]
-#endif
     [DataContract]
     [ProtoContract]
     public class InvocationExpression : Expression

@@ -6,9 +6,7 @@ using System.Xml.Serialization;
 namespace TreeProcessing.NET
 {
     [NodeAttr(NodeType.Expression)]
-#if PORTABLE || NET
     [Serializable]
-#endif
     [ProtoContract]
     [ProtoInclude(10, typeof(BinaryOperatorExpression))]
     [ProtoInclude(11, typeof(InvocationExpression))]

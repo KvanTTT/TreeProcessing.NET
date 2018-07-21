@@ -10,7 +10,6 @@ namespace TreeProcessing.NET.Tests
 {
     public class VisitorTests
     {
-#if PORTABLE || NET
         [Fact]
         public void CheckAllVisitorMethodsExists()
         {
@@ -28,7 +27,6 @@ namespace TreeProcessing.NET.Tests
                     $"Visitor for Type {type} is not exists");
             }
         }
-#endif
 
         [Fact]
         public void Visitor_Static()
