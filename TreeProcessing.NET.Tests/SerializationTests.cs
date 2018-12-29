@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Serialization;
+using MessagePack;
 using Xunit;
 
 namespace TreeProcessing.NET.Tests
@@ -17,7 +18,7 @@ namespace TreeProcessing.NET.Tests
 
             Statement actualTree;
             var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            using (var memoryStream = new System.IO.MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
                 binaryFormatter.Serialize(memoryStream, tree);
 
@@ -66,7 +67,7 @@ namespace TreeProcessing.NET.Tests
             XmlSerializer serializer = new XmlSerializer(typeof(Statement));
 
             Statement actualTree;
-            using (var memoryStream = new System.IO.MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
                 serializer.Serialize(memoryStream, tree);
 
@@ -87,7 +88,7 @@ namespace TreeProcessing.NET.Tests
         {
             Node tree = SampleTree.Init();
 
-            var settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
                 Converters = new JsonConverter[] { new StringEnumConverter() },
@@ -105,7 +106,7 @@ namespace TreeProcessing.NET.Tests
         {
             Node tree = SampleTree.Init();
 
-            var serializeSettings = new JsonSerializerSettings()
+            var serializeSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
                 Converters = new JsonConverter[] { new StringEnumConverter() },
@@ -127,7 +128,7 @@ namespace TreeProcessing.NET.Tests
         {
             Node tree = SampleTree.Init();
 
-            var settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
                 Converters = new JsonConverter[] { new ClassNameJsonConverter() },
@@ -144,7 +145,7 @@ namespace TreeProcessing.NET.Tests
         {
             Node tree = SampleTree.Init();
 
-            var settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
                 Converters = new JsonConverter[] { new AttributeJsonConverter() },
@@ -157,17 +158,21 @@ namespace TreeProcessing.NET.Tests
         }
 
         [Fact]
-        public void Protobuf_Seialization()
+        public void Protobuf_Serialization()
         {
             Statement tree = SampleTree.Init();
 
             Node actualTree;
-            var proto = ProtoBuf.Serializer.GetProto<Statement>();
-            using (var memoryStream = new System.IO.MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
                 ProtoBuf.Serializer.Serialize(memoryStream, tree);
                 memoryStream.Position = 0;
                 actualTree = ProtoBuf.Serializer.Deserialize<Statement>(memoryStream);
+            }
+
+            using (var fileStream = new FileStream("test", FileMode.OpenOrCreate))
+            {
+                ProtoBuf.Serializer.Serialize(fileStream, tree);
             }
 
             Assert.Equal(0, tree.CompareTo(actualTree));
@@ -193,6 +198,20 @@ namespace TreeProcessing.NET.Tests
             string actualJson = ServiceStack.Text.TypeSerializer.SerializeToString<Statement>(deserialized);
 
             Assert.Equal(expectedJson, actualJson);
+        }
+
+        [Fact]
+        public void MessagePack_Serialization()
+        {
+            Statement tree = SampleTree.Init();
+
+            var bytes = MessagePackSerializer.Serialize(tree);
+            var actualTree = MessagePackSerializer.Deserialize<Statement>(bytes);
+
+            var json = MessagePackSerializer.ToJson(bytes);
+            File.WriteAllText("MessagePack-Dump.json", json);
+
+            Assert.Equal(0, tree.CompareTo(actualTree));
         }
     }
 }
