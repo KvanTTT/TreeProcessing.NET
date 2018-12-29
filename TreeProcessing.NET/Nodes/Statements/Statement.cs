@@ -9,10 +9,10 @@ namespace TreeProcessing.NET
     [NodeAttr(NodeType.Statement)]
     [Serializable]
     [ProtoContract]
-    [ProtoInclude(50, typeof(BlockStatement))]
-    [ProtoInclude(51, typeof(ExpressionStatement))]
-    [ProtoInclude(52, typeof(ForStatement))]
-    [ProtoInclude(53, typeof(IfElseStatement))]
+    [ProtoInclude((int)NodeType.BlockStatement, typeof(BlockStatement))]
+    [ProtoInclude((int)NodeType.ExpressionStatement, typeof(ExpressionStatement))]
+    [ProtoInclude((int)NodeType.ForStatement, typeof(ForStatement))]
+    [ProtoInclude((int)NodeType.IfElseStatement, typeof(IfElseStatement))]
 
     [XmlInclude(typeof(BlockStatement))]
     [XmlInclude(typeof(ExpressionStatement))]
@@ -26,10 +26,10 @@ namespace TreeProcessing.NET
     [KnownType(typeof(IfElseStatement))]
 
     [MessagePackObject]
-    [Union(50, typeof(BlockStatement))]
-    [Union(51, typeof(ExpressionStatement))]
-    [Union(52, typeof(ForStatement))]
-    [Union(53, typeof(IfElseStatement))]
+    [Union((int)NodeType.BlockStatement, typeof(BlockStatement))]
+    [Union((int)NodeType.ExpressionStatement, typeof(ExpressionStatement))]
+    [Union((int)NodeType.ForStatement, typeof(ForStatement))]
+    [Union((int)NodeType.IfElseStatement, typeof(IfElseStatement))]
     public abstract class Statement : Node
     {
         [IgnoreMember]
