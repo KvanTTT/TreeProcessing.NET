@@ -10,7 +10,24 @@ namespace TreeProcessing.NET
     [NodeAttr(NodeType.Node)]
     [Serializable]
     [DataContract]
+
     [ProtoContract]
+
+    [MessagePackObject]
+    [Union((int)NodeType.BinaryOperatorExpression, typeof(BinaryOperatorExpression))]
+    [Union((int)NodeType.InvocationExpression, typeof(InvocationExpression))]
+    [Union((int)NodeType.MemberReferenceExpression, typeof(MemberReferenceExpression))]
+    [Union((int)NodeType.UnaryOperatorExpression, typeof(UnaryOperatorExpression))]
+    [Union((int)NodeType.BooleanLiteral, typeof(BooleanLiteral))]
+    [Union((int)NodeType.FloatLiteral, typeof(FloatLiteral))]
+    [Union((int)NodeType.Identifier, typeof(Identifier))]
+    [Union((int)NodeType.IntegerLiteral, typeof(IntegerLiteral))]
+    [Union((int)NodeType.NullLiteral, typeof(NullLiteral))]
+    [Union((int)NodeType.StringLiteral, typeof(StringLiteral))]
+    [Union((int)NodeType.BlockStatement, typeof(BlockStatement))]
+    [Union((int)NodeType.ExpressionStatement, typeof(ExpressionStatement))]
+    [Union((int)NodeType.ForStatement, typeof(ForStatement))]
+    [Union((int)NodeType.IfElseStatement, typeof(IfElseStatement))]
     public abstract class Node : IComparable, IComparable<Node>, IEquatable<Node>
     {
         [JsonProperty]
