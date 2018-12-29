@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using MessagePack;
 
 namespace TreeProcessing.NET
 {
@@ -9,16 +10,20 @@ namespace TreeProcessing.NET
     [Serializable]
     [DataContract]
     [ProtoContract]
+    [MessagePackObject]
     public class UnaryOperatorExpression : Expression
     {
+        [IgnoreMember]
         public override NodeType NodeType => NodeType.UnaryOperatorExpression;
 
         [DataMember]
         [ProtoMember(1)]
+        [Key(0)]
         public string Operator { get; set; }
 
         [DataMember]
         [ProtoMember(2)]
+        [Key(1)]
         public Expression Expression { get; set; }
 
         public UnaryOperatorExpression(string op, Expression expression)
@@ -55,6 +60,7 @@ namespace TreeProcessing.NET
             return 0;
         }
 
+        [IgnoreMember]
         public override IEnumerable<Node> Children
         {
             get
@@ -65,6 +71,7 @@ namespace TreeProcessing.NET
             }
         }
 
+        [IgnoreMember]
         public override IEnumerable<Node> AllDescendants
         {
             get

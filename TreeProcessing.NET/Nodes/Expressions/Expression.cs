@@ -2,6 +2,7 @@
 using System;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using MessagePack;
 
 namespace TreeProcessing.NET
 {
@@ -41,8 +42,21 @@ namespace TreeProcessing.NET
     [KnownType(typeof(IntegerLiteral))]
     [KnownType(typeof(NullLiteral))]
     [KnownType(typeof(StringLiteral))]
+
+    [MessagePackObject]
+    [Union(10, typeof(BinaryOperatorExpression))]
+    [Union(11, typeof(InvocationExpression))]
+    [Union(12, typeof(MemberReferenceExpression))]
+    [Union(13, typeof(UnaryOperatorExpression))]
+    [Union(20, typeof(BooleanLiteral))]
+    [Union(21, typeof(FloatLiteral))]
+    [Union(22, typeof(Identifier))]
+    [Union(23, typeof(IntegerLiteral))]
+    [Union(24, typeof(NullLiteral))]
+    [Union(25, typeof(StringLiteral))]
     public abstract class Expression : Node
     {
+        [IgnoreMember]
         public override NodeType NodeType => NodeType.Expression;
 
         public Expression()

@@ -3,6 +3,7 @@ using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using MessagePack;
 
 namespace TreeProcessing.NET
 {
@@ -13,6 +14,7 @@ namespace TreeProcessing.NET
     public abstract class Node : IComparable, IComparable<Node>, IEquatable<Node>
     {
         [JsonProperty]
+        [IgnoreMember]
         public abstract NodeType NodeType { get; }
 
         public bool Equals(Node other)
@@ -40,8 +42,10 @@ namespace TreeProcessing.NET
             return 0;
         }
 
+        [IgnoreMember]
         public abstract IEnumerable<Node> Children { get; }
 
+        [IgnoreMember]
         public abstract IEnumerable<Node> AllDescendants { get; }
 
         public override int GetHashCode()

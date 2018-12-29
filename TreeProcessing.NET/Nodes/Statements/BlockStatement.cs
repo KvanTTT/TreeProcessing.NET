@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using MessagePack;
 
 namespace TreeProcessing.NET
 {
@@ -9,12 +10,15 @@ namespace TreeProcessing.NET
     [Serializable]
     [DataContract]
     [ProtoContract]
+    [MessagePackObject]
     public class BlockStatement : Statement
     {
+        [IgnoreMember]
         public override NodeType NodeType => NodeType.BlockStatement;
 
         [DataMember]
         [ProtoMember(1)]
+        [Key(0)]
         public List<Statement> Statements { get; set; }
 
         public BlockStatement(List<Statement> statements)
@@ -52,6 +56,7 @@ namespace TreeProcessing.NET
             return 0;
         }
 
+        [IgnoreMember]
         public override IEnumerable<Node> Children
         {
             get
@@ -65,6 +70,7 @@ namespace TreeProcessing.NET
             }
         }
 
+        [IgnoreMember]
         public override IEnumerable<Node> AllDescendants
         {
             get

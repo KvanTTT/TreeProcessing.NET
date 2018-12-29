@@ -1,10 +1,7 @@
 ﻿using ProtoBuf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+using MessagePack;
 
 namespace TreeProcessing.NET
 {
@@ -12,17 +9,14 @@ namespace TreeProcessing.NET
     [Serializable]
     [DataContract]
     [ProtoContract]
+    [MessagePackObject]
     public class NullLiteral : Token
     {
+        [IgnoreMember]
         public override NodeType NodeType => NodeType.NullLiteral;
 
         public NullLiteral()
         {
-        }
-
-        public override int CompareTo(Node other)
-        {
-            return base.CompareTo(other);
         }
 
         public override int GetHashCode() => "null".GetHashCode();

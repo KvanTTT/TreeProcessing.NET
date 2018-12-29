@@ -1,10 +1,7 @@
 ﻿using ProtoBuf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+using MessagePack;
 
 namespace TreeProcessing.NET
 {
@@ -12,12 +9,15 @@ namespace TreeProcessing.NET
     [Serializable]
     [DataContract]
     [ProtoContract]
+    [MessagePackObject]
     public class IntegerLiteral : Token
     {
+        [IgnoreMember]
         public override NodeType NodeType => NodeType.IntegerLiteral;
 
         [DataMember]
         [ProtoMember(1)]
+        [Key(0)]
         public int Value { get; set; }
 
         public IntegerLiteral(int value)
@@ -46,8 +46,6 @@ namespace TreeProcessing.NET
 
             return 0;
         }
-
-        public override int GetHashCode() => base.GetHashCode();
 
         public override string ToString()
         {

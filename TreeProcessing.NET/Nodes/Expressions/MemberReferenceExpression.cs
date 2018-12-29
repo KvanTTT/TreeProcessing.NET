@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using MessagePack;
 
 namespace TreeProcessing.NET
 {
@@ -9,16 +10,20 @@ namespace TreeProcessing.NET
     [Serializable]
     [DataContract]
     [ProtoContract]
+    [MessagePackObject]
     public class MemberReferenceExpression : Expression
     {
+        [IgnoreMember]
         public override NodeType NodeType => NodeType.MemberReferenceExpression;
 
         [DataMember]
         [ProtoMember(1)]
+        [Key(0)]
         public Expression Target { get; set; }
 
         [DataMember]
         [ProtoMember(2)]
+        [Key(1)]
         public Identifier Name { get; set; }
 
         public MemberReferenceExpression(Expression target, Identifier name)
@@ -55,6 +60,7 @@ namespace TreeProcessing.NET
             return 0;
         }
 
+        [IgnoreMember]
         public override IEnumerable<Node> Children
         {
             get
@@ -66,6 +72,7 @@ namespace TreeProcessing.NET
             }
         }
 
+        [IgnoreMember]
         public override IEnumerable<Node> AllDescendants
         {
             get

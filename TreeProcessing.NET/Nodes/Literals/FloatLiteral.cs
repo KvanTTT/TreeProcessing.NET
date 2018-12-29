@@ -1,10 +1,7 @@
 ﻿using ProtoBuf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+using MessagePack;
 
 namespace TreeProcessing.NET
 {
@@ -12,12 +9,15 @@ namespace TreeProcessing.NET
     [Serializable]
     [DataContract]
     [ProtoContract]
+    [MessagePackObject]
     public class FloatLiteral : Token
     {
+        [IgnoreMember]
         public override NodeType NodeType => NodeType.FloatLiteral;
 
         [DataMember]
         [ProtoMember(1)]
+        [Key(0)]
         public float Value { get; set; }
 
         public FloatLiteral(float value)

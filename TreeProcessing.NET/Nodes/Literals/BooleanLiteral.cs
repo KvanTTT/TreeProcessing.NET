@@ -1,6 +1,7 @@
 ﻿using ProtoBuf;
 using System;
 using System.Runtime.Serialization;
+using MessagePack;
 
 namespace TreeProcessing.NET
 {
@@ -8,12 +9,15 @@ namespace TreeProcessing.NET
     [Serializable]
     [DataContract]
     [ProtoContract]
+    [MessagePackObject]
     public class BooleanLiteral : Token
     {
+        [IgnoreMember]
         public override NodeType NodeType => NodeType.BooleanLiteral;
 
         [DataMember]
         [ProtoMember(1)]
+        [Key(0)]
         public bool Value { get; set; }
 
         public BooleanLiteral(bool value)

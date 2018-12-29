@@ -2,6 +2,7 @@
 using System;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using MessagePack;
 
 namespace TreeProcessing.NET
 {
@@ -23,8 +24,15 @@ namespace TreeProcessing.NET
     [KnownType(typeof(ExpressionStatement))]
     [KnownType(typeof(ForStatement))]
     [KnownType(typeof(IfElseStatement))]
+
+    [MessagePackObject]
+    [Union(50, typeof(BlockStatement))]
+    [Union(51, typeof(ExpressionStatement))]
+    [Union(52, typeof(ForStatement))]
+    [Union(53, typeof(IfElseStatement))]
     public abstract class Statement : Node
     {
+        [IgnoreMember]
         public override NodeType NodeType => NodeType.Statement;
 
         public Statement()

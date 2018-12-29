@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using MessagePack;
 
 namespace TreeProcessing.NET
 {
@@ -9,12 +10,15 @@ namespace TreeProcessing.NET
     [Serializable]
     [DataContract]
     [ProtoContract]
+    [MessagePackObject]
     public class ExpressionStatement : Statement
     {
+        [IgnoreMember]
         public override NodeType NodeType => NodeType.ExpressionStatement;
 
         [DataMember]
         [ProtoMember(1)]
+        [Key(0)]
         public Expression Expression { get; set; }
 
         public ExpressionStatement(Expression expression)
@@ -44,6 +48,7 @@ namespace TreeProcessing.NET
             return 0;
         }
 
+        [IgnoreMember]
         public override IEnumerable<Node> Children
         {
             get
@@ -54,6 +59,7 @@ namespace TreeProcessing.NET
             }
         }
 
+        [IgnoreMember]
         public override IEnumerable<Node> AllDescendants
         {
             get

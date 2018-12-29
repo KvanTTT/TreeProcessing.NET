@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using MessagePack;
 
 namespace TreeProcessing.NET
 {
@@ -9,20 +10,25 @@ namespace TreeProcessing.NET
     [Serializable]
     [DataContract]
     [ProtoContract]
+    [MessagePackObject]
     public class IfElseStatement : Statement
     {
+        [IgnoreMember]
         public override NodeType NodeType => NodeType.IfElseStatement;
 
         [DataMember]
         [ProtoMember(1)]
+        [Key(0)]
         public Expression Condition { get; set; }
 
         [DataMember]
         [ProtoMember(2)]
+        [Key(1)]
         public Statement TrueStatement { get; set; }
 
         [DataMember]
         [ProtoMember(3)]
+        [Key(2)]
         public Statement FalseStatement { get; set; }
 
         public IfElseStatement(Expression condition, Statement trueStatement, Statement falseStatement = null)
@@ -75,6 +81,7 @@ namespace TreeProcessing.NET
             return 0;
         }
 
+        [IgnoreMember]
         public override IEnumerable<Node> Children
         {
             get
@@ -90,6 +97,7 @@ namespace TreeProcessing.NET
             }
         }
 
+        [IgnoreMember]
         public override IEnumerable<Node> AllDescendants
         {
             get
