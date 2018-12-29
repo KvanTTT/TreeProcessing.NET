@@ -20,8 +20,8 @@ namespace TreeProcessing.NET
 
             var graphString = new StringBuilder();
             graphString.AppendLine("digraph cfg {");
-            graphString.Append(_vertexesString.ToString());
-            graphString.Append(_edgesString.ToString());
+            graphString.Append(_vertexesString);
+            graphString.Append(_edgesString);
             graphString.AppendLine("}");
 
             return graphString.ToString();

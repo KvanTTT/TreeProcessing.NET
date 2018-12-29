@@ -47,7 +47,7 @@ namespace TreeProcessing.NET.Tests
                     },
                     new ForStatement
                     {
-                        Initializers = new List<Statement>()
+                        Initializers = new List<Statement>
                         {
                             new ExpressionStatement
                             {

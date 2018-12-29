@@ -8,6 +8,7 @@ namespace TreeProcessing.NET
 {
     [NodeAttr(NodeType.Expression)]
     [Serializable]
+
     [ProtoContract]
     [ProtoInclude((int)NodeType.BinaryOperatorExpression, typeof(BinaryOperatorExpression))]
     [ProtoInclude((int)NodeType.InvocationExpression, typeof(InvocationExpression))]

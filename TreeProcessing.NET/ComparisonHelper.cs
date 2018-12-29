@@ -14,11 +14,13 @@ namespace TreeProcessing.NET
             {
                 return 0;
             } 
-            else if (node1 != null && node2 == null)
+
+            if (node1 != null && node2 == null)
             {
                 return (int)node1.NodeType;
             }
-            else if (node1 == null && node2 != null)
+
+            if (node1 == null && node2 != null)
             {
                 return -(int)node2.NodeType;
             }
@@ -49,11 +51,13 @@ namespace TreeProcessing.NET
             {
                 return 0;
             }
-            else if (obj1 != null && obj2 == null)
+
+            if (obj1 != null && obj2 == null)
             {
                 return 1;
             }
-            else if (obj1 == null && obj2 != null)
+
+            if (obj1 == null && obj2 != null)
             {
                 return -1;
             }

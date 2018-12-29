@@ -10,6 +10,7 @@ namespace TreeProcessing.NET
     [Serializable]
     [DataContract]
     [ProtoContract]
+
     [MessagePackObject]
     public class ForStatement : Statement
     {
