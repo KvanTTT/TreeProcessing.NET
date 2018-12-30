@@ -68,11 +68,15 @@ namespace TreeProcessing.NET
         public override int GetHashCode()
         {
             int result = 0;
+
             foreach (Node child in Children)
             {
                 result = HashUtils.Combine(result, child.GetHashCode());
             }
+
             return result;
         }
+
+        public abstract TResult Accept<TResult>(IVisitor<TResult> nodeVisitor);
     }
 }

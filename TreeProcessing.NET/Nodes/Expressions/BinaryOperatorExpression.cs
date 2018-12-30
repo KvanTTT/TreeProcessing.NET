@@ -107,5 +107,10 @@ namespace TreeProcessing.NET
         {
             return HashUtils.Combine(base.GetHashCode(), Operator.GetHashCode());
         }
+
+        public override TResult Accept<TResult>(IVisitor<TResult> nodeVisitor)
+        {
+            return nodeVisitor.Visit(this);
+        }
     }
 }

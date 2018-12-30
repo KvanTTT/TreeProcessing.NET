@@ -89,5 +89,10 @@ namespace TreeProcessing.NET
         {
             return string.Join(" ", Statements);
         }
+
+        public override TResult Accept<TResult>(IVisitor<TResult> nodeVisitor)
+        {
+            return nodeVisitor.Visit(this);
+        }
     }
 }

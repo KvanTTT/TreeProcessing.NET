@@ -53,5 +53,10 @@ namespace TreeProcessing.NET
         {
             return Id;
         }
+
+        public override TResult Accept<TResult>(IVisitor<TResult> nodeVisitor)
+        {
+            return nodeVisitor.Visit(this);
+        }
     }
 }
