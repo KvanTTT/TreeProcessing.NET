@@ -208,9 +208,6 @@ namespace TreeProcessing.NET.Tests
             var bytes = MessagePackSerializer.Serialize(tree);
             var actualTree = MessagePackSerializer.Deserialize<Statement>(bytes);
 
-            var json = MessagePackSerializer.ToJson(bytes);
-            File.WriteAllText("MessagePack-Dump.json", json);
-
             Assert.Equal(0, tree.CompareTo(actualTree));
         }
     }

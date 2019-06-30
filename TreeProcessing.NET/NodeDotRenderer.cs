@@ -38,14 +38,9 @@ namespace TreeProcessing.NET
             }
             else if (node is Expression)
             {
-                if (node is Token)
-                {
-                    _vertexesString.Append(", fillcolor=\"#A3D977\", style=filled");
-                }
-                else
-                {
-                    _vertexesString.Append(", fillcolor=\"#FCC438\", style=filled");
-                }
+                _vertexesString.Append(node is Token
+                    ? ", fillcolor=\"#A3D977\", style=filled"
+                    : ", fillcolor=\"#FCC438\", style=filled");
             }
             _vertexesString.AppendLine("];");
 

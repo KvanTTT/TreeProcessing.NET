@@ -10,7 +10,7 @@ namespace TreeProcessing.NET.Tests
         private const string Enter = "Enter";
         private const string Exit = "Exit";
 
-        private static string[] BeginExpectedSequence = new string[]
+        private static string[] BeginExpectedSequence = new[]
         {
             Enter + nameof(Node), Enter + nameof(Statement), Enter + nameof(BlockStatement),
                 Enter + nameof(Statement), Enter + nameof(ExpressionStatement),
@@ -23,7 +23,7 @@ namespace TreeProcessing.NET.Tests
                 Exit + nameof(ExpressionStatement), Exit + nameof(Statement)
         };
 
-        private static string[] EndExpectedSequence = new string[]
+        private static string[] EndExpectedSequence = new[]
         {
                                     Enter + nameof(Expression), Enter + nameof(Token), Enter + nameof(Identifier),
                                 Exit + nameof(Identifier), Exit + nameof(Token), Exit + nameof(Expression),

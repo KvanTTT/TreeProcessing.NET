@@ -106,7 +106,6 @@ namespace TreeProcessing.NET
             }
 
             Type type = node.GetType();
-            var result = (Node)Activator.CreateInstance(type);
             PropertyInfo[] properties = ReflectionCache.GetClassProperties(type);
             foreach (PropertyInfo prop in properties)
             {
@@ -124,7 +123,6 @@ namespace TreeProcessing.NET
                     }
                     else if (typeInfo.ImplementedInterfaces.Contains(typeof(IEnumerable)))
                     {
-                        Type itemType = typeInfo.GenericTypeArguments[0];
                         var sourceCollection = (IEnumerable<object>)prop.GetValue(node);
 
                         if (sourceCollection != null)

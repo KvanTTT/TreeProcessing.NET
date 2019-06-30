@@ -5,7 +5,7 @@ namespace TreeProcessing.NET
     [AttributeUsage(AttributeTargets.Class)]
     public class NodeAttr : Attribute
     {
-        public NodeType NodeType { get; set; }
+        public NodeType NodeType { get; }
 
         public NodeAttr(NodeType nodeType)
         {
