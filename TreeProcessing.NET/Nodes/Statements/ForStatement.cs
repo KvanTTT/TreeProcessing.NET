@@ -17,24 +17,16 @@ namespace TreeProcessing.NET
         [IgnoreMember]
         public override NodeType NodeType => NodeType.ForStatement;
 
-        [DataMember]
-        [ProtoMember(1)]
-        [Key(0)]
+        [DataMember, ProtoMember(1), Key(0)]
         public List<Statement> Initializers { get; set; }
 
-        [DataMember]
-        [ProtoMember(2)]
-        [Key(1)]
+        [DataMember, ProtoMember(2), Key(1)]
         public Expression Condition { get; set; }
 
-        [DataMember]
-        [ProtoMember(3)]
-        [Key(2)]
+        [DataMember, ProtoMember(3), Key(2)]
         public List<Expression> Iterators { get; set; }
 
-        [DataMember]
-        [ProtoMember(4)]
-        [Key(3)]
+        [DataMember, ProtoMember(4), Key(3)]
         public Statement Statement { get; set; }
 
         public ForStatement(List<Statement> initializers, Expression condition, List<Expression> iterators, Statement statement)

@@ -15,9 +15,7 @@ namespace TreeProcessing.NET
         [IgnoreMember]
         public override NodeType NodeType => NodeType.StringLiteral;
 
-        [DataMember]
-        [ProtoMember(1)]
-        [Key(0)]
+        [DataMember, ProtoMember(1), Key(0)]
         public string Value { get; set; }
 
         public StringLiteral(string value)

@@ -16,9 +16,7 @@ namespace TreeProcessing.NET
         [IgnoreMember]
         public override NodeType NodeType => NodeType.BlockStatement;
 
-        [DataMember]
-        [ProtoMember(1)]
-        [Key(0)]
+        [DataMember, ProtoMember(1), Key(0)]
         public List<Statement> Statements { get; set; }
 
         public BlockStatement(List<Statement> statements)

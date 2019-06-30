@@ -16,19 +16,13 @@ namespace TreeProcessing.NET
         [IgnoreMember]
         public override NodeType NodeType => NodeType.BinaryOperatorExpression;
 
-        [DataMember]
-        [ProtoMember(1)]
-        [Key(0)]
+        [DataMember, ProtoMember(1), Key(0)]
         public Expression Left { get; set; }
 
-        [DataMember]
-        [ProtoMember(2)]
-        [Key(1)]
+        [DataMember, ProtoMember(2), Key(1)]
         public string Operator { get; set; }
 
-        [DataMember]
-        [ProtoMember(3)]
-        [Key(2)]
+        [DataMember, ProtoMember(3), Key(2)]
         public Expression Right { get; set; }
 
         public BinaryOperatorExpression(Expression left, string op, Expression right)

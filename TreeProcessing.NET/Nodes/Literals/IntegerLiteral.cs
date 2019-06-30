@@ -15,9 +15,7 @@ namespace TreeProcessing.NET
         [IgnoreMember]
         public override NodeType NodeType => NodeType.IntegerLiteral;
 
-        [DataMember]
-        [ProtoMember(1)]
-        [Key(0)]
+        [DataMember, ProtoMember(1), Key(0)]
         public int Value { get; set; }
 
         public IntegerLiteral(int value)
@@ -51,7 +49,7 @@ namespace TreeProcessing.NET
         {
             return Value.ToString();
         }
-        
+
         public override TResult Accept<TResult>(IVisitor<TResult> nodeVisitor)
         {
             return nodeVisitor.Visit(this);

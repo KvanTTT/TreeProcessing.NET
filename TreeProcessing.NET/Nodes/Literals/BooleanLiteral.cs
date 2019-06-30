@@ -15,9 +15,7 @@ namespace TreeProcessing.NET
         [IgnoreMember]
         public override NodeType NodeType => NodeType.BooleanLiteral;
 
-        [DataMember]
-        [ProtoMember(1)]
-        [Key(0)]
+        [DataMember, ProtoMember(1), Key(0)]
         public bool Value { get; set; }
 
         public BooleanLiteral(bool value)

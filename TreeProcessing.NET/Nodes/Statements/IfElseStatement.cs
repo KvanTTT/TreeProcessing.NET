@@ -16,19 +16,13 @@ namespace TreeProcessing.NET
         [IgnoreMember]
         public override NodeType NodeType => NodeType.IfElseStatement;
 
-        [DataMember]
-        [ProtoMember(1)]
-        [Key(0)]
+        [DataMember, ProtoMember(1), Key(0)]
         public Expression Condition { get; set; }
 
-        [DataMember]
-        [ProtoMember(2)]
-        [Key(1)]
+        [DataMember, ProtoMember(2), Key(1)]
         public Statement TrueStatement { get; set; }
 
-        [DataMember]
-        [ProtoMember(3)]
-        [Key(2)]
+        [DataMember, ProtoMember(3), Key(2)]
         public Statement FalseStatement { get; set; }
 
         public IfElseStatement(Expression condition, Statement trueStatement, Statement falseStatement = null)

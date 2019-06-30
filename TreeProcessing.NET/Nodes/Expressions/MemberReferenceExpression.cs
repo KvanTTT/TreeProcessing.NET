@@ -16,14 +16,10 @@ namespace TreeProcessing.NET
         [IgnoreMember]
         public override NodeType NodeType => NodeType.MemberReferenceExpression;
 
-        [DataMember]
-        [ProtoMember(1)]
-        [Key(0)]
+        [DataMember, ProtoMember(1), Key(0)]
         public Expression Target { get; set; }
 
-        [DataMember]
-        [ProtoMember(2)]
-        [Key(1)]
+        [DataMember, ProtoMember(2), Key(1)]
         public Identifier Name { get; set; }
 
         public MemberReferenceExpression(Expression target, Identifier name)

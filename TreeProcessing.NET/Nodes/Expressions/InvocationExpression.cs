@@ -16,14 +16,10 @@ namespace TreeProcessing.NET
         [IgnoreMember]
         public override NodeType NodeType => NodeType.InvocationExpression;
 
-        [DataMember]
-        [ProtoMember(1)]
-        [Key(0)]
+        [DataMember, ProtoMember(1), Key(0)]
         public Expression Target { get; set; }
 
-        [DataMember]
-        [ProtoMember(2)]
-        [Key(1)]
+        [DataMember, ProtoMember(2), Key(1)]
         public List<Expression> Args { get; set; }
 
         public InvocationExpression(Expression target, List<Expression> args)
@@ -92,7 +88,7 @@ namespace TreeProcessing.NET
             {
                 yield return targetDescendant;
             }
-            
+
             foreach (var arg in Args)
             {
                 yield return arg;
