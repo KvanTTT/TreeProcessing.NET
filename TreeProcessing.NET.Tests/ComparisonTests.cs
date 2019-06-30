@@ -47,7 +47,7 @@ namespace TreeProcessing.NET.Tests
         [Fact]
         public void Descendants_Static()
         {
-            TestDescendants(SampleTree.Init().AllDescendants);
+            TestDescendants(SampleTree.Init().GetAllDescendants());
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace TreeProcessing.NET.Tests
         {
             var actualDescendants = descendants.Select(node => node.GetType().Name);
 
-            var expectedDescendants = new List<string>()
+            var expectedDescendants = new List<string>
             {
                 nameof(ExpressionStatement),
                 nameof(BinaryOperatorExpression),

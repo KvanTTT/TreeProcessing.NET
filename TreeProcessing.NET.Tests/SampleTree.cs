@@ -8,7 +8,7 @@ namespace TreeProcessing.NET.Tests
         {
             var result = new BlockStatement
             {
-                Statements = new List<Statement>()
+                Statements = new List<Statement>
                 {
                     new ExpressionStatement
                     {
@@ -30,9 +30,9 @@ namespace TreeProcessing.NET.Tests
                                     Target = new Identifier("b"),
                                     Name = new Identifier("a")
                                 },
-                                Name = new Identifier("c"),
+                                Name = new Identifier("c")
                             },
-                            Args = new List<Expression>()
+                            Args = new List<Expression>
                             {
                                 new BooleanLiteral(true),
                                 new StringLiteral("asdf"),
@@ -65,7 +65,7 @@ namespace TreeProcessing.NET.Tests
                             Operator = "<",
                             Right = new IntegerLiteral(100)
                         },
-                        Iterators = new List<Expression>()
+                        Iterators = new List<Expression>
                         {
                             new UnaryOperatorExpression
                             {

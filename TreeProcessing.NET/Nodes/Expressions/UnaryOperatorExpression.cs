@@ -71,15 +71,13 @@ namespace TreeProcessing.NET
             }
         }
 
-        [IgnoreMember]
-        public override IEnumerable<Node> AllDescendants
+        public override IEnumerable<Node> GetAllDescendants()
         {
-            get
+            yield return Expression;
+
+            foreach (var node in Expression.GetAllDescendants())
             {
-                var result = new List<Node>();
-                result.Add(Expression);
-                result.AddRange(Expression.AllDescendants);
-                return result;
+                yield return node;
             }
         }
 

@@ -84,26 +84,29 @@ namespace TreeProcessing.NET
             }
         }
 
-        [IgnoreMember]
-        public override IEnumerable<Node> AllDescendants
+        public override IEnumerable<Node> GetAllDescendants()
         {
-            get
+            yield return Target;
+
+            foreach (var targetDescendant in Target.GetAllDescendants())
             {
-                var result = new List<Node>();
-                result.Add(Target);
-                result.AddRange(Target.AllDescendants);
-                foreach (var arg in Args)
+                yield return targetDescendant;
+            }
+            
+            foreach (var arg in Args)
+            {
+                yield return arg;
+
+                foreach (var argDescendant in arg.GetAllDescendants())
                 {
-                    result.Add(arg);
-                    result.AddRange(arg.AllDescendants);
+                    yield return argDescendant;
                 }
-                return result;
             }
         }
 
         public override string ToString()
         {
-            return $"{Target}({(string.Join(", ", Args))})";
+            return $"{Target}({string.Join(", ", Args)})";
         }
 
         public override TResult Accept<TResult>(IVisitor<TResult> nodeVisitor)

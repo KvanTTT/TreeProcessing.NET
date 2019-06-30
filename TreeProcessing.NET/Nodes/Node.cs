@@ -62,8 +62,7 @@ namespace TreeProcessing.NET
         [IgnoreMember]
         public abstract IEnumerable<Node> Children { get; }
 
-        [IgnoreMember]
-        public abstract IEnumerable<Node> AllDescendants { get; }
+        public abstract IEnumerable<Node> GetAllDescendants();
 
         public override int GetHashCode()
         {

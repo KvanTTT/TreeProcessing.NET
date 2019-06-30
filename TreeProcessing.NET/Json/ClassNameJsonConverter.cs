@@ -24,7 +24,7 @@ namespace TreeProcessing.NET
                 if (objectType == typeof(Node) || objectType.GetTypeInfo().IsSubclassOf(typeof(Node)))
                 {
                     var obj = jObject[PropertyName];
-                    var type = Type.GetType(typeof(Node).Namespace + "." + obj.ToString());
+                    var type = Type.GetType(typeof(Node).Namespace + "." + obj);
                     target = Activator.CreateInstance(type);
                 }
                 else

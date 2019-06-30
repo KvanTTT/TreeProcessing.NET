@@ -84,17 +84,20 @@ namespace TreeProcessing.NET
             }
         }
 
-        [IgnoreMember]
-        public override IEnumerable<Node> AllDescendants
+        public override IEnumerable<Node> GetAllDescendants()
         {
-            get
+            yield return Left;
+
+            foreach (var descendant in Left.GetAllDescendants())
             {
-                var result = new List<Node>();
-                result.Add(Left);
-                result.AddRange(Left.AllDescendants);
-                result.Add(Right);
-                result.AddRange(Right.AllDescendants);
-                return result;
+                yield return descendant;
+            }
+
+            yield return Right;
+
+            foreach (var descendant in Right.GetAllDescendants())
+            {
+                yield return descendant;
             }
         }
 
@@ -110,7 +113,10 @@ namespace TreeProcessing.NET
 
         public override TResult Accept<TResult>(IVisitor<TResult> nodeVisitor)
         {
-            return nodeVisitor.Visit(this);
+            Left.Accept(nodeVisitor);
+            Right.Accept(nodeVisitor);
+
+            return default;
         }
     }
 }

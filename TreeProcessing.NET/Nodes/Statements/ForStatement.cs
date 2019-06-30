@@ -121,27 +121,40 @@ namespace TreeProcessing.NET
             }
         }
 
-        [IgnoreMember]
-        public override IEnumerable<Node> AllDescendants
+        public override IEnumerable<Node> GetAllDescendants()
         {
-            get
+            foreach (var initializer in Initializers)
             {
-                var result = new List<Node>();
-                foreach (var initializer in Initializers)
+                yield return initializer;
+
+                foreach (var descendant in initializer.GetAllDescendants())
                 {
-                    result.Add(initializer);
-                    result.AddRange(initializer.AllDescendants);
+                    yield return descendant;
                 }
-                result.Add(Condition);
-                result.AddRange(Condition.AllDescendants);
-                foreach (var iterator in Iterators)
+            }
+
+            yield return Condition;
+
+            foreach (var descendant in Condition.GetAllDescendants())
+            {
+                yield return descendant;
+            }
+
+            foreach (var iterator in Iterators)
+            {
+                yield return iterator;
+
+                foreach (var descendant in iterator.GetAllDescendants())
                 {
-                    result.Add(iterator);
-                    result.AddRange(iterator.AllDescendants);
+                    yield return descendant;
                 }
-                result.Add(Statement);
-                result.AddRange(Statement.AllDescendants);
-                return result;
+            }
+
+            yield return Statement;
+
+            foreach (var descendant in Statement.GetAllDescendants())
+            {
+                yield return descendant;
             }
         }
 

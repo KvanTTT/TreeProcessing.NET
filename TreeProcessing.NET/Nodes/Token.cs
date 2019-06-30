@@ -19,7 +19,6 @@ namespace TreeProcessing.NET
         [IgnoreMember]
         public override IEnumerable<Node> Children => Enumerable.Empty<Node>();
 
-        [IgnoreMember]
-        public override IEnumerable<Node> AllDescendants => Enumerable.Empty<Node>();
+        public override IEnumerable<Node> GetAllDescendants() => Enumerable.Empty<Node>();
     }
 }

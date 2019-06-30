@@ -16,9 +16,7 @@ namespace TreeProcessing.NET
         [IgnoreMember]
         public override NodeType NodeType => NodeType.ExpressionStatement;
 
-        [DataMember]
-        [ProtoMember(1)]
-        [Key(0)]
+        [DataMember, ProtoMember(1), Key(0)]
         public Expression Expression { get; set; }
 
         public ExpressionStatement(Expression expression)
@@ -38,7 +36,7 @@ namespace TreeProcessing.NET
                 return result;
             }
 
-            ExpressionStatement statement = (ExpressionStatement)other;
+            ExpressionStatement statement = (ExpressionStatement) other;
             result = Expression.CompareTo(statement.Expression);
             if (result != 0)
             {
@@ -59,15 +57,13 @@ namespace TreeProcessing.NET
             }
         }
 
-        [IgnoreMember]
-        public override IEnumerable<Node> AllDescendants
+        public override IEnumerable<Node> GetAllDescendants()
         {
-            get
+            yield return Expression;
+
+            foreach (var expr in Expression.GetAllDescendants())
             {
-                var result = new List<Node>();
-                result.Add(Expression);
-                result.AddRange(Expression.AllDescendants);
-                return result;
+                yield return expr;
             }
         }
 
