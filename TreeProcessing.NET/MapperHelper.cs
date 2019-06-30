@@ -14,79 +14,81 @@ namespace TreeProcessing.NET
             {
                 return null;
             }
+
             Node result;
-            switch (dto.NodeType)
+            switch (dto)
             {
-                case NodeType.BinaryOperatorExpression:
-                    var binaryOperatorExpressionDto = dto as BinaryOperatorExpressionDto;
+                case BinaryOperatorExpressionDto binaryOperatorExpressionDto:
                     result = new BinaryOperatorExpression(
                         (Expression)DtoToModel(binaryOperatorExpressionDto.Left),
                         binaryOperatorExpressionDto.Operator,
                         (Expression)DtoToModel(binaryOperatorExpressionDto.Right));
                     break;
-                case NodeType.BlockStatement:
-                    var blockStatementDto = dto as BlockStatementDto;
+
+                case BlockStatementDto blockStatementDto:
                     result = new BlockStatement(
                         blockStatementDto.Statements.Select(s => (Statement)DtoToModel(s)).ToList());
                     break;
-                case NodeType.BooleanLiteral:
-                    var booleanLiteralDto = dto as BooleanLiteralDto;
+
+                case BooleanLiteralDto booleanLiteralDto:
                     result = new BooleanLiteral(booleanLiteralDto.Value);
                     break;
-                case NodeType.ExpressionStatement:
-                    var expressionStatementDto = dto as ExpressionStatementDto;
+
+                case ExpressionStatementDto expressionStatementDto:
                     result = new ExpressionStatement((Expression)DtoToModel(expressionStatementDto.Expression));
                     break;
-                case NodeType.FloatLiteral:
-                    var floatLiteralDto = dto as FloatLiteralDto;
+
+                case FloatLiteralDto floatLiteralDto:
                     result = new FloatLiteral(floatLiteralDto.Value);
                     break;
-                case NodeType.ForStatement:
-                    var forStatementDto = dto as ForStatementDto;
+
+                case ForStatementDto forStatementDto:
                     result = new ForStatement(forStatementDto.Initializers.Select(i => (Statement)DtoToModel(i)).ToList(),
                         (Expression)DtoToModel(forStatementDto.Condition),
                         forStatementDto.Iterators.Select(i => (Expression)DtoToModel(i)).ToList(),
                         (Statement)DtoToModel(forStatementDto.Statement));
                     break;
-                case NodeType.Identifier:
-                    var identifierDto = dto as IdentifierDto;
+
+                case IdentifierDto identifierDto:
                     result = new Identifier(identifierDto.Id);
                     break;
-                case NodeType.IfElseStatement:
-                    var ifElseStatementDto = dto as IfElseStatementDto;
+
+                case IfElseStatementDto ifElseStatementDto:
                     result = new IfElseStatement(
                         (Expression)DtoToModel(ifElseStatementDto.Condition),
                         (Statement)DtoToModel(ifElseStatementDto.TrueStatement),
                         (Statement)DtoToModel(ifElseStatementDto.FalseStatement));
                     break;
-                case NodeType.IntegerLiteral:
-                    var integerLiteralDto = dto as IntegerLiteralDto;
+
+                case IntegerLiteralDto integerLiteralDto:
                     result = new IntegerLiteral(integerLiteralDto.Value);
                     break;
-                case NodeType.InvocationExpression:
-                    var invocationExpressionDto = dto as InvocationExpressionDto;
+
+                case InvocationExpressionDto invocationExpressionDto:
                     result = new InvocationExpression(
                         (Expression)DtoToModel(invocationExpressionDto.Target),
                         invocationExpressionDto.Args.Select(a => (Expression)DtoToModel(a)).ToList());
                     break;
-                case NodeType.MemberReferenceExpression:
-                    var memberReferenceExpressionDto = dto as MemberReferenceExpressionDto;
+
+                case MemberReferenceExpressionDto memberReferenceExpressionDto:
                     result = new MemberReferenceExpression(
                         (Expression)DtoToModel(memberReferenceExpressionDto.Target),
                         (Identifier)DtoToModel(memberReferenceExpressionDto.Name));
                     break;
-                case NodeType.NullLiteral:
+
+                case NullLiteralDto _:
                     result = new NullLiteral();
                     break;
-                case NodeType.StringLiteral:
-                    var stringLiteralDto = dto as StringLiteralDto;
+
+                case StringLiteralDto stringLiteralDto:
                     result = new StringLiteral(stringLiteralDto.Value);
                     break;
-                case NodeType.UnaryOperatorExpression:
-                    var unaryOperatorExpressionDto = dto as UnaryOperatorExpressionDto;
+
+                case UnaryOperatorExpressionDto unaryOperatorExpressionDto:
                     result = new UnaryOperatorExpression(
                         unaryOperatorExpressionDto.Operator, (Expression)DtoToModel(unaryOperatorExpressionDto.Expression));
                     break;
+
                 default:
                     throw new NotImplementedException($"{nameof(dto.NodeType)} mapping is not implemented");
             }
@@ -100,78 +102,79 @@ namespace TreeProcessing.NET
                 return null;
             }
             NodeDto result;
-            switch (model.NodeType)
+            switch (model)
             {
-                case NodeType.BinaryOperatorExpression:
-                    var binaryOperatorExpression = model as BinaryOperatorExpression;
+                case BinaryOperatorExpression binaryOperatorExpression:
                     result = new BinaryOperatorExpressionDto(
                         (ExpressionDto)ModelToDto(binaryOperatorExpression.Left),
                         binaryOperatorExpression.Operator,
                         (ExpressionDto)ModelToDto(binaryOperatorExpression.Right));
                     break;
-                case NodeType.BlockStatement:
-                    var blockStatement = model as BlockStatement;
+
+                case BlockStatement blockStatement:
                     result = new BlockStatementDto(
                         blockStatement.Statements.Select(s => (StatementDto)ModelToDto(s)).ToList());
                     break;
-                case NodeType.BooleanLiteral:
-                    var booleanLiteral = model as BooleanLiteral;
+
+                case BooleanLiteral booleanLiteral:
                     result = new BooleanLiteralDto(booleanLiteral.Value);
                     break;
-                case NodeType.ExpressionStatement:
-                    var expressionStatement = model as ExpressionStatement;
+
+                case ExpressionStatement expressionStatement:
                     result = new ExpressionStatementDto((ExpressionDto)ModelToDto(expressionStatement.Expression));
                     break;
-                case NodeType.FloatLiteral:
-                    var floatLiteral = model as FloatLiteral;
+
+                case FloatLiteral floatLiteral:
                     result = new FloatLiteralDto(floatLiteral.Value);
                     break;
-                case NodeType.ForStatement:
-                    var forStatement = model as ForStatement;
+
+                case ForStatement forStatement:
                     result = new ForStatementDto(forStatement.Initializers.Select(i => (StatementDto)ModelToDto(i)).ToList(),
                         (ExpressionDto)ModelToDto(forStatement.Condition),
                         forStatement.Iterators.Select(i => (ExpressionDto)ModelToDto(i)).ToList(),
                         (StatementDto)ModelToDto(forStatement.Statement));
                     break;
-                case NodeType.Identifier:
-                    var identifier = model as Identifier;
+
+                case Identifier identifier:
                     result = new IdentifierDto(identifier.Id);
                     break;
-                case NodeType.IfElseStatement:
-                    var ifElseStatement = model as IfElseStatement;
+
+                case IfElseStatement ifElseStatement:
                     result = new IfElseStatementDto(
                         (ExpressionDto)ModelToDto(ifElseStatement.Condition),
                         (StatementDto)ModelToDto(ifElseStatement.TrueStatement),
                         (StatementDto)ModelToDto(ifElseStatement.FalseStatement));
                     break;
-                case NodeType.IntegerLiteral:
-                    var integerLiteral = model as IntegerLiteral;
+
+                case IntegerLiteral integerLiteral:
                     result = new IntegerLiteralDto(integerLiteral.Value);
                     break;
-                case NodeType.InvocationExpression:
-                    var invocationExpression = model as InvocationExpression;
+
+                case InvocationExpression invocationExpression:
                     result = new InvocationExpressionDto(
                         (ExpressionDto)ModelToDto(invocationExpression.Target),
                         invocationExpression.Args.Select(a => (ExpressionDto)ModelToDto(a)).ToList());
                     break;
-                case NodeType.MemberReferenceExpression:
-                    var memberReferenceExpression = model as MemberReferenceExpression;
+
+                case MemberReferenceExpression memberReferenceExpression:
                     result = new MemberReferenceExpressionDto(
                         (ExpressionDto)ModelToDto(memberReferenceExpression.Target),
                         (IdentifierDto)ModelToDto(memberReferenceExpression.Name));
                     break;
-                case NodeType.NullLiteral:
+
+                case NullLiteral _:
                     result = new NullLiteralDto();
                     break;
-                case NodeType.StringLiteral:
-                    var stringLiteral = model as StringLiteral;
+
+                case StringLiteral stringLiteral:
                     result = new StringLiteralDto(stringLiteral.Value);
                     break;
-                case NodeType.UnaryOperatorExpression:
-                    var unaryOperatorExpression = model as UnaryOperatorExpression;
+
+                case UnaryOperatorExpression unaryOperatorExpression:
                     result = new UnaryOperatorExpressionDto(
                         unaryOperatorExpression.Operator, (ExpressionDto)ModelToDto(unaryOperatorExpression.Expression));
                     break;
+
                 default:
                     throw new NotImplementedException($"{nameof(model.NodeType)} mapping is not implemented");
             }
@@ -243,7 +246,7 @@ namespace TreeProcessing.NET
             {
                 return null;
             }
-            
+
             Type type = model.GetType();
             Type dtoType = Type.GetType(type.FullName + "Dto");
             if (dtoType == null)

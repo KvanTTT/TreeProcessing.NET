@@ -6,20 +6,20 @@ namespace TreeProcessing.NET
     {
         public virtual T Visit(Token terminal)
         {
-            switch (terminal.NodeType)
+            switch (terminal)
             {
-                case NodeType.Identifier:
-                    return Visit((Identifier)terminal);
-                case NodeType.BooleanLiteral:
-                    return Visit((BooleanLiteral)terminal);
-                case NodeType.FloatLiteral:
-                    return Visit((FloatLiteral)terminal);
-                case NodeType.IntegerLiteral:
-                    return Visit((IntegerLiteral)terminal);
-                case NodeType.NullLiteral:
-                    return Visit((NullLiteral)terminal);
-                case NodeType.StringLiteral:
-                    return Visit((StringLiteral)terminal);
+                case Identifier identifier:
+                    return Visit(identifier);
+                case BooleanLiteral booleanLiteral:
+                    return Visit(booleanLiteral);
+                case FloatLiteral floatLiteral:
+                    return Visit(floatLiteral);
+                case IntegerLiteral integerLiteral:
+                    return Visit(integerLiteral);
+                case NullLiteral nullLiteral:
+                    return Visit(nullLiteral);
+                case StringLiteral stringLiteral:
+                    return Visit(stringLiteral);
                 default:
                     throw new InvalidOperationException();
             }
@@ -27,16 +27,16 @@ namespace TreeProcessing.NET
 
         public virtual T Visit(Statement statement)
         {
-            switch (statement.NodeType)
+            switch (statement)
             {
-                case NodeType.BlockStatement:
-                    return Visit((BlockStatement)statement);
-                case NodeType.ExpressionStatement:
-                    return Visit((ExpressionStatement)statement);
-                case NodeType.ForStatement:
-                    return Visit((ForStatement)statement);
-                case NodeType.IfElseStatement:
-                    return Visit((IfElseStatement)statement);
+                case BlockStatement blockStatement:
+                    return Visit(blockStatement);
+                case ExpressionStatement expressionStatement:
+                    return Visit(expressionStatement);
+                case ForStatement forStatement:
+                    return Visit(forStatement);
+                case IfElseStatement ifElseStatement:
+                    return Visit(ifElseStatement);
                 default:
                     throw new InvalidOperationException();
             }
@@ -49,16 +49,16 @@ namespace TreeProcessing.NET
 
         public virtual T Visit(Expression expression)
         {
-            switch (expression.NodeType)
+            switch (expression)
             {
-                case NodeType.BinaryOperatorExpression:
-                    return Visit((BinaryOperatorExpression)expression);
-                case NodeType.InvocationExpression:
-                    return Visit((InvocationExpression)expression);
-                case NodeType.MemberReferenceExpression:
-                    return Visit((MemberReferenceExpression)expression);
-                case NodeType.UnaryOperatorExpression:
-                    return Visit((UnaryOperatorExpression)expression);
+                case BinaryOperatorExpression binaryOperatorExpression:
+                    return Visit(binaryOperatorExpression);
+                case InvocationExpression invocationExpression:
+                    return Visit(invocationExpression);
+                case MemberReferenceExpression memberReferenceExpression:
+                    return Visit(memberReferenceExpression);
+                case UnaryOperatorExpression unaryOperatorExpression:
+                    return Visit(unaryOperatorExpression);
             }
             if (expression is Token)
             {
@@ -70,22 +70,22 @@ namespace TreeProcessing.NET
 
         public virtual T Visit(Node node)
         {
-            if (node is Expression)
+            if (node is Token token)
             {
-                return Visit((Expression)node);
+                return Visit(token);
             }
-            else if (node is Token)
+
+            if (node is Expression expression)
             {
-                return Visit((Token)node);
+                return Visit(expression);
             }
-            else if (node is Statement)
+
+            if (node is Statement statement)
             {
-                return Visit((Statement)node);
+                return Visit(statement);
             }
-            else
-            {
-                throw new InvalidOperationException();
-            }
+
+            throw new InvalidOperationException();
         }
 
         public virtual T Visit(BinaryOperatorExpression expression)
